@@ -46,7 +46,7 @@ item_table: Dict[str, PhoaItemData] = {
     "Kobold Blaster":                   PhoaItemData(42,    1,  IC.progression),
     "Neutron Lamp":                     PhoaItemData(43,    1,  IC.progression),  # Ignore light requirement option?
     "Remote Bombs":                     PhoaItemData(44,    1,  IC.progression),
-    "Doki Herb":                        PhoaItemData(45,    7,  IC.filler),
+    "Doki Herb":                        PhoaItemData(45,    9,  IC.filler),
     "Pumpkin Muffin":                   PhoaItemData(47,    1,  IC.filler),
     "Cooked Toad Leg":                  PhoaItemData(49,    1,  IC.filler),
     "Berry Fruit":                      PhoaItemData(50,    1,  IC.filler),
