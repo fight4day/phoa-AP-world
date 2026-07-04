@@ -1113,6 +1113,12 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
             flags=PhoaFlag.SHOPSANITY,
             vanillaItem="Bottle of Wine",
         ),
+        "Atai Town - Tavern Gustav's gift for filling the item ring": PhoaLocationData(
+            region="atai_town",
+            address=7676133,
+            flags=PhoaFlag.NPCGIFTS,
+            vanillaItem="Pooki Jerky",
+        ),
         "Atai Town - Guard residence mouse": PhoaLocationData(
             region="atai_town",
             address=7676227,

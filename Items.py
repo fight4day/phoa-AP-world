@@ -53,7 +53,7 @@ item_table: Dict[str, PhoaItemData] = {
     "Perro Egg":                        PhoaItemData(52,    4,  IC.filler),
     "Nectear":                          PhoaItemData(53,    13, IC.filler),
     "Honey Brew":                       PhoaItemData(54,    3,  IC.filler),
-    "Pooki Jerky":                      PhoaItemData(56,    3,  IC.filler),
+    "Pooki Jerky":                      PhoaItemData(56,    4,  IC.filler),
     "Fruit Jam":                        PhoaItemData(57,    2,  IC.filler),
     "Canned Beans":                     PhoaItemData(58,    4,  IC.filler),
     "Potato Lunch":                     PhoaItemData(59,    1,  IC.filler),
