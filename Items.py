@@ -19,6 +19,8 @@ class PhoaItemData(NamedTuple):
     type: IC
 
 # TODO: update items at the end
+# ET
+# fight4day
 # "Energy Gem" +2: "Daea Region - Cave ledge item", "Lake Laboratory - Fran 3rd moonstone batch"
 # "40 Rin" +1: "Daea Region - Cave chest"
 # "Perro" +1: "Daea Region - Perro Hide and Seek"

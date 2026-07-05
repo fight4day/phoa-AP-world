@@ -1867,6 +1867,8 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
         #     vanillaItem="Baroque of Battle",
         # ),
         # FIXME: from here
+        # ET
+        # fight4day
         "Daea Region - Cave chest": PhoaLocationData(
             region="daea_region",
             address=0,

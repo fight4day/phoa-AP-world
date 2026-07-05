@@ -580,7 +580,10 @@ def get_exit_data(player: int, options: PhoaOptions) -> list[PhoaExit]:
             connection="ouroboros_hideout(treasure_room_hidden_area)",
             rule=lambda state: logic.has_explosives(state),
         ),
+        # ouroboros_hideout(great_drake_arena)
         # FIXME: from here
+        # ET
+        # fight4day
         # daea_region
         PhoaExit(
             name="daea_region_to_lake_laboratory",
