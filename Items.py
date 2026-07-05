@@ -21,6 +21,7 @@ class PhoaItemData(NamedTuple):
 # TODO: update items at the end
 # ET
 # fight4day
+# Updated counts
 # "Energy Gem" +2: "Daea Region - Cave ledge item", "Lake Laboratory - Fran 3rd moonstone batch"
 # "40 Rin" +1: "Daea Region - Cave chest"
 # "Perro" +1: "Daea Region - Perro Hide and Seek"
@@ -28,8 +29,13 @@ class PhoaItemData(NamedTuple):
 # "Geo Ticket" +2: "Daea Region - GEO house reward", forgot a previous one
 # "Heart Ruby" +2: "Lake Laboratory - Fran 1st moonstone batch", "Lake Laboratory - Fran 5th moonstone batch"
 #
+# New items
 # "Tailoring Voucher" 2 (new, filler): "Lake Laboratory - Fran freedom quest", "Lake Laboratory - Fran 2nd moonstone batch"
 # "Moon Crystal" 1 (new, filler for now, progression for Aurantia): "Lake Laboratory - Fran 4th moonstone batch"
+#
+# Other changes
+# Moonstones progression if quest option is active
+# Geo tickets progression if shop option is active
 
 # @formatter:off
 item_table: Dict[str, PhoaItemData] = {
