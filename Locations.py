@@ -1963,6 +1963,75 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
             flags=PhoaFlag.SIDEQUEST,
             vanillaItem="Heart Ruby",
         ),
+        "GEO Base - Prize counter item 1": PhoaLocationData(
+            region="daea_region",
+            address=0,
+            rule=lambda state: state.has("GEO Ticket", player, 10),
+            flags=PhoaFlag.SHOPSANITY,
+            vanillaItem="Golden Egg",
+        ),
+        "GEO Base - Prize counter item 2": PhoaLocationData(
+            region="daea_region",
+            address=0,
+            rule=lambda state: state.has("GEO Ticket", player, 10),
+            flags=PhoaFlag.SHOPSANITY,
+            vanillaItem="Heart Ruby",
+        ),
+        "GEO Base - Prize counter item 3": PhoaLocationData(
+            region="daea_region",
+            address=0,
+            rule=lambda state: state.has("GEO Ticket", player, 10),
+            flags=PhoaFlag.SHOPSANITY,
+            vanillaItem="Energy Gem",
+        ),
+        "GEO Base - Prize counter item 4": PhoaLocationData(
+            region="daea_region",
+            address=0,
+            rule=lambda state: state.has("GEO Ticket", player, 10),
+            flags=PhoaFlag.SHOPSANITY,
+            vanillaItem="GEO Jacket",
+        ),
+        "GEO Base - Georgia quest 1": PhoaLocationData(
+            region="daea_region",
+            address=0,
+            rule=lambda state: state.has("GEO Ticket", player),
+            flags=PhoaFlag.SIDEQUEST,
+            vanillaItem="Lucky Earrings",
+        ),
+        "GEO Base - Georgia quest 2": PhoaLocationData(
+            region="daea_region",
+            address=0,
+            rule=lambda state: state.has("GEO Ticket", player, 2),
+            flags=PhoaFlag.SIDEQUEST,
+            vanillaItem="Heart Ruby",
+        ),
+        "GEO Base - Attic crate": PhoaLocationData(
+            region="daea_region",
+            address=0,
+            rule=lambda state: logic.can_deal_damage(state),
+            flags=PhoaFlag.BREAKABLE,
+            vanillaItem="Honey Drop",
+        ),
+        "GEO Base - GEO reward": PhoaLocationData(
+            region="daea_region",
+            address=0,
+            rule=lambda state: logic.has_music_instrument(state)
+                               and state.has("GEO Song", player)
+                               and (logic.has_slingshot(state)
+                                 or (logic.has_sonic_spear(state)
+                                   and (logic.has_bombs(state) or logic.has_crossbow(state))
+                                 )
+                               ),
+            flags=PhoaFlag.GEOCHALLENGE,
+            vanillaItem="GEO Ticket",
+        ),
+        "GEO Base - Pond fish": PhoaLocationData(
+            region="daea_region",
+            address=0,
+            rule=lambda state: logic.has_fishing_rod(state),
+            flags=PhoaFlag.FISHINGSPOT,
+            vanillaItem="Moonstone",
+        ),
         # FIXME: to here
         # Events
         "Anuri Temple - Side entrance gate opened": PhoaLocationData(

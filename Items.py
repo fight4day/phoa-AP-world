@@ -22,23 +22,30 @@ class PhoaItemData(NamedTuple):
 # ET
 # fight4day
 # Updated counts
-# "Energy Gem" +2: "Daea Region - Cave ledge item", "Lake Laboratory - Fran 3rd moonstone batch"
+# "Energy Gem" +3: "Daea Region - Cave ledge item", "Lake Laboratory - Fran 3rd moonstone batch", "GEO Base - Prize counter item 3"
 # "40 Rin" +1: "Daea Region - Cave chest"
 # "Perro" +1: "Daea Region - Perro Hide and Seek"
 # "Ouroboros Scroll" +1: "Daea Region - Cupid's Fountain Ouroboros shrine"
-# "Geo Ticket" +2: "Daea Region - GEO house reward", forgot a previous one
-# "Heart Ruby" +2: "Lake Laboratory - Fran 1st moonstone batch", "Lake Laboratory - Fran 5th moonstone batch"
+# "GEO Ticket" +3: "Daea Region - GEO house reward", "GEO Base - GEO reward", forgot a previous one
+# "Heart Ruby" +4: "Lake Laboratory - Fran 1st moonstone batch", "Lake Laboratory - Fran 5th moonstone batch", "GEO Base - Prize counter item 2"
+# "Antique Pin" +1: - (needed for "GEO Base - Georgia quest 2")
+# "Honey Drop" +1: "GEO Base - Attic crate"
+# "Moonstone" +1: "GEO Base - Pond fish"
 #
 # New items
 # "Tailoring Voucher" 2 (filler): "Lake Laboratory - Fran freedom quest", "Lake Laboratory - Fran 2nd moonstone batch"
 # "Moon Crystal" 1 (filler for now, progression for Aurantia): "Lake Laboratory - Fran 4th moonstone batch"
+# "Golden Egg" 1 (filler): "GEO Base - Prize counter item 1"
+# "GEO Jacket" 1 (useful): "GEO Base - Prize counter item 4"
+# "Lucky Earrings" 1 (filler): "GEO Base - Georgia quest 1"
 # "Unlock Panselo Franway" 1 (progression)
 # "Unlock Atai Franway" 1 (progression)
 # "Unlock Cosette Franway" 1 (progression)
 #
 # Other changes
-# 50 Moonstones progression if quest option is active (fran quest only active if moonstone locations are enabled?)
+# 50 Moonstones progression if sidequest option is active (make fran quest only active if moonstone locations are enabled?)
 # Geo tickets progression if shop option is active
+# Antique Pins progression if sidequest option is active
 
 # @formatter:off
 item_table: Dict[str, PhoaItemData] = {
