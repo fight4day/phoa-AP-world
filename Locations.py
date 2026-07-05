@@ -1924,58 +1924,42 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
         "Lake Laboratory - Fran freedom quest": PhoaLocationData(
             region="lake_laboratory",
             address=0,
-            rule=lambda state: logic.has_explosives(state)
-                               and (state.can_reach_region("panselo_region")
-                                 or state.can_reach_region("atai_region")),
-            flags=PhoaFlag.SIDEQUEST,
-            vanillaItem="Tailoring Voucher",
-        ),
-        "Lake Laboratory - Fran freedom quest": PhoaLocationData(
-            region="lake_laboratory",
-            address=0,
-            rule=lambda state: logic.has_explosives(state)
-                               and (state.can_reach_region("panselo_region", player)
-                                 or state.can_reach_region("atai_region", player)),
+            rule=lambda state: logic.can_do_fran_quest_chain(state, 0),
             flags=PhoaFlag.SIDEQUEST,
             vanillaItem="Tailoring Voucher",
         ),
         "Lake Laboratory - Fran 1st moonstone batch": PhoaLocationData(
             region="lake_laboratory",
             address=0,
-            rule=lambda state: state.can_reach_location("Lake Laboratory - Fran freedom quest", player)
-                               and state.has("Moonstone", player, 10), # TODO: adjust for Thomas shop later
+            rule=lambda state: logic.can_do_fran_quest_chain(state, 1),
             flags=PhoaFlag.SIDEQUEST,
             vanillaItem="Heart Ruby",
         ),
         "Lake Laboratory - Fran 2nd moonstone batch": PhoaLocationData(
             region="lake_laboratory",
             address=0,
-            rule=lambda state: state.can_reach_location("Lake Laboratory - Fran freedom quest", player)
-                               and state.has("Moonstone", player, 20), # TODO: adjust for Thomas shop later
+            rule=lambda state: logic.can_do_fran_quest_chain(state, 2),
             flags=PhoaFlag.SIDEQUEST,
             vanillaItem="Tailoring Voucher",
         ),
         "Lake Laboratory - Fran 3rd moonstone batch": PhoaLocationData(
             region="lake_laboratory",
             address=0,
-            rule=lambda state: state.can_reach_location("Lake Laboratory - Fran freedom quest", player)
-                               and state.has("Moonstone", player, 30), # TODO: adjust for Thomas shop later
+            rule=lambda state: logic.can_do_fran_quest_chain(state, 3),
             flags=PhoaFlag.SIDEQUEST,
             vanillaItem="Energy Gem",
         ),
         "Lake Laboratory - Fran 4th moonstone batch": PhoaLocationData(
             region="lake_laboratory",
             address=0,
-            rule=lambda state: state.can_reach_location("Lake Laboratory - Fran freedom quest", player)
-                               and state.has("Moonstone", player, 40), # TODO: adjust for Thomas shop later
+            rule=lambda state: logic.can_do_fran_quest_chain(state, 4),
             flags=PhoaFlag.SIDEQUEST,
             vanillaItem="Moon Crystal",
         ),
         "Lake Laboratory - Fran 5th moonstone batch": PhoaLocationData(
             region="lake_laboratory",
             address=0,
-            rule=lambda state: state.can_reach_location("Lake Laboratory - Fran freedom quest", player)
-                               and state.has("Moonstone", player, 50), # TODO: adjust for Thomas shop later
+            rule=lambda state: logic.can_do_fran_quest_chain(state, 5),
             flags=PhoaFlag.SIDEQUEST,
             vanillaItem="Heart Ruby",
         ),

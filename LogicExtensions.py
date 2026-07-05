@@ -1,4 +1,5 @@
 from BaseClasses import CollectionState
+from .Options import FranwayUnlockMode
 
 
 class PhoaLogic:
@@ -127,3 +128,25 @@ class PhoaLogic:
         # TODO: This is a bare minimum and needs to be reconsidered
         return ((self.has_bombs(state) and self.has_bat(state))
                 or state.has("Kobold Blaster", self.player))
+    
+    def can_do_fran_quest_chain(self, state: CollectionState, quest_number: int) -> bool:
+        # TODO: adjust moonstone cost for Thomas shop later
+        return (self.has_explosives(state)
+                and (state.can_reach_region("panselo_region") or state.can_reach_region("atai_region"))
+                and state.has("Moonstone", self.player, quest_number * 10))
+
+    def can_use_franway(self, state: CollectionState, franway_unlock_mode: FranwayUnlockMode, franway_region: str) -> bool:
+        match franway_region:
+            case "Panselo":
+                quest_number = 1
+            case "Atai":
+                quest_number = 2
+            case "Cosette":
+                quest_number = 3
+            case _:
+                raise Exception(f"Unknown region received: {franway_region}")
+
+        match franway_unlock_mode:
+            case 0: return self.can_do_fran_quest_chain(state, quest_number)
+            case 1: return state.has(f"Unlock {franway_region} Franway", self.player)
+            case 2: return True

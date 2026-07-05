@@ -136,6 +136,20 @@ class OpenPanseloGates(Toggle):
     display_name = "Open Panselo gates"
 
 
+class FranwayUnlockMode(Choice):
+    """
+    How the Franway teleporters should be handled.
+    vanilla opens them by following Fran's questline.
+    items adds an unlock item for each teleporter.
+    unlocked starts with all Franways unlocked.
+    """
+    display_name = "Franway unlock mode"
+    option_vanilla = 0
+    option_items = 1
+    option_unlocked = 2
+    default = 1
+
+
 class UpgradableBats(Toggle):
     """Instead of finding bats of random tiers, upgrade up one tier every time you find a bat"""
     display_name = "Upgradable bats"
@@ -186,6 +200,7 @@ class PhoaOptions(PerGameCommonOptions):
     upgradable_spear: UpgradableSpear
     upgradable_prelude: UpgradablePrelude
     open_panselo_gates: OpenPanseloGates
+    franway_unlock_mode: FranwayUnlockMode
     keep_excluded_status_upgrades_in_item_pool: KeepExcludedStatusUpgradesInItemPool
     death_link: DeathLink
 
@@ -258,6 +273,7 @@ phoa_option_groups: list[OptionGroup] = [
             KeepExcludedStatusUpgradesInItemPool,
             StartWithWoodenBat,
             OpenPanseloGates,
+            FranwayUnlockMode,
             UpgradableBats,
             UpgradableTools,
             UpgradableSpear,

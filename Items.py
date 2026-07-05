@@ -30,11 +30,14 @@ class PhoaItemData(NamedTuple):
 # "Heart Ruby" +2: "Lake Laboratory - Fran 1st moonstone batch", "Lake Laboratory - Fran 5th moonstone batch"
 #
 # New items
-# "Tailoring Voucher" 2 (new, filler): "Lake Laboratory - Fran freedom quest", "Lake Laboratory - Fran 2nd moonstone batch"
-# "Moon Crystal" 1 (new, filler for now, progression for Aurantia): "Lake Laboratory - Fran 4th moonstone batch"
+# "Tailoring Voucher" 2 (filler): "Lake Laboratory - Fran freedom quest", "Lake Laboratory - Fran 2nd moonstone batch"
+# "Moon Crystal" 1 (filler for now, progression for Aurantia): "Lake Laboratory - Fran 4th moonstone batch"
+# "Unlock Panselo Franway" 1 (progression)
+# "Unlock Atai Franway" 1 (progression)
+# "Unlock Cosette Franway" 1 (progression)
 #
 # Other changes
-# Moonstones progression if quest option is active
+# 50 Moonstones progression if quest option is active (fran quest only active if moonstone locations are enabled?)
 # Geo tickets progression if shop option is active
 
 # @formatter:off
