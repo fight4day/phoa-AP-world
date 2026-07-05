@@ -79,6 +79,8 @@ class PhoaWorld(World):
     def _determine_item_classifications_overrides(self) -> None:
         options = self.options
 
+        if not options.start_with_wooden_bat:
+            self.progressive_item_classifications_overrides.append("Progressive Bat")
         if options.enable_fishing_spots:
             self.progressive_item_classifications_overrides.append("Fishing Rod")
             self.progressive_item_classifications_overrides.append("Serpent Rod")
