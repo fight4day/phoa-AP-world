@@ -18,6 +18,16 @@ class PhoaItemData(NamedTuple):
     amount: int
     type: IC
 
+# TODO: update items at the end
+# "Energy Gem" +2: "Daea Region - Cave ledge item", "Lake Laboratory - Fran 3rd moonstone batch"
+# "40 Rin" +1: "Daea Region - Cave chest"
+# "Perro" +1: "Daea Region - Perro Hide and Seek"
+# "Ouroboros Scroll" +1: "Daea Region - Cupid's Fountain Ouroboros shrine"
+# "Geo Ticket" +2: "Daea Region - GEO house reward", forgot a previous one
+# "Heart Ruby" +2: "Lake Laboratory - Fran 1st moonstone batch", "Lake Laboratory - Fran 5th moonstone batch"
+#
+# "Tailoring Voucher" 2 (new, filler): "Lake Laboratory - Fran freedom quest", "Lake Laboratory - Fran 2nd moonstone batch"
+# "Moon Crystal" 1 (new, filler for now, progression for Aurantia): "Lake Laboratory - Fran 4th moonstone batch"
 
 # @formatter:off
 item_table: Dict[str, PhoaItemData] = {
