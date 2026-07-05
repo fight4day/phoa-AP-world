@@ -1866,6 +1866,118 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
         #     rule=lambda state: logic.has_sonic_spear(state) and state.has("Prelude of Panselo", player),
         #     vanillaItem="Baroque of Battle",
         # ),
+        # FIXME: from here
+        "Daea Region - Cave chest": PhoaLocationData(
+            region="daea_region",
+            address=0,
+            rule=lambda state: logic.has_light_source(state)
+                               and logic.has_explosives(state)
+                               and (state.has("Life Saver", player)
+                                 or state.has("Rocket Boots", player)),
+            flags=PhoaFlag.RINCHESTS,
+            vanillaItem="40 Rin",
+        ),
+        "Daea Region - Cave ledge item": PhoaLocationData(
+            region="daea_region",
+            address=0,
+            rule=lambda state: state.has("Rocket Boots", player)
+                               or (logic.has_light_source(state)
+                                 and logic.has_explosives(state)
+                                 and state.has("Life Saver", player)
+                                 and logic.has_sonic_spear(state)),
+            flags=PhoaFlag.ENERGYGEM,
+            vanillaItem="Energy Gem",
+        ),
+        "Daea Region - Perro Hide and Seek": PhoaLocationData(
+            region="daea_region",
+            address=0,
+            flags=PhoaFlag.PERRO,
+            vanillaItem="Perro",
+        ),
+        "Daea Region - Cupid's Fountain Ouroboros shrine": PhoaLocationData(
+            region="daea_region",
+            address=0,
+            # Possible without bat
+            rule=lambda state: logic.has_music_instrument(state)
+                               and state.has("Song of Ouroboros", player)
+                               and logic.has_bombs(state)
+                               and logic.has_crossbow(state),
+            flags=PhoaFlag.OUROBOROS,
+            vanillaItem="Ouroboros Scroll",
+        ),
+        "Daea Region - GEO house reward": PhoaLocationData(
+            region="daea_region",
+            address=0,
+            flags=PhoaFlag.GEOCHALLENGE,
+            rule=lambda state: logic.has_music_instrument(state)
+                               and state.has("GEO Song", player),
+            vanillaItem="GEO Ticket",
+        ),
+        "Daea Region - GEO house Mr. planto's reward": PhoaLocationData(
+            region="daea_region",
+            address=0,
+            flags=PhoaFlag.PLANTO,
+            vanillaItem="20 Rin",
+        ),
+        "Lake Laboratory - Fran freedom quest": PhoaLocationData(
+            region="lake_laboratory",
+            address=0,
+            rule=lambda state: logic.has_explosives(state)
+                               and (state.can_reach_region("panselo_region")
+                                 or state.can_reach_region("atai_region")),
+            flags=PhoaFlag.SIDEQUEST,
+            vanillaItem="Tailoring Voucher",
+        ),
+        "Lake Laboratory - Fran freedom quest": PhoaLocationData(
+            region="lake_laboratory",
+            address=0,
+            rule=lambda state: logic.has_explosives(state)
+                               and (state.can_reach_region("panselo_region", player)
+                                 or state.can_reach_region("atai_region", player)),
+            flags=PhoaFlag.SIDEQUEST,
+            vanillaItem="Tailoring Voucher",
+        ),
+        "Lake Laboratory - Fran 1st moonstone batch": PhoaLocationData(
+            region="lake_laboratory",
+            address=0,
+            rule=lambda state: state.can_reach_location("Lake Laboratory - Fran freedom quest", player)
+                               and state.has("Moonstone", player, 10), # TODO: adjust for Thomas shop later
+            flags=PhoaFlag.SIDEQUEST,
+            vanillaItem="Heart Ruby",
+        ),
+        "Lake Laboratory - Fran 2nd moonstone batch": PhoaLocationData(
+            region="lake_laboratory",
+            address=0,
+            rule=lambda state: state.can_reach_location("Lake Laboratory - Fran freedom quest", player)
+                               and state.has("Moonstone", player, 20), # TODO: adjust for Thomas shop later
+            flags=PhoaFlag.SIDEQUEST,
+            vanillaItem="Tailoring Voucher",
+        ),
+        "Lake Laboratory - Fran 3rd moonstone batch": PhoaLocationData(
+            region="lake_laboratory",
+            address=0,
+            rule=lambda state: state.can_reach_location("Lake Laboratory - Fran freedom quest", player)
+                               and state.has("Moonstone", player, 30), # TODO: adjust for Thomas shop later
+            flags=PhoaFlag.SIDEQUEST,
+            vanillaItem="Energy Gem",
+        ),
+        "Lake Laboratory - Fran 4th moonstone batch": PhoaLocationData(
+            region="lake_laboratory",
+            address=0,
+            rule=lambda state: state.can_reach_location("Lake Laboratory - Fran freedom quest", player)
+                               and state.has("Moonstone", player, 40), # TODO: adjust for Thomas shop later
+            flags=PhoaFlag.SIDEQUEST,
+            vanillaItem="Moon Crystal",
+        ),
+        "Lake Laboratory - Fran 5th moonstone batch": PhoaLocationData(
+            region="lake_laboratory",
+            address=0,
+            rule=lambda state: state.can_reach_location("Lake Laboratory - Fran freedom quest", player)
+                               and state.has("Moonstone", player, 50), # TODO: adjust for Thomas shop later
+            flags=PhoaFlag.SIDEQUEST,
+            vanillaItem="Heart Ruby",
+        ),
+        # FIXME: to here
         # Events
         "Anuri Temple - Side entrance gate opened": PhoaLocationData(
             region="anuri_temple(main)",

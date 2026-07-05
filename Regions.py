@@ -580,7 +580,50 @@ def get_exit_data(player: int, options: PhoaOptions) -> list[PhoaExit]:
             connection="ouroboros_hideout(treasure_room_hidden_area)",
             rule=lambda state: logic.has_explosives(state),
         ),
-        # ouroboros_hideout(great_drake_arena)
+        # FIXME: from here
+        # daea_region
+        PhoaExit(
+            name="daea_region_to_lake_laboratory",
+            region="daea_region",
+            connection="lake_laboratory",
+        ),
+        PhoaExit(
+            name="lake_laboratory_to_daea_region",
+            region="lake_laboratory",
+            connection="daea_region",
+        ),
+        # Franways # TODO: 3 options: always open, opened by respective item, opened vanilla with moonstones
+        # PhoaExit(
+        #     name="lake_laboratory_to_panselo_region",
+        #     region="lake_laboratory",
+        #     connection="panselo_region",
+        # ),
+        # PhoaExit(
+        #     name="panselo_region_to_lake_laboratory",
+        #     region="panselo_region",
+        #     connection="lake_laboratory",
+        # ),
+        # PhoaExit(
+        #     name="lake_laboratory_to_atai_region",
+        #     region="lake_laboratory",
+        #     connection="atai_region",
+        # ),
+        # PhoaExit(
+        #     name="atai_region_to_lake_laboratory",
+        #     region="atai_region",
+        #     connection="lake_laboratory",
+        # ),
+        # PhoaExit(
+        #     name="lake_laboratory_to_cosette_region",
+        #     region="lake_laboratory",
+        #     connection="cosette_region",
+        # ),
+        # PhoaExit(
+        #     name="cosette_region_to_lake_laboratory",
+        #     region="cosette_region",
+        #     connection="lake_laboratory",
+        # ),
+        # FIXME: to here
     ]
 
     return exits
