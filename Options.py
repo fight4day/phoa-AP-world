@@ -126,6 +126,14 @@ class EnableOuroborosShrines(Toggle):
     display_name = "Include Ouroboros shrines"
 
 
+class EnableMoonstoneShops(Toggle):
+    """
+    Includes the rewards from Fran's quest chain and Thomas' shop
+    Note that this adds 90 progression items. Enabling these rewards requires you to add enough locations
+    """
+    display_name = "Include Moonstone shops"
+
+
 class StartWithWoodenBat(DefaultOnToggle):
     """Start out with wooden bat"""
     display_name = "Start with wooden bat"
@@ -138,10 +146,10 @@ class OpenPanseloGates(Toggle):
 
 class FranwayUnlockMode(Choice):
     """
-    How the Franway teleporters should be handled.
-    vanilla opens them by following Fran's questline.
-    items adds an unlock item for each teleporter.
-    unlocked starts with all Franways unlocked.
+    How the Franway teleporters are unlocked
+    vanilla - unlocks them by following Fran's questline. If this is chosen and Moonstone shops are disabled, Franways are considered out of logic
+    items - adds an unlock item for each teleporter
+    unlocked - starts with all Franways unlocked
     """
     display_name = "Franway unlock mode"
     option_vanilla = 0
@@ -194,6 +202,7 @@ class PhoaOptions(PerGameCommonOptions):
     enable_trap_chests: EnableTrapChests
     enable_geo_challenge_rewards: EnableGEOChallengeRewards
     enable_ouroboros_shrines: EnableOuroborosShrines
+    enable_moonstone_shops: EnableMoonstoneShops
     start_with_wooden_bat: StartWithWoodenBat
     upgradable_bats: UpgradableBats
     upgradable_tools: UpgradableTools
@@ -228,12 +237,14 @@ class PhoaOptions(PerGameCommonOptions):
             "enable_trap_chests",
             "enable_geo_challenge_rewards",
             "enable_ouroboros_shrines",
+            "enable_moonstone_shops",
             "start_with_wooden_bat",
             "upgradable_bats",
             "upgradable_tools",
             "upgradable_spear",
             "upgradable_prelude",
             "open_panselo_gates",
+            "franway_unlock_mode",
             "keep_excluded_status_upgrades_in_item_pool",
             "death_link",
         )
@@ -265,6 +276,7 @@ phoa_option_groups: list[OptionGroup] = [
             EnableTrapChests,
             EnableGEOChallengeRewards,
             EnableOuroborosShrines,
+            EnableMoonstoneShops,
         ],
     ),
     OptionGroup(

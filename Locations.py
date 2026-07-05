@@ -29,6 +29,7 @@ class PhoaFlag(Flag):
     MINIGAMES = auto()
     TRAPCHEST = auto()
     OUROBOROS = auto()
+    MOONSTONE_SHOP = auto()
     PERRO = auto()
     VAULT = auto()
 
@@ -1932,35 +1933,35 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
             region="lake_laboratory",
             address=0,
             rule=lambda state: logic.can_do_fran_quest_chain(state, 1),
-            flags=PhoaFlag.SIDEQUEST,
+            flags=PhoaFlag.MOONSTONE_SHOP,
             vanillaItem="Heart Ruby",
         ),
         "Lake Laboratory - Fran 2nd moonstone batch": PhoaLocationData(
             region="lake_laboratory",
             address=0,
             rule=lambda state: logic.can_do_fran_quest_chain(state, 2),
-            flags=PhoaFlag.SIDEQUEST,
+            flags=PhoaFlag.MOONSTONE_SHOP,
             vanillaItem="Tailoring Voucher",
         ),
         "Lake Laboratory - Fran 3rd moonstone batch": PhoaLocationData(
             region="lake_laboratory",
             address=0,
             rule=lambda state: logic.can_do_fran_quest_chain(state, 3),
-            flags=PhoaFlag.SIDEQUEST,
+            flags=PhoaFlag.MOONSTONE_SHOP,
             vanillaItem="Energy Gem",
         ),
         "Lake Laboratory - Fran 4th moonstone batch": PhoaLocationData(
             region="lake_laboratory",
             address=0,
             rule=lambda state: logic.can_do_fran_quest_chain(state, 4),
-            flags=PhoaFlag.SIDEQUEST,
+            flags=PhoaFlag.MOONSTONE_SHOP,
             vanillaItem="Moon Crystal",
         ),
         "Lake Laboratory - Fran 5th moonstone batch": PhoaLocationData(
             region="lake_laboratory",
             address=0,
             rule=lambda state: logic.can_do_fran_quest_chain(state, 5),
-            flags=PhoaFlag.SIDEQUEST,
+            flags=PhoaFlag.MOONSTONE_SHOP,
             vanillaItem="Heart Ruby",
         ),
         "GEO Base - Prize counter item 1": PhoaLocationData(
@@ -2074,6 +2075,7 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
         (options.enable_minigames <= 0, PhoaFlag.MINIGAMES),
         (options.enable_trap_chests <= 0, PhoaFlag.TRAPCHEST),
         (options.enable_ouroboros_shrines <= 0, PhoaFlag.OUROBOROS),
+        (options.enable_moonstone_shops <= 0, PhoaFlag.MOONSTONE_SHOP),
         (options.enable_perros <= 0, PhoaFlag.PERRO),
         (options.enable_ancient_vault <= 0, PhoaFlag.VAULT),
     ]

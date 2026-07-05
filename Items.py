@@ -43,7 +43,7 @@ class PhoaItemData(NamedTuple):
 # "Unlock Cosette Franway" 1 (progression)
 #
 # Other changes
-# 50 Moonstones progression if sidequest option is active (make fran quest only active if moonstone locations are enabled?)
+# 50 Moonstones progression if EnableMoonstoneShops option is active (later 90 with Thomas' shop)
 # Geo tickets progression if shop option is active
 # Antique Pins progression if sidequest option is active
 

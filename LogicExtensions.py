@@ -1,5 +1,5 @@
 from BaseClasses import CollectionState
-from .Options import FranwayUnlockMode
+from .Options import PhoaOptions
 
 
 class PhoaLogic:
@@ -133,9 +133,9 @@ class PhoaLogic:
         # TODO: adjust moonstone cost for Thomas shop later
         return (self.has_explosives(state)
                 and (state.can_reach_region("panselo_region") or state.can_reach_region("atai_region"))
-                and state.has("Moonstone", self.player, quest_number * 10))
+                and (state.has("Moonstone", self.player, quest_number * 10)) if quest_number > 0 else True)
 
-    def can_use_franway(self, state: CollectionState, franway_unlock_mode: FranwayUnlockMode, franway_region: str) -> bool:
+    def can_use_franway(self, state: CollectionState, options: PhoaOptions, franway_region: str) -> bool:
         match franway_region:
             case "Panselo":
                 quest_number = 1
@@ -146,7 +146,10 @@ class PhoaLogic:
             case _:
                 raise Exception(f"Unknown region received: {franway_region}")
 
-        match franway_unlock_mode:
-            case 0: return self.can_do_fran_quest_chain(state, quest_number)
-            case 1: return state.has(f"Unlock {franway_region} Franway", self.player)
-            case 2: return True
+        match options.franway_unlock_mode.value:
+            case 0:
+                return options.enable_moonstone_shops and self.can_do_fran_quest_chain(state, quest_number)
+            case 1:
+                return state.has(f"Unlock {franway_region} Franway", self.player)
+            case 2:
+                return True
