@@ -628,11 +628,34 @@ def get_exit_data(player: int, options: PhoaOptions) -> list[PhoaExit]:
             connection="daea_region",
         ),
 
+        PhoaExit(
+            name="daea_region_to_daea_city",
+            region="daea_region",
+            connection="daea_city",
+        ),
+        PhoaExit(
+            name="daea_city_to_geo_dungeon",
+            region="daea_city",
+            connection="daea_city(geo_dungeon)",
+            rule=lambda state: state.has("Rocket Boots", player),
+        ),
+        PhoaExit(
+            name="daea_city_to_seer",
+            region="daea_city",
+            connection="daea_city(seer)",
+            rule=lambda state: state.has("Rocket Boots", player),
+        ),
+
+
         # create_region(world, player, locations_per_region, "moonlight_ravine(south_town)"),
         # create_region(world, player, locations_per_region, "moonlight_ravine(wilds)"),
         # create_region(world, player, locations_per_region, "moonlight_ravine(north_town)"),
         # create_region(world, player, locations_per_region, "kingdom_bridge(south)"),
         # create_region(world, player, locations_per_region, "kingdom_bridge(north)"),
+        # create_region(world, player, locations_per_region, "daea_city"),
+        # create_region(world, player, locations_per_region, "daea_city(geo_dungeon)"),
+        # create_region(world, player, locations_per_region, "daea_city(seer)"),
+
 
 
         # fight4day
