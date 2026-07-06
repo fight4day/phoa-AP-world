@@ -45,7 +45,8 @@ class PhoaWorld(World):
 
         for item in precollected_items:
             precollected_item = self.create_item(item)
-            precollected_item.classification = IC.progression
+            if precollected_item.classification != IC.progression:
+                raise Exception(f"Precollected item that is not progression: '{item}'")
             self.multiworld.push_precollected(precollected_item)
 
         item_pool: list[PhoaItem] = []
