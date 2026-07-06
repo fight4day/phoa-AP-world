@@ -1960,7 +1960,7 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
         "Moonlight Ravine - Wilds Room 2 Pot": PhoaLocationData(
             region="moonlight_ravine(wilds)",
             address=0,
-            flags=PhoaFlag.BREAKABLES,
+            flags=PhoaFlag.MOONSTONE,
             vanillaItem="Moonstone",
         ),
         "Moonlight Ravine - Wilds Room 2 Underwater Item 3": PhoaLocationData(
@@ -1997,7 +1997,7 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
             region="moonlight_ravine(wilds)",
             address=0,
             rule=lambda state: logic.has_sonic_spear(state),
-            flags=PhoaFlag.BREAKABLE,
+            flags=PhoaFlag.MOONSTONE,
             vanillaItem="Moonstone",
         ),
         "Moonlight Ravine - Wilds Room 3 Underwater Item 2": PhoaLocationData(
@@ -2013,7 +2013,7 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
             rule=lambda state: state.has("Life Saver", player)
                                and (logic.can_use_spear_bomb(state)
                                or state.has("Kobold Blaster", player)),
-            flags=PhoaFlag.BREAKABLE,
+            flags=PhoaFlag.MOONSTONE,
             vanillaItem="Moonstone",
         ),
         "Moonlight Ravine - Wilds Room 3 Wall Chest": PhoaLocationData(
