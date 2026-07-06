@@ -1868,7 +1868,369 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
         #     vanillaItem="Baroque of Battle",
         # ),
         # FIXME: from here
+        
         # ET
+        "Moonlight Ravine - South Town Shop Item 1": PhoaLocationData(
+            region="moonlight_ravine(south)",
+            address=0,
+            flags=PhoaFlag.SHOPSANITY,
+            vanillaItem="Fishing Rod",
+        ),
+        "Moonlight Ravine - South Town Shop Item 2": PhoaLocationData(
+            region="moonlight_ravine(south)",
+            address=0,
+            flags=PhoaFlag.SHOPSANITY,
+            vanillaItem="Cooked Knife Krill", # 3 of them
+        ),
+        "Moonlight Ravine - South Town Shop Item 3": PhoaLocationData(
+            region="moonlight_ravine(south)",
+            address=0,
+            flags=PhoaFlag.SHOPSANITY,
+            vanillaItem="Sushi", # 2 of them
+        ),
+        "Moonlight Ravine - South Town Shop Item 4": PhoaLocationData(
+            region="moonlight_ravine(south)",
+            address=0,
+            flags=PhoaFlag.SHOPSANITY,
+            vanillaItem="Fish Skewer",
+        ),
+        "Moonlight Ravine -  South Town Crate under shop": PhoaLocationData(
+            region="moonlight_ravine(south)",
+            address=0,
+            flags=PhoaFlag.BREAKABLE,
+            vanillaItem="Honey Drop",
+        ),
+        "Moonlight Ravine -  South Town Hidden NPC": PhoaLocationData(
+            region="moonlight_ravine(south)",
+            address=0,
+            flags=PhoaFlag.SIDEQUEST,
+            vanillaItem="Moonstone",
+        ),
+
+        "Moonlight Ravine - Wilds Room 1 Underwater Item 1": PhoaLocationData(
+            region="moonlight_ravine(wilds)",
+            address=0,
+            rule=lambda state: state.has("Life Saver", player),
+            flags=PhoaFlag.FREESTANDING,
+            vanillaItem="Moon Kelp",
+        ),
+        "Moonlight Ravine - Wilds Room 1 Underwater Item 2": PhoaLocationData(
+            region="moonlight_ravine(wilds)",
+            address=0,
+            rule=lambda state: state.has("Life Saver", player),
+            flags=PhoaFlag.FREESTANDING,
+            vanillaItem="Moon Kelp",
+        ),
+        "Moonlight Ravine - Wilds Room 1 Underwater Item 3": PhoaLocationData(
+            region="moonlight_ravine(wilds)",
+            address=0,
+            rule=lambda state: state.has("Life Saver", player),
+            flags=PhoaFlag.FREESTANDING,
+            vanillaItem="Moon Kelp",
+        ),
+        "Moonlight Ravine - Wilds Room 1 Chest": PhoaLocationData(
+            region="moonlight_ravine(wilds)",
+            address=0,
+            rule=lambda state: state.has("Life Saver", player),
+            flags=PhoaFlag.RINCHESTS,
+            vanillaItem="30 Rin",
+        ),
+        "Moonlight Ravine - Wilds Room 1 Underwater Item 4": PhoaLocationData(
+            region="moonlight_ravine(wilds)",
+            address=0,
+            rule=lambda state: state.has("Life Saver", player),
+            flags=PhoaFlag.FREESTANDING,
+            vanillaItem="Moon Kelp",
+        ),
+
+        "Moonlight Ravine - Wilds Room 2 Underwater Item 1": PhoaLocationData(
+            region="moonlight_ravine(wilds)",
+            address=0,
+            rule=lambda state: state.has("Life Saver", player),
+            flags=PhoaFlag.FREESTANDING,
+            vanillaItem="Moon Kelp",
+        ),
+        "Moonlight Ravine - Wilds Room 2 Underwater Item 2": PhoaLocationData(
+            region="moonlight_ravine(wilds)",
+            address=0,
+            rule=lambda state: state.has("Life Saver", player),
+            flags=PhoaFlag.FREESTANDING,
+            vanillaItem="Moon Kelp",
+        ),
+        "Moonlight Ravine - Wilds Room 2 Pot": PhoaLocationData(
+            region="moonlight_ravine(wilds)",
+            address=0,
+            flags=PhoaFlag.BREAKABLES,
+            vanillaItem="Moonstone",
+        ),
+        "Moonlight Ravine - Wilds Room 2 Underwater Item 3": PhoaLocationData(
+            region="moonlight_ravine(wilds)",
+            address=0,
+            rule=lambda state: state.has("Life Saver", player),
+            flags=PhoaFlag.FREESTANDING,
+            vanillaItem="Moon Kelp",
+        ),
+        "Moonlight Ravine - Wilds Room 2 Underwater Item 4": PhoaLocationData(
+            region="moonlight_ravine(wilds)",
+            address=0,
+            rule=lambda state: state.has("Life Saver", player),
+            flags=PhoaFlag.FREESTANDING,
+            vanillaItem="Moon Kelp",
+        ),
+        "Moonlight Ravine - Wilds Room 2 Alcove Item": PhoaLocationData(
+            region="moonlight_ravine(wilds)",
+            address=0,
+            rule=lambda state: logic.has_explosives(state)
+                               and state.has("Life Saver", player),
+            flags=PhoaFlag.LUNARARTIFACT,
+            vanillaItem="Lunar Crown",
+        ),
+
+        "Moonlight Ravine - Wilds Room 3 Underwater Item 1": PhoaLocationData(
+            region="moonlight_ravine(wilds)",
+            address=0,
+            rule=lambda state: state.has("Life Saver", player),
+            flags=PhoaFlag.FREESTANDING,
+            vanillaItem="Moon Kelp",
+        ),
+        "Moonlight Ravine - Wilds Room 3 Pot": PhoaLocationData(
+            region="moonlight_ravine(wilds)",
+            address=0,
+            rule=lambda state: logic.has_sonic_spear(state),
+            flags=PhoaFlag.BREAKABLE,
+            vanillaItem="Moonstone",
+        ),
+        "Moonlight Ravine - Wilds Room 3 Underwater Item 2": PhoaLocationData(
+            region="moonlight_ravine(wilds)",
+            address=0,
+            rule=lambda state: state.has("Life Saver", player),
+            flags=PhoaFlag.FREESTANDING,
+            vanillaItem="Moon Kelp",
+        ),
+        "Moonlight Ravine - Wilds Room 3 Water Crevice Pot": PhoaLocationData(
+            region="moonlight_ravine(wilds)",
+            address=0,
+            rule=lambda state: state.has("Life Saver", player)
+                               and (logic.can_use_spear_bomb(state)
+                               or state.has("Kobold Blaster", player)),
+            flags=PhoaFlag.BREAKABLE,
+            vanillaItem="Moonstone",
+        ),
+        "Moonlight Ravine - Wilds Room 3 Wall Chest": PhoaLocationData(
+            region="moonlight_ravine(wilds)",
+            address=0,
+            rule=lambda state: state.has("Life Saver", player)
+                               and logic.has_explosives(state),
+            flags=PhoaFlag.RINCHESTS,
+            vanillaItem="30 Rin",
+        ),
+        "Moonlight Ravine - Wilds Room 3 Underwater Item 3": PhoaLocationData(
+            region="moonlight_ravine(wilds)",
+            address=0,
+            rule=lambda state: state.has("Life Saver", player),
+            flags=PhoaFlag.FREESTANDING,
+            vanillaItem="Moon Kelp",
+        ),
+        "Moonlight Ravine - Wilds Room 3 Underwater Item 4": PhoaLocationData(
+            region="moonlight_ravine(wilds)",
+            address=0,
+            rule=lambda state: state.has("Life Saver", player),
+            flags=PhoaFlag.FREESTANDING,
+            vanillaItem="Moon Kelp",
+        ),
+
+        "Moonlight Ravine - Wilds Room 4 Underwater Item 1": PhoaLocationData(
+            region="moonlight_ravine(wilds)",
+            address=0,
+            rule=lambda state: state.has("Life Saver", player),
+            flags=PhoaFlag.FREESTANDING,
+            vanillaItem="Moon Kelp",
+        ),
+        "Moonlight Ravine - Wilds Room 4 Lizard": PhoaLocationData(
+            region="moonlight_ravine(wilds)",
+            address=0,
+            rule=lambda state: logic.can_reasonably_kill_mice(state),
+            flags=PhoaFlag.SMALLANIMALS,
+            vanillaItem="Mystery Meat",
+        ),
+        "Moonlight Ravine - Wilds Room 4 Underwater Item 2": PhoaLocationData(
+            region="moonlight_ravine(wilds)",
+            address=0,
+            rule=lambda state: state.has("Life Saver", player)
+                               and logic.has_sonic_spear(state)
+                               and logic.has_explosives(state),
+            flags=PhoaFlag.LUNARARTIFACT,
+            vanillaItem="Lunar Trident",
+        ),
+        "Moonlight Ravine - Wilds Room 4 Underwater Item 3": PhoaLocationData(
+            region="moonlight_ravine(wilds)",
+            address=0,
+            rule=lambda state: state.has("Life Saver", player),
+            flags=PhoaFlag.FREESTANDING,
+            vanillaItem="Moon Kelp",
+        ),
+        "Moonlight Ravine - Wilds Room 4 Underwater Item 4": PhoaLocationData(
+            region="moonlight_ravine(wilds)",
+            address=0,
+            rule=lambda state: state.has("Life Saver", player),
+            flags=PhoaFlag.ENERGYGEM,
+            vanillaItem="Energy Gem",
+        ),
+        "Moonlight Ravine - Wilds Room 4 Underwater Item 5": PhoaLocationData(
+            region="moonlight_ravine(wilds)",
+            address=0,
+            rule=lambda state: state.has("Life Saver", player),
+            flags=PhoaFlag.FREESTANDING,
+            vanillaItem="Moon Kelp",
+        ),
+        "Moonlight Ravine - Wilds Room 4 Underwater Item 6": PhoaLocationData(
+            region="moonlight_ravine(wilds)",
+            address=0,
+            rule=lambda state: state.has("Life Saver", player),
+            flags=PhoaFlag.FREESTANDING,
+            vanillaItem="Moon Kelp",
+        ),
+
+        "Moonlight Ravine - North Town Underwater Item 1": PhoaLocationData(
+            region="moonlight_ravine(north)",
+            address=0,
+            rule=lambda state: state.has("Life Saver", player),
+            flags=PhoaFlag.FREESTANDING,
+            vanillaItem="Moon Kelp",
+        ),
+        "Moonlight Ravine - North Town Bo Running Challenge Item": PhoaLocationData(
+            region="moonlight_ravine(north)",
+            address=0,
+            rule=lambda state: state.has("Life Saver", player)
+                               or state.has("Rocket Boots", player),
+            flags=PhoaFlag.SIDEQUEST,
+            vanillaItem="40 Rin",
+        ),
+        "Moonlight Ravine - North Town Underwater Item 2": PhoaLocationData(
+            region="moonlight_ravine(north)",
+            address=0,
+            rule=lambda state: state.has("Life Saver", player),
+            flags=PhoaFlag.FREESTANDING,
+            vanillaItem="Moon Kelp",
+        ),
+        "Moonlight Ravine - North Town Underwater Item 3": PhoaLocationData(
+            region="moonlight_ravine(north)",
+            address=0,
+            rule=lambda state: state.has("Life Saver", player),
+            flags=PhoaFlag.FREESTANDING,
+            vanillaItem="Moon Kelp",
+        ),
+        "Moonlight Ravine - North Town Fish Item": PhoaLocationData( # SOME AMOUNT OF ENERGY NECESSARY
+            region="moonlight_ravine(north)",
+            address=0,
+            rule=lambda state: logic.has_fishing_rod(state),
+            flags=PhoaFlag.FISHINGSPOT,
+            vanillaItem="Moonstone",
+        ),
+        "Moonlight Ravine - North Town Hidden Chest": PhoaLocationData(
+            region="moonlight_ravine(north)",
+            address=0,
+            flags=PhoaFlag.RINCHESTS,
+            vanillaItem="30 Rin",
+        ),
+
+        "Kingdom Bridge - South Songstone Puzzle Chest": PhoaLocationData(
+            region="kingdom_bridge(south)",
+            address=0,
+            rule=lambda state: logic.has_music_instrument(state),
+            flags=PhoaFlag.RINCHESTS,
+            vanillaItem="45 Rin",
+        ),
+        "Kingdom Bridge - South Bridge Chest": PhoaLocationData(
+            region="kingdom_bridge(south)",
+            address=0,
+            flags=PhoaFlag.RINCHESTS,
+            vanillaItem="35 Rin",
+        ),
+        "Kingdom Bridge - South Fish Item": PhoaLocationData( # SOME AMOUNT OF ENERGY NECESSARY
+            region="kingdom_bridge(south)",
+            address=0,
+            rule=lambda state: logic.has_fishing_rod(state),
+            flags=PhoaFlag.FISHINGSPOT,
+            vanillaItem="Moonstone",
+        ),
+        "Kingdom Bridge - Tower Crate 1": PhoaLocationData(
+            region="kingdom_bridge(north)",
+            address=0,
+            flags=PhoaFlag.BREAKABLE,
+            vanillaItem="Drake Tail",
+        ),
+        "Kingdom Bridge - Tower Crate Mouse": PhoaLocationData(
+            region="kingdom_bridge(north)",
+            address=0,
+            rule=lambda state: logic.can_reasonably_kill_mice(state),
+            flags=PhoaFlag.SMALLANIMALS,
+            vanillaItem="Mystery Meat",
+        ),
+        "Kingdom Bridge - Tower Lower Chest": PhoaLocationData(
+            region="kingdom_bridge(north)",
+            address=0,
+            flags=PhoaFlag.RINCHESTS,
+            vanillaItem="20 Rin",
+        ),
+        "Kingdom Bridge - Tower Crate 2": PhoaLocationData(
+            region="kingdom_bridge(north)",
+            address=0,
+            flags=PhoaFlag.BREAKABLE,
+            vanillaItem="Saffron Milk",
+        ),
+        "Kingdom Bridge - North Turret Pot": PhoaLocationData(
+            region="kingdom_bridge(north)",
+            address=0,
+            flags=PhoaFlag.MOONSTONE,
+            vanillaItem="Moonstone",
+        ),
+        "Kingdom Bridge - Tower Upper Turret Chest": PhoaLocationData(
+            region="kingdom_bridge(north)",
+            address=0,
+            rule=lambda state: logic.has_sonic_spear(state)
+                               and logic.has_music_instrument(state),
+            flags=PhoaFlag.RINCHESTS,
+            vanillaItem="50 Rin",
+        ),
+        "Kingdom Bridge - Tower Upper Turret Pot": PhoaLocationData(
+            region="kingdom_bridge(north)",
+            address=0,
+            rule=lambda state: logic.has_sonic_spear(state)
+                               and logic.has_music_instrument(state),
+            flags=PhoaFlag.MOONSTONE,
+            vanillaItem="Moonstone",
+        ),
+        "Kingdom Bridge - GEO Dungeon Item": PhoaLocationData(
+            region="kingdom_bridge(north)",
+            address=0,
+            flags=PhoaFlag.GEOCHALLENGE,
+            vanillaItem="GEO Ticket",
+        ),
+
+        # 1 Fishing Rod
+        # 1 Cooked Knife Krill 3x
+        # 1 Sushi 2x
+        # 1 Fish Skewer
+        # 1 Honey Drop
+        # 8 Moonstone
+        # 19 Moon Kelp
+        # 3 30 Rin
+        # 1 Lunar Crown
+        # 2 Mystery Meat
+        # 1 Lunar Trident
+        # 1 Energy Gem
+        # 1 40 Rin
+        # 1 45 Rin
+        # 1 35 Rin
+        # 1 Drake Tail
+        # 1 20 Rin
+        # 1 Saffron Milk
+        # 1 50 Rin
+        # 1 GEO Ticket
+        
+
+
         # fight4day
         "Daea Region - Cave chest": PhoaLocationData(
             region="daea_region",

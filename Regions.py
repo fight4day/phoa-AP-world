@@ -583,6 +583,58 @@ def get_exit_data(player: int, options: PhoaOptions) -> list[PhoaExit]:
         # ouroboros_hideout(great_drake_arena)
         # FIXME: from here
         # ET
+        # moonlight_ravine
+        PhoaExit(
+            name="atai_region_to_moonlight_ravine_south",
+            region="atai_region",
+            connection="moonlight_ravine(south)",
+        ),
+        PhoaExit(
+            name="moonlight_ravine_south_to_wilds",
+            region="moonlight_ravine(south)",
+            connection="moonlight_ravine(wilds)",
+            rule=lambda state: logic.has_lifesaver(state)
+                               or state.has("Rocket Boots", player),
+        ),
+        PhoaExit(
+            name="moonlight_ravine_wilds_to_north",
+            region="moonlight_ravine(wilds)",
+            connection="moonlight_ravine(north)",
+            rule=lambda state: logic.has_lifesaver(state)
+                               or state.has("Rocket Boots", player),
+        ),
+        PhoaExit(
+            name="moonlight_ravine_north_to_daea_region",
+            region="moonlight_ravine(north)",
+            connection="daea_region",
+        ),
+
+        PhoaExit(
+            name="atai_region_to_kingdom_bridge_south",
+            region="atai_region",
+            connection="kingdom_bridge(south)",
+        ),
+        PhoaExit(
+            name="kingdom_bridge_south_kingdom_bridge_north",
+            region="kingdom_bridge(south)",
+            connection="kingdom_bridge(north)",
+            rule=lambda state: (logic.has_lifesaver(state) 
+                               and logic.has_sonic_spear(state)) 
+                               or state.has("Rocket Boots", player),
+        ),
+        PhoaExit(
+            name="kingdom_bridge_north_to_daea_region",
+            region="kingdom_bridge(north)",
+            connection="daea_region",
+        ),
+
+        # create_region(world, player, locations_per_region, "moonlight_ravine(south_town)"),
+        # create_region(world, player, locations_per_region, "moonlight_ravine(wilds)"),
+        # create_region(world, player, locations_per_region, "moonlight_ravine(north_town)"),
+        # create_region(world, player, locations_per_region, "kingdom_bridge(south)"),
+        # create_region(world, player, locations_per_region, "kingdom_bridge(north)"),
+
+
         # fight4day
         # daea_region
         PhoaExit(
