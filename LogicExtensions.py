@@ -73,7 +73,7 @@ class PhoaLogic:
                 or (state.has("Refurbished Crank Lamp", self.player) and not exclude_lamp)
                 or state.has("Kobold Blaster", self.player))
 
-    def can_reasonably_kill_enemies(self, state: CollectionState, exclude_slingshot: bool = False) -> bool:
+    def can_reasonably_kill_enemies(self, state: CollectionState, exclude_slingshot: bool = False,  exclude_rocket_boots: bool = False) -> bool:
         return (self.has_bat(state)
                 or (self.has_slingshot(state) and not exclude_slingshot)
                 or self.has_bombs(state)
@@ -128,6 +128,10 @@ class PhoaLogic:
         # TODO: This is a bare minimum and needs to be reconsidered
         return ((self.has_bombs(state) and self.has_bat(state))
                 or state.has("Kobold Blaster", self.player))
+
+    def can_defeat_wrecker(self, state: CollectionState) -> bool:
+        # TODO: This is a bare minimum and needs to be reconsidered
+        return self.has_bat(state)
     
     def can_do_fran_quest_chain(self, state: CollectionState, quest_number: int) -> bool:
         # TODO: adjust moonstone cost for Thomas shop later

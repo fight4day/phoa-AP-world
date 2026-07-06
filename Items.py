@@ -22,15 +22,17 @@ class PhoaItemData(NamedTuple):
 # ET
 # fight4day
 # Updated counts
-# "Energy Gem" +3: "Daea Region - Cave ledge item", "Lake Laboratory - Fran 3rd moonstone batch", "GEO Base - Prize counter item 3"
+# "Energy Gem" +4: "Daea Region - Cave ledge item", "Lake Laboratory - Fran 3rd moonstone batch", "GEO Base - Prize counter item 3", "Thomas's Lab - Binary room item"
 # "40 Rin" +1: "Daea Region - Cave chest"
+# "50 Rin" +1: "Thomas's Lab - Reception bribe"
 # "Perro" +1: "Daea Region - Perro Hide and Seek"
 # "Ouroboros Scroll" +1: "Daea Region - Cupid's Fountain Ouroboros shrine"
 # "GEO Ticket" +3: "Daea Region - GEO house reward", "GEO Base - GEO reward", forgot a previous one
-# "Heart Ruby" +4: "Lake Laboratory - Fran 1st moonstone batch", "Lake Laboratory - Fran 5th moonstone batch", "GEO Base - Prize counter item 2"
+# "Heart Ruby" +6: "Lake Laboratory - Fran 1st moonstone batch", "Lake Laboratory - Fran 5th moonstone batch", "GEO Base - Prize counter item 2", "Thomas's Lab - Punching bag minigame", "Thomas's Lab - Wrecker room Floret quest"
 # "Antique Pin" +1: - (needed for "GEO Base - Georgia quest 2")
 # "Honey Drop" +1: "GEO Base - Attic crate"
-# "Moonstone" +1: "GEO Base - Pond fish"
+# "Moonstone" +3: "GEO Base - Pond fish", "Thomas's Lab - Reception blue medallion quest", "Thomas's Lab - Reception red medallion quest"
+# "Pumpkin Muffin" +1: "Thomas's Lab - Diary room crate"
 #
 # New items
 # "Tailoring Voucher" 2 (filler): "Lake Laboratory - Fran freedom quest", "Lake Laboratory - Fran 2nd moonstone batch"
@@ -38,12 +40,15 @@ class PhoaItemData(NamedTuple):
 # "Golden Egg" 1 (filler): "GEO Base - Prize counter item 1"
 # "GEO Jacket" 1 (useful): "GEO Base - Prize counter item 4"
 # "Lucky Earrings" 1 (filler): "GEO Base - Georgia quest 1"
+# "Calory Slush" 2 (filler): "Thomas's Lab - Vending machine", "Thomas's Lab - Crate behind wrecker room"
+# "Blue Golem Medallion" 4 (progression): "Thomas's Lab - Room 1-1", "Thomas's Lab - Room 1-2", "Thomas's Lab - Room 1-3", "Thomas's Lab - Room 1-4"
+# "Red Golem Medallion" 4 (progression): "Thomas's Lab - Room 2-1", "Thomas's Lab - Room 2-2", "Thomas's Lab - Room 2-3", "Thomas's Lab - Room 2-4"
 # "Unlock Panselo Franway" 1 (progression)
 # "Unlock Atai Franway" 1 (progression)
 # "Unlock Cosette Franway" 1 (progression)
 #
 # Other changes
-# 50 Moonstones progression if EnableMoonstoneShops option is active (later 90 with Thomas' shop)
+# 50 Moonstones progression if EnableMoonstoneShops option is active (later 90 with Thomas's shop)
 # Geo tickets progression if shop option is active
 # Antique Pins progression if sidequest option is active
 
