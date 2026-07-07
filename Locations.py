@@ -1903,7 +1903,7 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
         "Moonlight Ravine -  South town hidden NPC": PhoaLocationData(
             region="moonlight_ravine(south)",
             address=0,
-            flags=PhoaFlag.SIDEQUEST,
+            flags=PhoaFlag.NPCGIFTS,
             vanillaItem="Moonstone",
         ),
 
@@ -2207,6 +2207,12 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
             flags=PhoaFlag.GEOCHALLENGE,
             vanillaItem="GEO Ticket",
         ),
+        "Daea City - West side bird lady quest": PhoaLocationData( # FACT CHECK
+            region="daea_city",
+            address=0,
+            flags=PhoaFlag.SIDEQUEST,
+            vanillaItem="Energy Gem",
+        ),
         "Daea City - GEO dungeon item": PhoaLocationData(
             region="daea_city(geo_dungeon)",
             address=0,
@@ -2259,28 +2265,380 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
             flags=PhoaFlag.SIDEQUEST,
             vanillaItem="60 Rin",
         ),
+        "Daea City - Residential house grandmother": PhoaLocationData(
+            region="daea_city",
+            address=0,
+            flags=PhoaFlag.NPCGIFTS,
+            vanillaItem="Moonstone",
+        ),
+        "Daea City - West alley pot": PhoaLocationData(
+            region="daea_city",
+            address=0,
+            rule=lambda state: logic.has_sonic_spear(state),
+            flags=PhoaFlag.BREAKABLE,
+            vanillaItem="Moonstone",
+        ),
+        "Daea City - West alley mouse": PhoaLocationData(
+            region="daea_city",
+            address=0,
+            rule=lambda state: logic.can_reasonably_kill_mice(state),
+            flags=PhoaFlag.SMALLANIMALS,
+            vanillaItem="Mystery Meat",
+        ),
+        "Daea City - Student dormitory chest": PhoaLocationData(
+            region="daea_city",
+            address=0,
+            rule=lambda state: logic.has_sonic_spear(state),
+            flags=PhoaFlag.RINCHESTS,
+            vanillaItem="35 Rin",
+        ),
+        "Daea City - Blue Lobster pantry crate 1": PhoaLocationData(
+            region="daea_city",
+            address=0,
+            flags=PhoaFlag.BREAKABLE,
+            vanillaItem="Grape Juice",
+        ),
+        "Daea City - Blue Lobster pantry crate 2": PhoaLocationData(
+            region="daea_city",
+            address=0,
+            flags=PhoaFlag.BREAKABLE,
+            vanillaItem="Macaron",
+        ),
+        "Daea City - Blue Lobster pantry mouse": PhoaLocationData(
+            region="daea_city",
+            address=0,
+            rule=lambda state: logic.can_reasonably_kill_mice(state),
+            flags=PhoaFlag.SMALLANIMALS,
+            vanillaItem="Mystery Meat",
+        ),
+        "Daea City - Bo running challenge": PhoaLocationData(
+            region="daea_city",
+            address=0,
+            flags=PhoaFlag.SIDEQUEST,
+            vanillaItem="50 Rin",
+        ),
+        "Daea City - Blue Lobster shop item 1": PhoaLocationData(
+            region="daea_city",
+            address=0,
+            flags=PhoaFlag.SHOPSANITY,
+            vanillaItem="Deli Sandwich",
+        ),
+        "Daea City - Blue Lobster shop item 2": PhoaLocationData(
+            region="daea_city",
+            address=0,
+            flags=PhoaFlag.SHOPSANITY,
+            vanillaItem="House Soup",
+        ),
+        "Daea City - Blue Lobster shop item 3": PhoaLocationData(
+            region="daea_city",
+            address=0,
+            flags=PhoaFlag.SHOPSANITY,
+            vanillaItem="Blue Lobster Special",
+        ),
+        "Daea City - Blue Lobster shop item 4": PhoaLocationData(
+            region="daea_city",
+            address=0,
+            flags=PhoaFlag.SHOPSANITY,
+            vanillaItem="Milk",
+        ),
+        "Daea City - Blue Lobster shop item 5": PhoaLocationData(
+            region="daea_city",
+            address=0,
+            flags=PhoaFlag.SHOPSANITY,
+            vanillaItem="Honey Brew",
+        ),
+        "Daea City - Blue Lobster shop item 6": PhoaLocationData(
+            region="daea_city",
+            address=0,
+            flags=PhoaFlag.SHOPSANITY,
+            vanillaItem="Grape Juice",
+        ),
+        "Daea City - Library songstone puzzle": PhoaLocationData(
+            region="daea_city",
+            address=0,
+            rule=lambda state: logic.has_music_instrument(state),
+            flags=PhoaFlag.ENERGYGEM,
+            vanillaItem="Energy Gem",
+        ),
+        "Daea City - Troubadours Alto quest item": PhoaLocationData(
+            region="daea_city",
+            address=0,
+            flags=PhoaFlag.SIDEQUEST,
+            vanillaItem="Heart Ruby",
+        ),
+        "Daea City - Troubadours Forte quest item": PhoaLocationData( # RECURRING
+            region="daea_city",
+            address=0,
+            flags=PhoaFlag.SIDEQUEST,
+            vanillaItem="35 Rin",
+        ),
+        "Daea City - East alley mouse": PhoaLocationData(
+            region="daea_city",
+            address=0,
+            rule=lambda state: logic.can_reasonably_kill_mice(state),
+            flags=PhoaFlag.SMALLANIMALS,
+            vanillaItem="Mystery Meat",
+        ),
+        "Daea City - East alley balcony item": PhoaLocationData(
+            region="daea_city",
+            address=0,
+            flags=PhoaFlag.HEARTRUBY,
+            vanillaItem="Heart Ruby",
+        ),
+        "Daea City - East alley Faun Fountain quest (Song of Ouroboros)": PhoaLocationData( # NOT SURE IF THIS IS A SIDEQUEST OR SOMETHING ELSE
+            region="daea_city",
+            address=0,
+            rule=lambda state: logic.has_music_instrument(state)
+                               and state.has("Song of Ouroboros", player),
+            flags=PhoaFlag.SIDEQUEST,
+            vanillaItem="20 Rin",
+        ),
+        "Daea City - East alley Faun Fountain quest (GEO Song)": PhoaLocationData(
+            region="daea_city",
+            address=0,
+            rule=lambda state: logic.has_music_instrument(state)
+                               and state.has("GEO Song", player),
+            flags=PhoaFlag.SIDEQUEST,
+            vanillaItem="20 Rin",
+        ),
+        "Daea City - East alley Faun Fountain quest (Royal Hymn)": PhoaLocationData(
+            region="daea_city",
+            address=0,
+            rule=lambda state: logic.has_music_instrument(state)
+                               and state.has("Royal Hymn", player),
+            flags=PhoaFlag.SIDEQUEST,
+            vanillaItem="20 Rin",
+        ),
+        "Daea City - East alley Faun Fountain quest (Prelude of Panselo)": PhoaLocationData(
+            region="daea_city",
+            address=0,
+            rule=lambda state: logic.has_music_instrument(state)
+                               and state.has("Prelude of Panselo", player),
+            flags=PhoaFlag.SIDEQUEST,
+            vanillaItem="20 Rin",
+        ),
+        "Daea City - East alley Faun Fountain quest (Baroque of Battle)": PhoaLocationData(
+            region="daea_city",
+            address=0,
+            rule=lambda state: logic.has_music_instrument(state)
+                               and state.has("Baroque of Battle", player),
+            flags=PhoaFlag.SIDEQUEST,
+            vanillaItem="20 Rin",
+        ),
+        "Daea City - East alley Faun Fountain quest (Lullaby of Ava)": PhoaLocationData(
+            region="daea_city",
+            address=0,
+            rule=lambda state: logic.has_music_instrument(state)
+                               and state.has("Lullaby of Ava", player),
+            flags=PhoaFlag.SIDEQUEST,
+            vanillaItem="20 Rin",
+        ),
+        "Daea City - East alley Faun Fountain quest (All Songs)": PhoaLocationData( # THIS WILL TRIGGER AT THE SAME TIME AS THE LAST SONG PLAYED
+            region="daea_city",
+            address=0,
+            rule=lambda state: logic.has_music_instrument(state)
+                               and state.has("Song of Ouroboros", player)
+                               and state.has("GEO Song", player)
+                               and state.has("Royal Hymn", player)
+                               and state.has("Prelude of Panselo", player)
+                               and state.has("Baroque of Battle", player)
+                               and state.has("Lullaby of Ava", player),
+            flags=PhoaFlag.SIDEQUEST,
+            vanillaItem="50 Rin",
+        ),
+        "Daea City - Bakery shop item 1": PhoaLocationData(
+            region="daea_city",
+            address=0,
+            flags=PhoaFlag.SHOPSANITY,
+            vanillaItem="Puff Pastry",
+        ),
+        "Daea City - Bakery shop item 2": PhoaLocationData(
+            region="daea_city",
+            address=0,
+            flags=PhoaFlag.SHOPSANITY,
+            vanillaItem="Macarons", # 2 of them
+        ),
+        "Daea City - Bakery shop item 3": PhoaLocationData(
+            region="daea_city",
+            address=0,
+            flags=PhoaFlag.SHOPSANITY,
+            vanillaItem="Grape Cake",
+        ),
+        "Daea City - Bakery shop item 4": PhoaLocationData(
+            region="daea_city",
+            address=0,
+            flags=PhoaFlag.SHOPSANITY,
+            vanillaItem="Chocolates", # 3 of them
+        ),
+        "Daea City - Shooting gallery item 1": PhoaLocationData( # UNSURE OF IF I WOULD NEED TO MAKE THIS EASIER MAYBE TWEAK THE ENERGY GEM AMOUNTS
+            region="daea_city",
+            address=0,
+            rule=lambda state: logic.can_clear_atai_expert_gallery(state),
+            flags=PhoaFlag.MINIGAMES,
+            vanillaItem="Rubber Duck",
+        ),
+        "Daea City - Shooting gallery item 2": PhoaLocationData(
+            region="daea_city",
+            address=0,
+            rule=lambda state: logic.can_clear_atai_expert_gallery(state),
+            flags=PhoaFlag.MINIGAMES,
+            vanillaItem="Heart Ruby",
+        ),
+        "Daea City - Shooting gallery item 3": PhoaLocationData(
+            region="daea_city",
+            address=0,
+            rule=lambda state: logic.can_clear_atai_expert_gallery(state),
+            flags=PhoaFlag.MINIGAMES,
+            vanillaItem="Moonstone",
+        ),
+        "Daea City - Guard tower balcony crate": PhoaLocationData(
+            region="daea_city",
+            address=0,
+            flags=PhoaFlag.BREAKABLE,
+            vanillaItem="Grape Cake",
+        ),
+        "Daea City - Dojo Teraka shop item": PhoaLocationData( # NOT SURE IF THIS IS SHOPSANITY
+            region="daea_city",
+            address=0,
+            flags=PhoaFlag.SHOPSANITY,
+            vanillaItem="Concentrate",
+        ),
+        "Daea City - Dojo Teraka quest": PhoaLocationData(
+            region="daea_city",
+            address=0,
+            flags=PhoaFlag.SIDEQUEST,
+            vanillaItem="Moonstone",
+        ),
+        "Daea City - Noodle shop item": PhoaLocationData(
+            region="daea_city",
+            address=0,
+            flags=PhoaFlag.SHOPSANITY,
+            vanillaItem="Spicy Noodles",
+        ),
+        "Daea City - Tunnel pantry crate 1": PhoaLocationData(
+            region="daea_city",
+            address=0,
+            flags=PhoaFlag.BREAKABLE,
+            vanillaItem="Big Raw Meat",
+        ),
+        "Daea City - Tunnel pantry crate 2": PhoaLocationData(
+            region="daea_city",
+            address=0,
+            flags=PhoaFlag.BREAKABLE,
+            vanillaItem="Gourmet Fish Fillet",
+        ),
+        "Daea City - Tunnel pantry chest": PhoaLocationData(
+            region="daea_city",
+            address=0,
+            flags=PhoaFlag.RINCHESTS,
+            vanillaItem="100 Rin",
+        ),
+        "Daea City - Tunnel kitchen crate": PhoaLocationData(
+            region="daea_city",
+            address=0,
+            flags=PhoaFlag.BREAKABLE,
+            vanillaItem="Raw Bird",
+        ),
+        "Daea City - Tunnel kitchen Chef Basil quest 1": PhoaLocationData( # THESE WILL LIKELY NEED REGION ACCESS LOGIC
+            region="daea_city",
+            address=0,
+            flags=PhoaFlag.SIDEQUEST, # Knife Krill
+            vanillaItem="10 Rin",
+        ),
+        "Daea City - Tunnel kitchen Chef Basil quest 2": PhoaLocationData(
+            region="daea_city",
+            address=0,
+            flags=PhoaFlag.SIDEQUEST, # Desert Squash
+            vanillaItem="20 Rin",
+        ),
+        "Daea City - Tunnel kitchen Chef Basil quest 3": PhoaLocationData(
+            region="daea_city",
+            address=0,
+            flags=PhoaFlag.SIDEQUEST, # Amber Fish Fillet
+            vanillaItem="Moonstone",
+        ),
+        "Daea City - Tunnel kitchen Chef Basil quest 4": PhoaLocationData(
+            # ARBOAR MEAT CAN BE GAINED FROM THAT ONE COSETTE ROOM BUT IT'S A ONE-TIME CHANCE
+            # MAYBE WE JUST ALLOW THE ARBOAR TO ALWAYS SPAWN OR REQUIRE IT AFTER AURANTIA
+            region="daea_city",
+            address=0,
+            flags=PhoaFlag.SIDEQUEST, # Arboar Meat
+            vanillaItem="Elixir",
+        ),
+        "Daea City - Ballroom under the stage": PhoaLocationData(
+            region="daea_city",
+            address=0,
+            flags=PhoaFlag.RINCHESTS,
+            vanillaItem="75 Rin",
+        ),
+        "Daea City - Ballroom piano lady quest": PhoaLocationData(
+            region="daea_city",
+            address=0,
+            flags=PhoaFlag.SIDEQUEST,
+            vanillaItem="Moonstone",
+        ),
+        "Daea City - Tunnel White Towers entrance item": PhoaLocationData(
+            region="daea_city",
+            address=0,
+            rule=lambda state: logic.has_music_instrument(state)
+                               and state.has("Royal Hymn", player),
+            flags=PhoaFlag.HEARTRUBY,
+            vanillaItem="Heart Ruby",
+        ),
+        
 
-        # 1 Fishing Rod
+        # 13 Moonstone
+        # 4 Heart Ruby
+        # 4 Energy Gem
+        
+        # 8 20 Rin
+        # 3 30 Rin
+        # 3 35 Rin
+        # 1 40 Rin
+        # 1 45 Rin
+        # 3 50 Rin
+        # 1 60 Rin
+        # 1 75 Rin
+        # 1 100 Rin
+
+        # 2 Fishing Rod
+        # 1 Crank Lamp
+        # 1 Steel Bat
+        # 1 Jade Hauberk
+        # 1 Civillian Crossbow
+        # 1 Night Star
+        # 1 Concentrate
+
+        # 1 Lunar Crown
+        # 1 Lunar Trident
+        # 2 GEO Ticket
+        
+        # 5 Mystery Meat
+
         # 1 Cooked Knife Krill 3x
         # 1 Sushi 2x
         # 1 Fish Skewer
         # 1 Honey Drop
-        # 8 Moonstone
         # 19 Moon Kelp
-        # 3 30 Rin
-        # 1 Lunar Crown
-        # 2 Mystery Meat
-        # 1 Lunar Trident
-        # 1 Energy Gem
-        # 1 40 Rin
-        # 1 45 Rin
-        # 1 35 Rin
         # 1 Drake Tail
-        # 1 20 Rin
         # 1 Saffron Milk
-        # 1 50 Rin
-        # 1 GEO Ticket
-        
+        # 2 Grape Juice
+        # 1 Macaron (Singular)
+        # 1 Macarons (Set of 2)
+        # 1 Deli Sandwich
+        # 1 House Soup
+        # 1 Blue Lobster Special
+        # 1 Milk
+        # 1 Honey Brew
+        # 1 Puff Pastry
+        # 2 Grape Cake
+        # 1 Chocolates (Set of 3)
+        # 1 Rubber Duck
+        # 1 Spicy Noodles
+        # 1 Big Raw Meat
+        # 1 Gourmet Fish Fillet
+        # 1 Raw Bird
+        # 1 Elixir        
 
 
         # fight4day
