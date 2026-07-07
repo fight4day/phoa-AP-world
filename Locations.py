@@ -2848,10 +2848,7 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
         "Thomas's Lab - Room 1-4": PhoaLocationData(
             region="daea_region",
             address=0,
-            rule=lambda state: logic.has_crossbow(state)
-                               or logic.has_slingshot(state)
-                               or logic.has_bombs(state)
-                               or state.has("Kobold Blaster", player),
+            rule=lambda state: logic.can_reasonably_kill_flying_enemies(state),
             flags=PhoaFlag.MAINQUEST,
             vanillaItem="Blue Golem Medallion",
         ),
@@ -2876,10 +2873,7 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
         "Thomas's Lab - Room 2-4": PhoaLocationData(
             region="daea_region",
             address=0,
-            rule=lambda state: logic.has_crossbow(state)
-                               or logic.has_slingshot(state)
-                               or logic.has_bombs(state)
-                               or state.has("Kobold Blaster", player),
+            rule=lambda state: logic.can_reasonably_kill_flying_enemies(state),
             flags=PhoaFlag.MAINQUEST,
             vanillaItem="Red Golem Medallion",
         ),
@@ -2922,7 +2916,10 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
         "Thomas's Lab - Wrecker room Floret quest": PhoaLocationData( # TODO: quest should be active earlier
             region="daea_region",
             address=0,
-            rule=lambda state: state.has("Defeat Wrecker boss", player),
+            # Ensure player can buy chocolate
+            rule=lambda state: state.has("Defeat Wrecker boss", player)
+                               and (state.can_reach_region("atai_region", player)
+                                 or state.can_reach_region("daea_city", player)),
             flags=PhoaFlag.SIDEQUEST,
             vanillaItem="Heart Ruby",
         ),

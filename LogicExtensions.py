@@ -81,6 +81,12 @@ class PhoaLogic:
                 or self.has_sonic_spear(state)
                 or state.has_any({"Kobold Blaster", "Rocket Boots"}, self.player))
 
+    def can_reasonably_kill_flying_enemies(self, state: CollectionState, exclude_slingshot: bool = False) -> bool:
+        return ((self.has_slingshot(state) and not exclude_slingshot)
+                or self.has_bombs(state)
+                or self.has_crossbow(state)
+                or state.has("Kobold Blaster", self.player))
+
     def can_break_big_object_with_tools(self, state: CollectionState, exclude_spear: bool = False) -> bool:
         return (self.has_bat(state)
                 or self.has_slingshot(state)
