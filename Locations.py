@@ -42,7 +42,7 @@ class PhoaLocationData(NamedTuple):
     region: str
     address: Optional[int]
     rule: Optional[Callable[[CollectionState], bool]] = None
-    flags: PhoaFlag = PhoaFlag.DEFAULT
+    flags: PhoaFlag | list[PhoaFlag] = PhoaFlag.DEFAULT
     vanillaItem: str = ""
 
 
@@ -2736,35 +2736,35 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
             flags=PhoaFlag.MOONSTONE_SHOP,
             vanillaItem="Heart Ruby",
         ),
-        # TODO: these checks are part of Fran MOONSTONE_SHOP questline but also NPCGIFTS. Also, missable
-        # "Lake Laboratory - Lan gift after 1st moonstone batch": PhoaLocationData(
-        #     region="lake_laboratory",
-        #     address=0,
-        #     rule=lambda state: logic.can_do_fran_quest_chain(state, 1),
-        #     flags=PhoaFlag.MOONSTONE_SHOP, # Would also need PhoaFlag.NPCGIFTS
-        #     vanillaItem="Saffron Milk",
-        # ),
-        # "Lake Laboratory - Van gift after 2nd moonstone batch": PhoaLocationData(
-        #     region="lake_laboratory",
-        #     address=0,
-        #     rule=lambda state: logic.can_do_fran_quest_chain(state, 2),
-        #     flags=PhoaFlag.MOONSTONE_SHOP, # Would also need PhoaFlag.NPCGIFTS
-        #     vanillaItem="Grape Cake",
-        # ),
-        # "Lake Laboratory - Van gift after 3rd moonstone batch": PhoaLocationData(
-        #     region="lake_laboratory",
-        #     address=0,
-        #     rule=lambda state: logic.can_do_fran_quest_chain(state, 3),
-        #     flags=PhoaFlag.MOONSTONE_SHOP, # Would also need PhoaFlag.NPCGIFTS
-        #     vanillaItem="Cooked Drake Tail",
-        # ),
-        # "Lake Laboratory - Lan gift after 4th moonstone batch": PhoaLocationData(
-        #     region="lake_laboratory",
-        #     address=0,
-        #     rule=lambda state: logic.can_do_fran_quest_chain(state, 4),
-        #     flags=PhoaFlag.MOONSTONE_SHOP, # Would also need PhoaFlag.NPCGIFTS
-        #     vanillaItem="Spicy Noodles",
-        # ),
+        # TODO: these gift checks are missable
+        "Lake Laboratory - Lan gift after 1st moonstone batch": PhoaLocationData(
+            region="lake_laboratory",
+            address=0,
+            rule=lambda state: logic.can_do_fran_quest_chain(state, 1),
+            flags=[PhoaFlag.MOONSTONE_SHOP, PhoaFlag.NPCGIFTS],
+            vanillaItem="Saffron Milk",
+        ),
+        "Lake Laboratory - Van gift after 2nd moonstone batch": PhoaLocationData(
+            region="lake_laboratory",
+            address=0,
+            rule=lambda state: logic.can_do_fran_quest_chain(state, 2),
+            flags=[PhoaFlag.MOONSTONE_SHOP, PhoaFlag.NPCGIFTS],
+            vanillaItem="Grape Cake",
+        ),
+        "Lake Laboratory - Van gift after 3rd moonstone batch": PhoaLocationData(
+            region="lake_laboratory",
+            address=0,
+            rule=lambda state: logic.can_do_fran_quest_chain(state, 3),
+            flags=[PhoaFlag.MOONSTONE_SHOP, PhoaFlag.NPCGIFTS],
+            vanillaItem="Cooked Drake Tail",
+        ),
+        "Lake Laboratory - Lan gift after 4th moonstone batch": PhoaLocationData(
+            region="lake_laboratory",
+            address=0,
+            rule=lambda state: logic.can_do_fran_quest_chain(state, 4),
+            flags=[PhoaFlag.MOONSTONE_SHOP, PhoaFlag.NPCGIFTS],
+            vanillaItem="Spicy Noodles",
+        ),
         "GEO Base - Prize counter item 1": PhoaLocationData(
             region="daea_region",
             address=0,
@@ -2952,6 +2952,171 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
             flags=PhoaFlag.SIDEQUEST,
             vanillaItem="Heart Ruby",
         ),
+        # TODO: artifacts aren't getting removed from inventory?
+        "Antique Shop - Deliver Lunar Artifact 1": PhoaLocationData(
+            region="daea_region",
+            address=0,
+            rule=lambda state: logic.has_lunar_artifacts(1, state),
+            flags=PhoaFlag.SIDEQUEST,
+            vanillaItem="40 Rin",
+        ),
+        "Antique Shop - Deliver Lunar Artifact 2": PhoaLocationData(
+            region="daea_region",
+            address=0,
+            rule=lambda state: logic.has_lunar_artifacts(2, state),
+            flags=PhoaFlag.SIDEQUEST,
+            vanillaItem="40 Rin",
+        ),
+        "Antique Shop - Deliver Lunar Artifact 3": PhoaLocationData(
+            region="daea_region",
+            address=0,
+            rule=lambda state: logic.has_lunar_artifacts(3, state),
+            flags=PhoaFlag.SIDEQUEST,
+            vanillaItem="40 Rin",
+        ),
+        "Antique Shop - Deliver Lunar Artifact 4": PhoaLocationData(
+            region="daea_region",
+            address=0,
+            rule=lambda state: logic.has_lunar_artifacts(4, state),
+            flags=PhoaFlag.SIDEQUEST,
+            vanillaItem="40 Rin",
+        ),
+        "Antique Shop - Deliver Lunar Artifact 5": PhoaLocationData(
+            region="daea_region",
+            address=0,
+            rule=lambda state: logic.has_lunar_artifacts(5, state),
+            flags=PhoaFlag.SIDEQUEST,
+            vanillaItem="40 Rin",
+        ),
+        "Antique Shop - Deliver Lunar Artifact 6": PhoaLocationData(
+            region="daea_region",
+            address=0,
+            rule=lambda state: logic.has_lunar_artifacts(6, state),
+            flags=PhoaFlag.SIDEQUEST,
+            vanillaItem="40 Rin",
+        ),
+        "Antique Shop - Deliver Lunar Artifact 7": PhoaLocationData(
+            region="daea_region",
+            address=0,
+            rule=lambda state: logic.has_lunar_artifacts(7, state),
+            flags=PhoaFlag.SIDEQUEST,
+            vanillaItem="40 Rin",
+        ),
+        "Antique Shop - Deliver Lunar Artifact 8": PhoaLocationData(
+            region="daea_region",
+            address=0,
+            rule=lambda state: logic.has_lunar_artifacts(8, state),
+            flags=PhoaFlag.SIDEQUEST,
+            vanillaItem="40 Rin",
+        ),
+        "Antique Shop - Deliver Lunar Artifact 9": PhoaLocationData(
+            region="daea_region",
+            address=0,
+            rule=lambda state: logic.has_lunar_artifacts(9, state),
+            flags=PhoaFlag.SIDEQUEST,
+            vanillaItem="40 Rin",
+        ),
+        "Antique Shop - Deliver Lunar Artifact 10": PhoaLocationData(
+            region="daea_region",
+            address=0,
+            rule=lambda state: logic.has_lunar_artifacts(10, state),
+            flags=PhoaFlag.SIDEQUEST,
+            vanillaItem="40 Rin",
+        ),
+        "Antique Shop - Deliver Lunar Artifact 11": PhoaLocationData(
+            region="daea_region",
+            address=0,
+            rule=lambda state: logic.has_lunar_artifacts(11, state),
+            flags=PhoaFlag.SIDEQUEST,
+            vanillaItem="40 Rin",
+        ),
+        "Antique Shop - Deliver Lunar Artifact 12": PhoaLocationData(
+            region="daea_region",
+            address=0,
+            rule=lambda state: logic.has_lunar_artifacts(12, state),
+            flags=PhoaFlag.SIDEQUEST,
+            vanillaItem="40 Rin",
+        ),
+        "Antique Shop - Deliver Lunar Artifact 4 bonus": PhoaLocationData(
+            region="daea_region",
+            address=0,
+            rule=lambda state: logic.has_lunar_artifacts(4, state),
+            flags=PhoaFlag.SIDEQUEST,
+            vanillaItem="Energy Gem",
+        ),
+        "Antique Shop - Deliver Lunar Artifact 8 bonus": PhoaLocationData(
+            region="daea_region",
+            address=0,
+            rule=lambda state: logic.has_lunar_artifacts(8, state),
+            flags=PhoaFlag.SIDEQUEST,
+            vanillaItem="Antique Cast Iron",
+        ),
+        "Antique Shop - Deliver Lunar Artifact 12 bonus": PhoaLocationData(
+            region="daea_region",
+            address=0,
+            rule=lambda state: logic.has_lunar_artifacts(12, state),
+            flags=PhoaFlag.SIDEQUEST,
+            vanillaItem="Heart Ruby",
+        ),
+        "Antique Shop - Basement mouse": PhoaLocationData(
+            region="daea_region",
+            address=0,
+            rule=lambda state: logic.can_reasonably_kill_mice(state),
+            flags=PhoaFlag.SMALLANIMALS,
+            vanillaItem="Mystery Meat",
+        ),
+        "Antique Shop - Basement puzzle": PhoaLocationData(
+            region="daea_region",
+            address=0,
+            rule=lambda state: logic.has_crossbow(state),
+            flags=PhoaFlag.HEARTRUBY,
+            vanillaItem="Heart Ruby",
+        ),
+        "First Wall - Bottom right guard room crate": PhoaLocationData(
+            region="daea_region",
+            address=0,
+            # Crate near ceiling
+            rule=lambda state: logic.can_reasonably_kill_enemies(state, False, True),
+            flags=PhoaFlag.MOONSTONE,
+            vanillaItem="Moonstone",
+        ),
+        "First Wall - Turret item": PhoaLocationData( # TODO: also first wall needs to be opened
+            region="daea_region",
+            address=0,
+            rule=lambda state: logic.has_sonic_spear(state)
+                               and state.has("Rocket Boots", player),
+            flags=PhoaFlag.ENERGYGEM,
+            vanillaItem="Energy Gem",
+        ),
+        "First Wall - Cafeteria crate": PhoaLocationData(
+            region="daea_region",
+            address=0,
+            # Crate near ceiling
+            rule=lambda state: logic.can_reasonably_kill_enemies(state, False, True),
+            flags=PhoaFlag.BREAKABLE,
+            vanillaItem="Cheese",
+        ),
+        "First Wall - Storage crate": PhoaLocationData(
+            region="daea_region",
+            address=0,
+            flags=PhoaFlag.BREAKABLE,
+            vanillaItem="Raw Meat",
+        ),
+        "First Wall - Cafeteria waiter quest": PhoaLocationData(
+            region="daea_region",
+            address=0,
+            # Can reach Doki Herb and Stink Root
+            rule=lambda state: state.can_reach_region("panselo_region", player)
+                               and state.can_reach_region("ouroboros_hideout(storage_back)", player),
+            flags=PhoaFlag.SIDEQUEST,
+            vanillaItem="Heart Ruby",
+        ),
+        "First Wall - Mother/daughter quest": PhoaLocationData(
+            region="daea_region",
+            address=0,
+            flags=PhoaFlag.SIDEQUEST,
+            vanillaItem="Moonstone",
+        ),
         # FIXME: to here
         # Events
         "Anuri Temple - Side entrance gate opened": PhoaLocationData(
@@ -3004,10 +3169,14 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
         (options.enable_ancient_vault <= 0, PhoaFlag.VAULT),
     ]
 
-    for option, flag in filters:
-        if option:
-            locations = {
-                name: data for name, data in locations.items() if data.flags != flag
-            }
+    activeFlags = [flag for option, flag in filters if option]
+
+    for data in locations.values():
+        if not isinstance(data.flags, list):
+            data.flags = [data.flags]
+
+    locations = {
+        name: data for name, data in locations.items() if all(flag in activeFlags for flag in data.flags)
+    }
 
     return locations

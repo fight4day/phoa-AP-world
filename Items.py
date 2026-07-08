@@ -22,17 +22,20 @@ class PhoaItemData(NamedTuple):
 # ET
 # fight4day
 # Updated counts
-# "Energy Gem" +4: "Daea Region - Cave ledge item", "Lake Laboratory - Fran 3rd moonstone batch", "GEO Base - Prize counter item 3", "Thomas's Lab - Binary room item"
-# "40 Rin" +1: "Daea Region - Cave chest"
+# "Energy Gem" +6: "Daea Region - Cave ledge item", "Lake Laboratory - Fran 3rd moonstone batch", "GEO Base - Prize counter item 3", "Thomas's Lab - Binary room item", "Antique Shop - Deliver Lunar Artifact 4 bonus", "First Wall - Turret item"
+# "40 Rin" +13: "Daea Region - Cave chest", "Antique Shop - Deliver Lunar Artifact 1-12"
 # "50 Rin" +1: "Thomas's Lab - Reception bribe"
 # "Perro" +1: "Daea Region - Perro Hide and Seek"
 # "Ouroboros Scroll" +1: "Daea Region - Cupid's Fountain Ouroboros shrine"
 # "GEO Ticket" +3: "Daea Region - GEO house reward", "GEO Base - GEO reward", forgot a previous one
-# "Heart Ruby" +6: "Lake Laboratory - Fran 1st moonstone batch", "Lake Laboratory - Fran 5th moonstone batch", "GEO Base - Prize counter item 2", "Thomas's Lab - Punching bag minigame", "Thomas's Lab - Wrecker room Floret quest"
+# "Heart Ruby" +8: "Lake Laboratory - Fran 1st moonstone batch", "Lake Laboratory - Fran 5th moonstone batch", "GEO Base - Prize counter item 2", "Thomas's Lab - Punching bag minigame", "Thomas's Lab - Wrecker room Floret quest", "Antique Shop - Deliver Lunar Artifact 12 bonus", "Antique Shop - Basement puzzle", "First Wall - Cafeteria waiter quest"
 # "Antique Pin" +1: - (needed for "GEO Base - Georgia quest 2")
 # "Honey Drop" +1: "GEO Base - Attic crate"
-# "Moonstone" +3: "GEO Base - Pond fish", "Thomas's Lab - Reception blue medallion quest", "Thomas's Lab - Reception red medallion quest"
+# "Moonstone" +5: "GEO Base - Pond fish", "Thomas's Lab - Reception blue medallion quest", "Thomas's Lab - Reception red medallion quest", "First Wall - Bottom right guard room crate", "First Wall - Mother/daughter quest"
 # "Pumpkin Muffin" +1: "Thomas's Lab - Diary room crate"
+# "Mystery Meat" +1: "Antique Shop - Basement mouse"
+# "Cheese" +1: "First Wall - Cafeteria crate"
+# "Raw Meat" +1: "First Wall - Storage crate"
 #
 # New items
 # "Tailoring Voucher" 2 (filler): "Lake Laboratory - Fran freedom quest", "Lake Laboratory - Fran 2nd moonstone batch"
@@ -43,6 +46,16 @@ class PhoaItemData(NamedTuple):
 # "Calory Slush" 2 (filler): "Thomas's Lab - Vending machine", "Thomas's Lab - Crate behind wrecker room"
 # "Blue Golem Medallion" 4 (progression): "Thomas's Lab - Room 1-1", "Thomas's Lab - Room 1-2", "Thomas's Lab - Room 1-3", "Thomas's Lab - Room 1-4"
 # "Red Golem Medallion" 4 (progression): "Thomas's Lab - Room 2-1", "Thomas's Lab - Room 2-2", "Thomas's Lab - Room 2-3", "Thomas's Lab - Room 2-4"
+# "Lunar Compass" 1 (filler): (needed for antique shop quest)
+# "Lunar Trident" 1 (filler): (needed for antique shop quest)
+# "Lunar Crown" 1 (filler): (needed for antique shop quest)
+# "Lunar Comb" 1 (filler): (needed for antique shop quest)
+# "Lunar Watch" 1 (filler): (needed for antique shop quest)
+# "Lunar Goblet" 1 (filler): (needed for antique shop quest)
+# "Lunar Medal" 1 (filler): (needed for antique shop quest)
+# "Lunar Egg" 1 (filler): (needed for antique shop quest)
+# "Lunar Key" 1 (filler): (needed for antique shop quest)
+# "Antique Cast Iron" 1 (filler): "Antique Shop - Deliver Lunar Artifact 8 bonus"
 # "Unlock Panselo Franway" 1 (progression)
 # "Unlock Atai Franway" 1 (progression)
 # "Unlock Cosette Franway" 1 (progression)
@@ -51,6 +64,7 @@ class PhoaItemData(NamedTuple):
 # 50 Moonstones progression if EnableMoonstoneShops option is active (later 90 with Thomas's shop)
 # Geo tickets progression if shop option is active
 # Antique Pins progression if sidequest option is active
+# 12 lunar items progression if sidequest option is active
 
 # @formatter:off
 item_table: Dict[str, PhoaItemData] = {

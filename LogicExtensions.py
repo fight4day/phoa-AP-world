@@ -54,6 +54,22 @@ class PhoaLogic:
     def has_anuri_pearlstones(self, amount: int, state: CollectionState) -> bool:
         return state.has("Anuri Pearlstone", self.player, amount)
 
+    def has_lunar_artifacts(self, amount: int, state: CollectionState) -> bool:
+        return state.has_from_list([
+                "Lunar Frog",
+                "Lunar Vase",
+                "Lunar Drake",
+                "Lunar Compass",
+                "Lunar Trident",
+                "Lunar Crown",
+                "Lunar Comb",
+                "Lunar Watch",
+                "Lunar Goblet",
+                "Lunar Medal",
+                "Lunar Egg",
+                "Lunar Key",
+            ], self.player, amount)
+
     def can_use_spear_bomb(self, state: CollectionState) -> bool:
         return (state.has_all({"Sonic Spear", "Spear Bomb"}, self.player)
                 or state.has("Progressive Spear", self.player, 2))
@@ -79,7 +95,8 @@ class PhoaLogic:
                 or self.has_bombs(state)
                 or self.has_crossbow(state)
                 or self.has_sonic_spear(state)
-                or state.has_any({"Kobold Blaster", "Rocket Boots"}, self.player))
+                or state.has("Kobold Blaster", self.player)
+                or state.has("Rocket Boots", self.player) and not exclude_rocket_boots)
 
     def can_reasonably_kill_flying_enemies(self, state: CollectionState, exclude_slingshot: bool = False) -> bool:
         return ((self.has_slingshot(state) and not exclude_slingshot)
@@ -121,7 +138,7 @@ class PhoaLogic:
                 or self.has_double_crossbow(state) and state.has("Energy Gem", self.player, 4)
                 or self.can_use_spear_bomb(state)
                 or state.has("Kobold Blaster", self.player))
-
+    
     def can_clear_ancient_vault(self, state: CollectionState) -> bool:
         # TODO: Even with this it's almost impossible
         return (state.has("Spheralis", self.player)
