@@ -2736,6 +2736,35 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
             flags=PhoaFlag.MOONSTONE_SHOP,
             vanillaItem="Heart Ruby",
         ),
+        # TODO: these checks are part of Fran MOONSTONE_SHOP questline but also NPCGIFTS. Also, missable
+        # "Lake Laboratory - Lan gift after 1st moonstone batch": PhoaLocationData(
+        #     region="lake_laboratory",
+        #     address=0,
+        #     rule=lambda state: logic.can_do_fran_quest_chain(state, 1),
+        #     flags=PhoaFlag.MOONSTONE_SHOP, # Would also need PhoaFlag.NPCGIFTS
+        #     vanillaItem="Saffron Milk",
+        # ),
+        # "Lake Laboratory - Van gift after 2nd moonstone batch": PhoaLocationData(
+        #     region="lake_laboratory",
+        #     address=0,
+        #     rule=lambda state: logic.can_do_fran_quest_chain(state, 2),
+        #     flags=PhoaFlag.MOONSTONE_SHOP, # Would also need PhoaFlag.NPCGIFTS
+        #     vanillaItem="Grape Cake",
+        # ),
+        # "Lake Laboratory - Van gift after 3rd moonstone batch": PhoaLocationData(
+        #     region="lake_laboratory",
+        #     address=0,
+        #     rule=lambda state: logic.can_do_fran_quest_chain(state, 3),
+        #     flags=PhoaFlag.MOONSTONE_SHOP, # Would also need PhoaFlag.NPCGIFTS
+        #     vanillaItem="Cooked Drake Tail",
+        # ),
+        # "Lake Laboratory - Lan gift after 4th moonstone batch": PhoaLocationData(
+        #     region="lake_laboratory",
+        #     address=0,
+        #     rule=lambda state: logic.can_do_fran_quest_chain(state, 4),
+        #     flags=PhoaFlag.MOONSTONE_SHOP, # Would also need PhoaFlag.NPCGIFTS
+        #     vanillaItem="Spicy Noodles",
+        # ),
         "GEO Base - Prize counter item 1": PhoaLocationData(
             region="daea_region",
             address=0,
