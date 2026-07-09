@@ -593,14 +593,14 @@ def get_exit_data(player: int, options: PhoaOptions) -> list[PhoaExit]:
             name="moonlight_ravine_south_to_wilds",
             region="moonlight_ravine(south)",
             connection="moonlight_ravine(wilds)",
-            rule=lambda state: logic.has_lifesaver(state)
+            rule=lambda state: state.has("Life Saver", player)
                                or state.has("Rocket Boots", player),
         ),
         PhoaExit(
             name="moonlight_ravine_wilds_to_north",
             region="moonlight_ravine(wilds)",
             connection="moonlight_ravine(north)",
-            rule=lambda state: logic.has_lifesaver(state)
+            rule=lambda state: state.has("Life Saver", player)
                                or state.has("Rocket Boots", player),
         ),
         PhoaExit(
@@ -618,8 +618,8 @@ def get_exit_data(player: int, options: PhoaOptions) -> list[PhoaExit]:
             name="kingdom_bridge_south_kingdom_bridge_north",
             region="kingdom_bridge(south)",
             connection="kingdom_bridge(north)",
-            rule=lambda state: (logic.has_lifesaver(state) 
-                               and logic.has_sonic_spear(state)) 
+            rule=lambda state: (state.has("Life Saver", player)
+                               and logic.has_sonic_spear(state))
                                or state.has("Rocket Boots", player),
         ),
         PhoaExit(
@@ -645,18 +645,6 @@ def get_exit_data(player: int, options: PhoaOptions) -> list[PhoaExit]:
             connection="daea_city(seer)",
             rule=lambda state: state.has("Rocket Boots", player),
         ),
-
-
-        # create_region(world, player, locations_per_region, "moonlight_ravine(south_town)"),
-        # create_region(world, player, locations_per_region, "moonlight_ravine(wilds)"),
-        # create_region(world, player, locations_per_region, "moonlight_ravine(north_town)"),
-        # create_region(world, player, locations_per_region, "kingdom_bridge(south)"),
-        # create_region(world, player, locations_per_region, "kingdom_bridge(north)"),
-        # create_region(world, player, locations_per_region, "daea_city"),
-        # create_region(world, player, locations_per_region, "daea_city(geo_dungeon)"),
-        # create_region(world, player, locations_per_region, "daea_city(seer)"),
-
-
 
         # fight4day
         # daea_region
@@ -772,6 +760,19 @@ def create_regions_and_locations(world: MultiWorld, player: int, options: PhoaOp
         create_region(world, player, locations_per_region, "ouroboros_hideout(treasure_room)"),
         create_region(world, player, locations_per_region, "ouroboros_hideout(treasure_room_hidden_area)"),
         create_region(world, player, locations_per_region, "ouroboros_hideout(great_drake_arena)"),
+        # ET
+        create_region(world, player, locations_per_region, "moonlight_ravine(south)"),
+        create_region(world, player, locations_per_region, "moonlight_ravine(wilds)"),
+        create_region(world, player, locations_per_region, "moonlight_ravine(north)"),
+        create_region(world, player, locations_per_region, "kingdom_bridge(south)"),
+        create_region(world, player, locations_per_region, "kingdom_bridge(north)"),
+        create_region(world, player, locations_per_region, "daea_city"),
+        create_region(world, player, locations_per_region, "daea_city(geo_dungeon)"),
+        create_region(world, player, locations_per_region, "daea_city(seer)"),
+        # fight4day
+        create_region(world, player, locations_per_region, "daea_region"),
+        create_region(world, player, locations_per_region, "lake_laboratory"),
+        create_region(world, player, locations_per_region, "cosette_region"),
     ]
 
     world.regions += regions
