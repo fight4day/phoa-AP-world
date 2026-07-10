@@ -2665,13 +2665,13 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
         ),
         "Daea Region - Perro Hide and Seek": PhoaLocationData(
             region="daea_region",
-            address=0,
+            address=7676502,
             flags=PhoaFlag.PERRO,
             vanillaItem="Perro",
         ),
         "Daea Region - Cupid's Fountain Ouroboros shrine": PhoaLocationData(
             region="daea_region",
-            address=0,
+            address=7676503,
             # Possible without bat
             rule=lambda state: logic.has_music_instrument(state)
                                and state.has("Song of Ouroboros", player)
@@ -2682,7 +2682,7 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
         ),
         "Daea Region - GEO house reward": PhoaLocationData(
             region="daea_region",
-            address=0,
+            address=7676504,
             flags=PhoaFlag.GEOCHALLENGE,
             rule=lambda state: logic.has_music_instrument(state)
                                and state.has("GEO Song", player),
@@ -2690,7 +2690,7 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
         ),
         "Daea Region - GEO house Mr. planto's reward": PhoaLocationData(
             region="daea_region",
-            address=0,
+            address=7676505,
             flags=PhoaFlag.PLANTO,
             vanillaItem="20 Rin",
         ),
@@ -3179,6 +3179,11 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
 
     locations = {
         name: data for name, data in locations.items() if all(flag in active_flags for flag in to_list(data.flags))
+    }
+
+    # TODO: only for development
+    locations = {
+        name: data for name, data in locations.items() if data.address != 0
     }
 
     return locations
