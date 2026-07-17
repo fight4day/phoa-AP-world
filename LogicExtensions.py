@@ -159,7 +159,7 @@ class PhoaLogic:
     def can_do_fran_quest_chain(self, state: CollectionState, quest_number: int) -> bool:
         # TODO: adjust moonstone cost for Thomas shop later
         return (self.has_explosives(state)
-                and (state.can_reach_region("panselo_region") or state.can_reach_region("atai_region"))
+                and (state.can_reach_region("panselo_region", self.player) or state.can_reach_region("atai_region", self.player))
                 and (state.has("Moonstone", self.player, quest_number * 10)) if quest_number > 0 else True)
 
     def can_use_franway(self, state: CollectionState, options: PhoaOptions, franway_region: str) -> bool:
