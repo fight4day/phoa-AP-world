@@ -126,9 +126,21 @@ class EnableOuroborosShrines(Toggle):
     display_name = "Include Ouroboros shrines"
 
 
+# Quality of life settings
+
 class StartWithWoodenBat(DefaultOnToggle):
     """Start out with wooden bat"""
     display_name = "Start with wooden bat"
+
+
+class BundleAnuriPearlstones(Toggle):
+    """Bundles Anuri Pearlstones into an Anuri Pearlstone necklace with infinite uses"""
+    display_name = "Bundle Anuri Pearlstones"
+
+
+class BundleOuroGuardKeys(Toggle):
+    """Bundles Ouro Guard Keys into an Ouro Guard Keyring with infinite uses"""
+    display_name = "Bundle Ouro Guard Keys"
 
 
 class OpenPanseloGates(Toggle):
@@ -181,6 +193,8 @@ class PhoaOptions(PerGameCommonOptions):
     enable_geo_challenge_rewards: EnableGEOChallengeRewards
     enable_ouroboros_shrines: EnableOuroborosShrines
     start_with_wooden_bat: StartWithWoodenBat
+    bundle_anuri_pearlstones: BundleAnuriPearlstones
+    bundle_ouro_guard_keys: BundleOuroGuardKeys
     upgradable_bats: UpgradableBats
     upgradable_tools: UpgradableTools
     upgradable_spear: UpgradableSpear
@@ -214,6 +228,8 @@ class PhoaOptions(PerGameCommonOptions):
             "enable_geo_challenge_rewards",
             "enable_ouroboros_shrines",
             "start_with_wooden_bat",
+            "bundle_anuri_pearlstones",
+            "bundle_ouro_guard_keys",
             "upgradable_bats",
             "upgradable_tools",
             "upgradable_spear",
@@ -257,6 +273,8 @@ phoa_option_groups: list[OptionGroup] = [
         [
             KeepExcludedStatusUpgradesInItemPool,
             StartWithWoodenBat,
+            BundleAnuriPearlstones,
+            BundleOuroGuardKeys,
             OpenPanseloGates,
             UpgradableBats,
             UpgradableTools,

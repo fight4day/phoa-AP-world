@@ -67,7 +67,7 @@ item_table: Dict[str, PhoaItemData] = {
     "Big Raw Meat":                     PhoaItemData(74,    1,  IC.filler),
     "Prime Fish Fillet":                PhoaItemData(81,    1,  IC.filler),
     "Honey Drop":                       PhoaItemData(89,    2,  IC.filler),
-    "Anuri Pearlstone":                 PhoaItemData(98,    10, IC.progression),  # Dungeon option?
+    "Anuri Pearlstone":                 PhoaItemData(98,    10, IC.progression),  # Only progression when dungeon is in location pool
     "Lunar Frog":                       PhoaItemData(99,    1,  IC.filler),
     "Lunar Vase":                       PhoaItemData(100,   1,  IC.filler),
     "Dandelion":                        PhoaItemData(101,   4,  IC.filler),
@@ -75,7 +75,7 @@ item_table: Dict[str, PhoaItemData] = {
     "Moon Kelp":                        PhoaItemData(104,   1,  IC.filler),
     "Prickle Fruit":                    PhoaItemData(106,   6,  IC.filler),
     "Stink Root":                       PhoaItemData(107,   1,  IC.filler),
-    "Ouro Guard Key":                   PhoaItemData(108,   5,  IC.progression),  # Only progressive when option enabled
+    "Ouro Guard Key":                   PhoaItemData(108,   5,  IC.progression),
     "Rubber Ducky":                     PhoaItemData(109,   2,  IC.filler),
     "Ouroboros Proof":                  PhoaItemData(111,   3,  IC.progression),
     "Mystery Meat":                     PhoaItemData(112,   35, IC.filler),
@@ -89,7 +89,7 @@ item_table: Dict[str, PhoaItemData] = {
     "Baroque of Battle":                PhoaItemData(129,   1,  IC.useful),
     "Perro":                            PhoaItemData(139,   2,  IC.filler),
     "Antique Pin":                      PhoaItemData(141,   1,  IC.filler),
-    "Ouroboros Scroll":                 PhoaItemData(143,   4,  IC.progression),  # Only progressive when option enabled
+    "Ouroboros Scroll":                 PhoaItemData(143,   4,  IC.filler),
     "Lunar Drake":                      PhoaItemData(145,   1,  IC.filler),
     "Strange Urn":                      PhoaItemData(161,   1,  IC.filler),
     "Mysterious Golem Head":            PhoaItemData(166,   1,  IC.filler),
@@ -101,6 +101,8 @@ item_table: Dict[str, PhoaItemData] = {
     "Dragon's Scale":                   PhoaItemData(185,   1,  IC.filler),
     "Honey Bun":                        PhoaItemData(205,   3,  IC.filler),
     "Spell of Rejuvenation":            PhoaItemData(216,   1,  IC.useful),
+    "Anuri Pearlstone Necklace":        PhoaItemData(217,   1,  IC.progression),  # Only progression when dungeon is in location pool
+    "Ouro Guard Keyring":               PhoaItemData(218,   1,  IC.progression),
     "Progressive Prelude of Panselo":   PhoaItemData(292,   2,  IC.useful),
     "Progressive Bat":                  PhoaItemData(293,   2,  IC.useful),
     "Progressive Slingshot":            PhoaItemData(294,   2,  IC.progression),
@@ -134,6 +136,11 @@ upgrade_groups = [
     ("upgradable_prelude", "Progressive Prelude of Panselo", ["Prelude of Panselo", "Spell of Rejuvenation"]),
 ]
 
+dungeon_item_bundle_groups = [
+    ("bundle_anuri_pearlstones", "Anuri Pearlstone", "Anuri Pearlstone Necklace"),
+    ("bundle_ouro_guard_keys", "Ouro Guard Key", "Ouro Guard Keyring"),
+]
+
 item_inclusion_priority: list[str] = \
     ["Progressive Bat", "Composite Bat", "Progressive Fishing Rod", "Serpent Rod", "Fishing Rod",
      "Progressive Prelude of Panselo", "Prelude of Panselo", "Spell of Rejuvenation", "Baroque of Battle", "Sky Vest",
@@ -153,33 +160,35 @@ def get_item_pool(world: "PhoaWorld", locations: dict[str, PhoaLocationData]) ->
     local_item_table = filter_upgradable_items(local_item_table, world)
 
     # Remove events from locations
-    locations = {key: location for key, location in locations.items() if location.vanillaItem}
+    locations: dict[str, PhoaLocationData] = \
+        {key: location for key, location in locations.items() if location.vanillaItem}
     location_count = len(locations)
 
     # Initialize item pools based on classifications
-    progressive_items: list[str] = []
+    progression_items: list[str] = []
     useful_items: list[str] = []
 
     for item_name, item_data in local_item_table.items():
-        if item_data.type == IC.progression or item_name in world.progressive_item_classifications_overrides:
-            progressive_items.extend([item_name] * item_data.amount)
+        if item_data.type == IC.progression or item_name in world.progression_item_classifications_overrides:
+            progression_items.extend([item_name] * item_data.amount)
         elif item_data.type == IC.useful:
             useful_items.extend([item_name] * item_data.amount)
 
-    # Remove progressive and useful items from the items_from_locations
+    # Remove progression and useful items from the items_from_locations
     upgrade_map = build_upgrade_map(world.options)
     items_from_locations: list[str] = [
         upgrade_map.get(location.vanillaItem, location.vanillaItem)
         for location in locations.values()
     ]
 
-    items_from_locations = [item for item in items_from_locations if item not in set(progressive_items)]
+    items_from_locations = [item for item in items_from_locations if item not in set(progression_items)]
     items_from_locations = [item for item in items_from_locations if item not in set(useful_items)]
 
-    # Filter out the Wooden Bat or a Progressive Bat and add it to precollected items if starting with one
+    # Filter out the Wooden Bat or a Progressive Bat, from either the progression or useful items,
+    # and add it to precollected items if starting with one
     precollected_items: list[str] = []
     if world.options.start_with_wooden_bat:
-        for items in (progressive_items, useful_items):
+        for items in (progression_items, useful_items):
             for item in items:
                 if item in ["Wooden Bat", "Progressive Bat"]:
                     items.remove(item)
@@ -187,17 +196,13 @@ def get_item_pool(world: "PhoaWorld", locations: dict[str, PhoaLocationData]) ->
                     break
 
     # Check whether enough locations are available to place all progressive items
-    if len(progressive_items) > location_count:
+    if len(progression_items) > location_count:
         raise OptionError(
             f"Not enough progress locations({str(location_count)}) "
-            f"to place all progressive items({str(len(progressive_items))})"
+            f"to place all progressive items({str(len(progression_items))})"
         )
 
-    # Remove progressive and useful items from the items_from_locations
-    items_from_locations = [item for item in items_from_locations if item not in set(progressive_items)]
-    items_from_locations = [item for item in items_from_locations if item not in set(useful_items)]
-
-    # Sort items on importance
+    # Sort useful and filler items by importance
     def sort_by_priority(items, priority_list: list[str]) -> list[str]:
         priority_map = {item: i for i, item in enumerate(priority_list)}
         default_priority = len(priority_list)
@@ -207,7 +212,7 @@ def get_item_pool(world: "PhoaWorld", locations: dict[str, PhoaLocationData]) ->
     items_from_locations = sort_by_priority(items_from_locations, item_inclusion_priority)
 
     # Construct the item pool
-    item_pool = progressive_items.copy()
+    item_pool = progression_items.copy()
 
     remaining_slots = location_count - len(item_pool)
 
@@ -223,12 +228,18 @@ def get_item_pool(world: "PhoaWorld", locations: dict[str, PhoaLocationData]) ->
 
 
 def filter_upgradable_items(items, world: "PhoaWorld") -> dict[str, PhoaItemData]:
-    for option, progressive, bases in upgrade_groups:
+    for option, upgradable, bases in upgrade_groups:
         if getattr(world.options, option):
             for base in bases:
                 items.pop(base, None)
             continue
-        items.pop(progressive, None)
+        items.pop(upgradable, None)
+
+    for option, dungeon_item, bundled_dungeon_item in dungeon_item_bundle_groups:
+        if getattr(world.options, option):
+            items.pop(dungeon_item, None)
+            continue
+        items.pop(bundled_dungeon_item, None)
 
     removal_map = [
         (not world.options.enable_heart_ruby_locations
@@ -245,7 +256,7 @@ def filter_upgradable_items(items, world: "PhoaWorld") -> dict[str, PhoaItemData
     for condition, names in removal_map:
         if condition:
             for name in names:
-                if name in world.progressive_item_classifications_overrides:
+                if name in world.progression_item_classifications_overrides:
                     raise OptionError(
                         "KeepExcludedStatusUpgradesInItemPool Error: "
                         "Items excluded from the item pool are progression items for enabled locations. "
@@ -259,9 +270,9 @@ def filter_upgradable_items(items, world: "PhoaWorld") -> dict[str, PhoaItemData
 def build_upgrade_map(options: PhoaOptions) -> dict[str, str]:
     mapping = {}
 
-    for option, progressive, bases in upgrade_groups:
+    for option, upgradable, bases in upgrade_groups:
         if getattr(options, option):
             for base in bases:
-                mapping[base] = progressive
+                mapping[base] = upgradable
 
     return mapping
