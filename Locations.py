@@ -2663,7 +2663,7 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
             flags=PhoaFlag.ENERGYGEM,
             vanillaItem="Energy Gem",
         ),
-        "Daea Region - Perro Hide and Seek": PhoaLocationData(
+        "Daea Region - Perro Hide and Seek": PhoaLocationData( # TODO: not yet implemented
             region="daea_region",
             address=7676502,
             flags=PhoaFlag.PERRO,
@@ -2737,35 +2737,35 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
             vanillaItem="Heart Ruby",
         ),
         # TODO: these gift checks are missable
-        "Lake Laboratory - Lan gift after 1st moonstone batch": PhoaLocationData(
+        "Lake Laboratory - Lan gift after 1st moonstone batch": PhoaLocationData( # TODO: not yet implemented
             region="lake_laboratory",
             address=7676512,
             rule=lambda state: logic.can_do_fran_quest_chain(state, 1),
             flags=[PhoaFlag.MOONSTONE_SHOP, PhoaFlag.NPCGIFTS],
             vanillaItem="Saffron Milk",
         ),
-        "Lake Laboratory - Van gift after 2nd moonstone batch": PhoaLocationData(
+        "Lake Laboratory - Van gift after 2nd moonstone batch": PhoaLocationData( # TODO: not yet implemented
             region="lake_laboratory",
             address=7676513,
             rule=lambda state: logic.can_do_fran_quest_chain(state, 2),
             flags=[PhoaFlag.MOONSTONE_SHOP, PhoaFlag.NPCGIFTS],
             vanillaItem="Grape Cake",
         ),
-        "Lake Laboratory - Van gift after 3rd moonstone batch": PhoaLocationData(
+        "Lake Laboratory - Van gift after 3rd moonstone batch": PhoaLocationData( # TODO: not yet implemented
             region="lake_laboratory",
             address=7676514,
             rule=lambda state: logic.can_do_fran_quest_chain(state, 3),
             flags=[PhoaFlag.MOONSTONE_SHOP, PhoaFlag.NPCGIFTS],
             vanillaItem="Cooked Drake Tail",
         ),
-        "Lake Laboratory - Lan gift after 4th moonstone batch": PhoaLocationData(
+        "Lake Laboratory - Lan gift after 4th moonstone batch": PhoaLocationData( # TODO: not yet implemented
             region="lake_laboratory",
             address=7676515,
             rule=lambda state: logic.can_do_fran_quest_chain(state, 4),
             flags=[PhoaFlag.MOONSTONE_SHOP, PhoaFlag.NPCGIFTS],
             vanillaItem="Spicy Noodles",
         ),
-        "GEO Base - Learn GEO Song": PhoaLocationData(
+        "GEO Base - Learn GEO Song": PhoaLocationData( # TODO: not yet implemented
             region="daea_region",
             address=7676516,
             rule=lambda state: logic.has_music_instrument(state),
