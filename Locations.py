@@ -2765,30 +2765,37 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
             flags=[PhoaFlag.MOONSTONE_SHOP, PhoaFlag.NPCGIFTS],
             vanillaItem="Spicy Noodles",
         ),
-        "GEO Base - Prize counter item 1": PhoaLocationData(
+        "GEO Base - Learn GEO Song": PhoaLocationData(
             region="daea_region",
             address=7676516,
-            rule=lambda state: state.has("GEO Ticket", player, 10),
-            flags=PhoaFlag.SHOPSANITY,
-            vanillaItem="Golden Egg",
+            rule=lambda state: logic.has_music_instrument(state),
+            flags=PhoaFlag.SIDEQUEST,
+            vanillaItem="GEO Song",
         ),
-        "GEO Base - Prize counter item 2": PhoaLocationData(
+        "GEO Base - Prize counter item 1": PhoaLocationData( # TODO: should be able to be bought even if not in GEO club?
             region="daea_region",
             address=7676517,
             rule=lambda state: state.has("GEO Ticket", player, 10),
             flags=PhoaFlag.SHOPSANITY,
-            vanillaItem="Heart Ruby",
+            vanillaItem="Golden Egg",
         ),
-        "GEO Base - Prize counter item 3": PhoaLocationData(
+        "GEO Base - Prize counter item 2": PhoaLocationData( # TODO: should be able to be bought even if not in GEO club?
             region="daea_region",
             address=7676518,
             rule=lambda state: state.has("GEO Ticket", player, 10),
             flags=PhoaFlag.SHOPSANITY,
-            vanillaItem="Energy Gem",
+            vanillaItem="Heart Ruby",
         ),
-        "GEO Base - Prize counter item 4": PhoaLocationData(
+        "GEO Base - Prize counter item 3": PhoaLocationData( # TODO: should be able to be bought even if not in GEO club?
             region="daea_region",
             address=7676519,
+            rule=lambda state: state.has("GEO Ticket", player, 10),
+            flags=PhoaFlag.SHOPSANITY,
+            vanillaItem="Energy Gem",
+        ),
+        "GEO Base - Prize counter item 4": PhoaLocationData( # TODO: should be able to be bought even if not in GEO club?
+            region="daea_region",
+            address=7676520,
             rule=lambda state: state.has("GEO Ticket", player, 10),
             flags=PhoaFlag.SHOPSANITY,
             vanillaItem="GEO Jacket",
