@@ -3151,41 +3151,37 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
         return locations
 
     filters = [
-        (options.enable_main_quest_locations > 0, PhoaFlag.MAINQUEST),
-        (options.enable_heart_ruby_locations > 0, PhoaFlag.HEARTRUBY),
-        (options.enable_energy_gem_locations > 0, PhoaFlag.ENERGYGEM),
-        (options.enable_moonstone_locations > 0, PhoaFlag.MOONSTONE),
-        (options.enable_lunar_artifacts_locations > 0, PhoaFlag.LUNARARTIFACT),
-        (options.enable_fishing_spots > 0, PhoaFlag.FISHINGSPOT),
-        (options.enable_npc_gifts > 0, PhoaFlag.NPCGIFTS),
-        (options.enable_planto_rewards > 0, PhoaFlag.PLANTO),
-        (options.enable_misc > 0, PhoaFlag.MISC),
-        (options.shop_sanity > 0, PhoaFlag.SHOPSANITY),
-        (options.enable_small_animal_drops > 0, PhoaFlag.SMALLANIMALS),
-        (options.enable_rin_locations > 0, PhoaFlag.RINCHESTS),
-        (options.enable_rin_locations > 1, PhoaFlag.RINCONTAINERS),
-        (options.enable_geo_challenge_rewards > 0, PhoaFlag.GEOCHALLENGE),
-        (options.enable_breakables > 0, PhoaFlag.BREAKABLE),
-        (options.enable_sidequests > 0, PhoaFlag.SIDEQUEST),
-        (options.enable_freestanding > 0, PhoaFlag.FREESTANDING),
-        (options.enable_minigames > 0, PhoaFlag.MINIGAMES),
-        (options.enable_trap_chests > 0, PhoaFlag.TRAPCHEST),
-        (options.enable_ouroboros_shrines > 0, PhoaFlag.OUROBOROS),
-        (options.enable_moonstone_shops > 0, PhoaFlag.MOONSTONE_SHOP),
-        (options.enable_perros > 0, PhoaFlag.PERRO),
-        (options.enable_ancient_vault > 0, PhoaFlag.VAULT),
-        (True, PhoaFlag.DUNGEONITEM),
-        (True, PhoaFlag.DEFAULT),
+        (options.enable_main_quest_locations <= 0, PhoaFlag.MAINQUEST),
+        (options.enable_heart_ruby_locations <= 0, PhoaFlag.HEARTRUBY),
+        (options.enable_energy_gem_locations <= 0, PhoaFlag.ENERGYGEM),
+        (options.enable_moonstone_locations <= 0, PhoaFlag.MOONSTONE),
+        (options.enable_lunar_artifacts_locations <= 0, PhoaFlag.LUNARARTIFACT),
+        (options.enable_fishing_spots <= 0, PhoaFlag.FISHINGSPOT),
+        (options.enable_npc_gifts <= 0, PhoaFlag.NPCGIFTS),
+        (options.enable_planto_rewards <= 0, PhoaFlag.PLANTO),
+        (options.enable_misc <= 0, PhoaFlag.MISC),
+        (options.shop_sanity <= 0, PhoaFlag.SHOPSANITY),
+        (options.enable_small_animal_drops <= 0, PhoaFlag.SMALLANIMALS),
+        (options.enable_rin_locations <= 0, PhoaFlag.RINCHESTS),
+        (options.enable_rin_locations <= 1, PhoaFlag.RINCONTAINERS),
+        (options.enable_geo_challenge_rewards <= 0, PhoaFlag.GEOCHALLENGE),
+        (options.enable_breakables <= 0, PhoaFlag.BREAKABLE),
+        (options.enable_sidequests <= 0, PhoaFlag.SIDEQUEST),
+        (options.enable_freestanding <= 0, PhoaFlag.FREESTANDING),
+        (options.enable_minigames <= 0, PhoaFlag.MINIGAMES),
+        (options.enable_trap_chests <= 0, PhoaFlag.TRAPCHEST),
+        (options.enable_ouroboros_shrines <= 0, PhoaFlag.OUROBOROS),
+        (options.enable_perros <= 0, PhoaFlag.PERRO),
+        (options.enable_ancient_vault <= 0, PhoaFlag.VAULT),
     ]
 
-    active_flags = [flag for option, flag in filters if option]
-
-    # Could refactor later to just put all flags in lists and avoid this to_list
-    def to_list(flag: PhoaFlag | list[PhoaFlag]) -> list[PhoaFlag]:
-        return flag if isinstance(flag, list) else [flag]
+    enabled_flags = PhoaFlag.DEFAULT
+    for option, flag in filters:
+        if not option:
+            enabled_flags |= flag
 
     locations = {
-        name: data for name, data in locations.items() if all(flag in active_flags for flag in to_list(data.flags))
+        name: data for name, data in locations.items() if (data.flags & enabled_flags) == data.flags
     }
 
     # TODO: only for development
