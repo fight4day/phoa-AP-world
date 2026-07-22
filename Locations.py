@@ -488,13 +488,15 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
             rule=lambda state: logic.can_hit_switch_from_a_distance(state, True),
             flags=PhoaFlag.DUNGEONITEM,
             vanillaItem="Anuri Pearlstone",
-        ),"Anuri Temple - First item in narrow crawlspace in tree with prickle fruit room": PhoaLocationData(
+        ),
+        "Anuri Temple - First item in narrow crawlspace in tree with prickle fruit room": PhoaLocationData(
             region="anuri_temple(main)",
             address=7676134,
             rule=lambda state: logic.can_hit_switch_from_a_distance(state, True),
             flags=PhoaFlag.FREESTANDING,
             vanillaItem="Doki Herb",
-        ),"Anuri Temple - Second item in narrow crawlspace in tree with prickle fruit room": PhoaLocationData(
+        ),
+        "Anuri Temple - Second item in narrow crawlspace in tree with prickle fruit room": PhoaLocationData(
             region="anuri_temple(main)",
             address=7676135,
             rule=lambda state: logic.can_hit_switch_from_a_distance(state, True),
@@ -946,13 +948,15 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
         "Atai Town - Dark tower pot": PhoaLocationData(
             region="atai_town",
             address=7676200,
-            rule=lambda state: logic.can_break_big_object_with_tools(state),
+            rule=lambda state: logic.can_break_big_object_with_tools(state)
+                               and logic.has_light_source(state),
             flags=PhoaFlag.MOONSTONE,
             vanillaItem="Moonstone",
         ),
         "Atai Town - Dark tower chest": PhoaLocationData(
             region="atai_town",
             address=7676201,
+            rule=lambda state: logic.has_light_source(state),
             flags=PhoaFlag.RINCHESTS,
             vanillaItem="30 Rin",
         ),
@@ -1226,14 +1230,14 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
             region="atai_town",
             address=7676240,
             rule=lambda state: logic.can_hit_switch_from_a_distance(state, exclude_bombs=True),
-            flags=PhoaFlag.MINIGAMES,
+            flags=PhoaFlag.MINIGAMES | PhoaFlag.HEARTRUBY,
             vanillaItem="Heart Ruby",
         ),
         "Atai Town - Shooting range item 3": PhoaLocationData(
             region="atai_town",
             address=7676241,
             rule=lambda state: logic.can_clear_atai_expert_gallery(state),
-            flags=PhoaFlag.MINIGAMES,
+            flags=PhoaFlag.MINIGAMES | PhoaFlag.MOONSTONE,
             vanillaItem="Moonstone",
         ),
         "Atai Town - West residence crate under step up": PhoaLocationData(

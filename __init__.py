@@ -27,14 +27,14 @@ class PhoaWorld(World):
     location_name_to_id = {name: data.address for name, data in get_location_data(-1, None).items()}
     item_name_to_id = {name: data.code for name, data in item_table.items()}
 
-    progressive_item_classifications_overrides: list[str] = []
+    progression_item_classifications_overrides: list[str] = []
 
     def generate_early(self) -> None:
         self._determine_item_classifications_overrides()
 
     def create_item(self, name: str) -> PhoaItem:
         item_classification = IC.progression \
-            if name in self.progressive_item_classifications_overrides \
+            if name in self.progression_item_classifications_overrides \
             else item_table[name].type
         return PhoaItem(name, item_classification, item_table[name].code, self.player)
 
@@ -45,7 +45,8 @@ class PhoaWorld(World):
 
         for item in precollected_items:
             precollected_item = self.create_item(item)
-            precollected_item.classification = IC.progression
+            if precollected_item.classification != IC.progression:
+                raise Exception(f"Precollected item that is not progression: '{item}'")
             self.multiworld.push_precollected(precollected_item)
 
         item_pool: list[PhoaItem] = []
@@ -79,14 +80,14 @@ class PhoaWorld(World):
         options = self.options
 
         if not options.start_with_wooden_bat:
-            self.progressive_item_classifications_overrides.append("Progressive Bat")
+            self.progression_item_classifications_overrides.append("Progressive Bat")
         if options.enable_fishing_spots:
-            self.progressive_item_classifications_overrides.append("Fishing Rod")
-            self.progressive_item_classifications_overrides.append("Serpent Rod")
-            self.progressive_item_classifications_overrides.append("Progressive Fishing Rod")
+            self.progression_item_classifications_overrides.append("Fishing Rod")
+            self.progression_item_classifications_overrides.append("Serpent Rod")
+            self.progression_item_classifications_overrides.append("Progressive Fishing Rod")
         if (options.enable_rin_locations > 1
                 or options.enable_minigames
                 or options.enable_moonstone_locations
                 or options.enable_fishing_spots
                 or options.enable_ancient_vault):
-            self.progressive_item_classifications_overrides.append("Energy Gem")
+            self.progression_item_classifications_overrides.append("Energy Gem")
