@@ -1,4 +1,3 @@
-import time
 from typing import Dict, NamedTuple, TYPE_CHECKING
 from BaseClasses import Item
 from BaseClasses import ItemClassification as IC
