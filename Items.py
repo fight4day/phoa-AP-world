@@ -1,3 +1,4 @@
+import time
 from typing import Dict, NamedTuple, TYPE_CHECKING
 from BaseClasses import Item
 from BaseClasses import ItemClassification as IC
@@ -175,9 +176,9 @@ def get_item_pool(world: "PhoaWorld", locations: dict[str, PhoaLocationData]) ->
             useful_items.extend([item_name] * item_data.amount)
 
     # Remove progression and useful items from the items_from_locations
-    upgrade_map = build_upgrade_map(world.options)
+    replacement_map = build_replacement_map(world.options)
     items_from_locations: list[str] = [
-        upgrade_map.get(location.vanillaItem, location.vanillaItem)
+        replacement_map.get(location.vanillaItem, location.vanillaItem)
         for location in locations.values()
     ]
 
@@ -267,12 +268,16 @@ def filter_upgradable_items(items, world: "PhoaWorld") -> dict[str, PhoaItemData
     return items
 
 
-def build_upgrade_map(options: PhoaOptions) -> dict[str, str]:
+def build_replacement_map(options: PhoaOptions) -> dict[str, str]:
     mapping = {}
 
     for option, upgradable, bases in upgrade_groups:
         if getattr(options, option):
             for base in bases:
                 mapping[base] = upgradable
+
+    for option, dungeon_item, bundle in dungeon_item_bundle_groups:
+        if getattr(options, option):
+            mapping[dungeon_item] = bundle
 
     return mapping
