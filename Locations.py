@@ -42,7 +42,7 @@ class PhoaLocationData(NamedTuple):
     region: str
     address: Optional[int]
     rule: Optional[Callable[[CollectionState], bool]] = None
-    flags: PhoaFlag | list[PhoaFlag] = PhoaFlag.DEFAULT
+    flags: PhoaFlag = PhoaFlag.DEFAULT
     vanillaItem: str = ""
 
 
@@ -2745,28 +2745,28 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
             region="lake_laboratory",
             address=7676512,
             rule=lambda state: logic.can_do_fran_quest_chain(state, 1),
-            flags=[PhoaFlag.MOONSTONE_SHOP, PhoaFlag.NPCGIFTS],
+            flags=PhoaFlag.MOONSTONE_SHOP | PhoaFlag.NPCGIFTS,
             vanillaItem="Saffron Milk",
         ),
         "Lake Laboratory - Van gift after 2nd moonstone batch": PhoaLocationData( # TODO: not yet implemented
             region="lake_laboratory",
             address=7676513,
             rule=lambda state: logic.can_do_fran_quest_chain(state, 2),
-            flags=[PhoaFlag.MOONSTONE_SHOP, PhoaFlag.NPCGIFTS],
+            flags=PhoaFlag.MOONSTONE_SHOP | PhoaFlag.NPCGIFTS,
             vanillaItem="Grape Cake",
         ),
         "Lake Laboratory - Van gift after 3rd moonstone batch": PhoaLocationData( # TODO: not yet implemented
             region="lake_laboratory",
             address=7676514,
             rule=lambda state: logic.can_do_fran_quest_chain(state, 3),
-            flags=[PhoaFlag.MOONSTONE_SHOP, PhoaFlag.NPCGIFTS],
+            flags=PhoaFlag.MOONSTONE_SHOP | PhoaFlag.NPCGIFTS,
             vanillaItem="Cooked Drake Tail",
         ),
         "Lake Laboratory - Lan gift after 4th moonstone batch": PhoaLocationData( # TODO: not yet implemented
             region="lake_laboratory",
             address=7676515,
             rule=lambda state: logic.can_do_fran_quest_chain(state, 4),
-            flags=[PhoaFlag.MOONSTONE_SHOP, PhoaFlag.NPCGIFTS],
+            flags=PhoaFlag.MOONSTONE_SHOP | PhoaFlag.NPCGIFTS,
             vanillaItem="Spicy Noodles",
         ),
         "GEO Base - Learn GEO Song": PhoaLocationData( # TODO: not yet implemented
