@@ -2667,7 +2667,7 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
             flags=PhoaFlag.ENERGYGEM,
             vanillaItem="Energy Gem",
         ),
-        "Daea Region - Perro Hide and Seek": PhoaLocationData( # TODO: partially implemented
+        "Daea Region - Perro Hide and Seek": PhoaLocationData(
             region="daea_region",
             address=7676502,
             flags=PhoaFlag.PERRO,
@@ -2804,7 +2804,7 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
             flags=PhoaFlag.SHOPSANITY,
             vanillaItem="GEO Jacket",
         ),
-        "GEO Base - Georgia quest 1": PhoaLocationData( # TODO: partially implemented
+        "GEO Base - Georgia quest 1": PhoaLocationData(
             region="daea_region",
             address=7676521,
             rule=lambda state: state.has("GEO Ticket", player),
