@@ -1,6 +1,7 @@
 from typing import Dict, NamedTuple, TYPE_CHECKING
 from BaseClasses import Item
 from BaseClasses import ItemClassification as IC
+from Fill import fill_restrictive
 from Options import OptionError
 from worlds.phoa.Locations import PhoaLocationData
 from . import PhoaOptions
@@ -65,6 +66,14 @@ class PhoaItemData(NamedTuple):
 # Geo tickets progression if shop option is active
 # Antique Pins progression if sidequest option is active
 # 12 lunar items progression if sidequest option is active
+
+class DungeonItemSettingGroup(NamedTuple):
+    shuffle_option: str
+    bundle_option: str
+    dungeon_name: str
+    dungeon_item: str
+    dungeon_item_bundle: str
+
 
 # @formatter:off
 item_table: Dict[str, PhoaItemData] = {
@@ -183,9 +192,11 @@ upgrade_groups = [
     ("upgradable_prelude", "Progressive Prelude of Panselo", ["Prelude of Panselo", "Spell of Rejuvenation"]),
 ]
 
-dungeon_item_bundle_groups = [
-    ("bundle_anuri_pearlstones", "Anuri Pearlstone", "Anuri Pearlstone Necklace"),
-    ("bundle_ouro_guard_keys", "Ouro Guard Key", "Ouro Guard Keyring"),
+dungeon_item_setting_groups = [
+    DungeonItemSettingGroup("anuri_pearlstone_shuffle", "bundle_anuri_pearlstones", "Anuri Temple", "Anuri Pearlstone",
+                            "Anuri Pearlstone Necklace"),
+    DungeonItemSettingGroup("ouro_guard_key_shuffle", "bundle_ouro_guard_keys", "Ouroboros Hideout", "Ouro Guard Key",
+                            "Ouro Guard Keyring"),
 ]
 
 item_inclusion_priority: list[str] = \
@@ -282,11 +293,11 @@ def filter_upgradable_items(items, world: "PhoaWorld") -> dict[str, PhoaItemData
             continue
         items.pop(upgradable, None)
 
-    for option, dungeon_item, bundled_dungeon_item in dungeon_item_bundle_groups:
-        if getattr(world.options, option):
-            items.pop(dungeon_item, None)
+    for dungeon_item_setting_group in dungeon_item_setting_groups:
+        if getattr(world.options, dungeon_item_setting_group.bundle_option):
+            items.pop(dungeon_item_setting_group.dungeon_item, None)
             continue
-        items.pop(bundled_dungeon_item, None)
+        items.pop(dungeon_item_setting_group.dungeon_item_bundle, None)
 
     removal_map = [
         (not world.options.enable_heart_ruby_locations
@@ -322,8 +333,75 @@ def build_replacement_map(options: PhoaOptions) -> dict[str, str]:
             for base in bases:
                 mapping[base] = upgradable
 
-    for option, dungeon_item, bundle in dungeon_item_bundle_groups:
-        if getattr(options, option):
-            mapping[dungeon_item] = bundle
+    for dungeon_item_setting_group in dungeon_item_setting_groups:
+        if getattr(options, dungeon_item_setting_group.bundle_option):
+            mapping[dungeon_item_setting_group.dungeon_item] = dungeon_item_setting_group.dungeon_item_bundle
 
     return mapping
+
+
+def filter_dungeon_items(world: "PhoaWorld", location_data: dict[str, PhoaLocationData],
+                         dungeon_item_info: DungeonItemSettingGroup,
+                         item_pool_strings: list[str]):
+    dungeon_item_name = \
+        dungeon_item_info.dungeon_item_bundle \
+            if getattr(world.options, dungeon_item_info.bundle_option) \
+            else dungeon_item_info.dungeon_item
+
+    dungeon_locations = []
+    for location_name in location_data.keys():
+        if location_name.startswith(dungeon_item_info.dungeon_name):
+            dungeon_locations.append(location_name)
+
+    world.own_dungeon_locations[dungeon_item_info.dungeon_name] = dungeon_locations
+
+    # For vanilla placements
+    if (getattr(world.options, dungeon_item_info.shuffle_option) ==
+            getattr(world.options, dungeon_item_info.shuffle_option).option_vanilla):
+        i = 0
+        while dungeon_item_name in item_pool_strings:
+            item_pool_strings.remove(dungeon_item_name)
+            i += 1
+
+        for location_name in dungeon_locations:
+            if location_data[location_name].vanillaItem == dungeon_item_info.dungeon_item:
+                location_to_place = world.multiworld.get_location(location_name, world.player)
+                location_to_place.place_locked_item(world.create_item(dungeon_item_name))
+                if getattr(world.options, dungeon_item_info.bundle_option).value:
+                    break
+
+    # Within own dungeon
+    elif (getattr(world.options, dungeon_item_info.shuffle_option) ==
+          getattr(world.options, dungeon_item_info.shuffle_option).option_own_dungeon):
+        world.own_dungeon_keys.setdefault(dungeon_item_info.dungeon_name, [])
+        while dungeon_item_name in item_pool_strings:
+            item_pool_strings.remove(dungeon_item_name)
+            world.own_dungeon_keys[dungeon_item_info.dungeon_name].append(world.create_item(dungeon_item_name))
+
+
+def fill_dungeon_items_in_own_dungeon(world: "PhoaWorld", dungeon_item_info: DungeonItemSettingGroup) -> None:
+    if (getattr(world.options, dungeon_item_info.shuffle_option) !=
+            getattr(world.options, dungeon_item_info.shuffle_option).option_own_dungeon):
+        return
+
+    dungeon_items = world.own_dungeon_keys[dungeon_item_info.dungeon_name]
+
+    locations = []
+    for location_name in world.own_dungeon_locations[dungeon_item_info.dungeon_name]:
+        location = world.multiworld.get_location(location_name, world.player)
+        if location.item is None:
+            locations.append(location)
+
+    if len(dungeon_items) > len(locations):
+        raise Exception(
+            f"'{dungeon_item_info.dungeon_name}' has {len(dungeon_items)} dungeon items to place,"
+            f"but only {len(locations)} available locations."
+        )
+
+    # This state pretends to have all items minus the dungeon items
+    state = world.multiworld.get_all_state()
+    for dungeon_item in dungeon_items:
+        state.remove(dungeon_item)
+
+    world.multiworld.random.shuffle(locations)
+    fill_restrictive(world.multiworld, state, locations, dungeon_items)

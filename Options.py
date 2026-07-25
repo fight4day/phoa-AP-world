@@ -37,11 +37,6 @@ class KeepExcludedStatusUpgradesInItemPool(DefaultOnToggle):
     display_name = "Keep status upgrades and moonstones in item pool when locations are excluded"
 
 
-# class EnableDungeonKeys(DefaultOnToggle):
-#     """Include dungeon key items like Anuri Pearlstones"""
-#     display_name = "Include dungeon items"
-
-
 class EnableLunarArtifactLocations(DefaultOnToggle):
     """Include Lunar Artifact locations"""
     display_name = "Include Lunar Artifact locations"
@@ -133,6 +128,39 @@ class EnableMoonstoneShops(Toggle):
     """
     display_name = "Include Moonstone shops"
 
+
+# Dungeon item shuffle
+
+class DungeonItemShuffle(Choice):
+    """Determines where dungeon items can be placed.
+    - **Vanilla**: Places dungeon items at their vanilla location
+    - **Own Dungeon**: Places dungeon items shuffled within their dungeon
+    - **Anywhere**: Dungeon items can be found across the multiworld"""
+    display_name = "Dungeon item shuffle"
+    option_vanilla = 0
+    option_own_dungeon = 1
+    option_anywhere = 2
+    default = 1
+
+
+class AnuriPearlstoneShuffle(DungeonItemShuffle):
+    """Determines where Anuri Pearlstones can be placed.
+    - **Vanilla**: Places Anuri Pearlstones at their vanilla location
+    - **Own Dungeon**: Places Anuri Pearlstones shuffled within their dungeon
+    - **Anywhere**: Anuri Pearlstones can be found across the multiworld"""
+    display_name = "Anuri Pearlstone shuffle"
+    default = 1
+
+
+class OuroGuardKeyShuffle(DungeonItemShuffle):
+    """Determines where Ouro Guard Keys can be placed.
+    - **Vanilla**: Places Ouro Guard Keys at their vanilla location
+    - **Own Dungeon**: Places Ouro Guard Keys shuffled within their dungeon
+    - **Anywhere**: Ouro Guard Keys can be found across the multiworld"""
+    display_name = "Ouro Guard Key shuffle"
+    default = 1
+
+
 # Quality of life settings
 
 class StartWithWoodenBat(DefaultOnToggle):
@@ -196,7 +224,6 @@ class PhoaOptions(PerGameCommonOptions):
     enable_energy_gem_locations: EnableEnergyGemLocations
     enable_ancient_vault: EnableAncientVault
     enable_moonstone_locations: EnableMoonstoneLocations
-    # enable_dungeon_items: EnableDungeonKeys
     enable_lunar_artifacts_locations: EnableLunarArtifactLocations
     enable_fishing_spots: EnableFishingSpots
     enable_npc_gifts: EnableNpcGifts
@@ -214,6 +241,8 @@ class PhoaOptions(PerGameCommonOptions):
     enable_geo_challenge_rewards: EnableGEOChallengeRewards
     enable_ouroboros_shrines: EnableOuroborosShrines
     enable_moonstone_shops: EnableMoonstoneShops
+    anuri_pearlstone_shuffle: AnuriPearlstoneShuffle
+    ouro_guard_key_shuffle: OuroGuardKeyShuffle
     start_with_wooden_bat: StartWithWoodenBat
     bundle_anuri_pearlstones: BundleAnuriPearlstones
     bundle_ouro_guard_keys: BundleOuroGuardKeys
@@ -233,7 +262,6 @@ class PhoaOptions(PerGameCommonOptions):
             "enable_energy_gem_locations",
             "enable_ancient_vault",
             "enable_moonstone_locations",
-            # "enable_dungeon_items",
             "enable_lunar_artifacts_locations",
             "enable_fishing_spots",
             "enable_npc_gifts",
@@ -251,6 +279,8 @@ class PhoaOptions(PerGameCommonOptions):
             "enable_geo_challenge_rewards",
             "enable_ouroboros_shrines",
             "enable_moonstone_shops",
+            "anuri_pearlstone_shuffle",
+            "ouro_guard_key_shuffle",
             "start_with_wooden_bat",
             "bundle_anuri_pearlstones",
             "bundle_ouro_guard_keys",
@@ -274,7 +304,6 @@ phoa_option_groups: list[OptionGroup] = [
             EnableEnergyGemLocations,
             EnableAncientVault,
             EnableMoonstoneLocations,
-            # EnableDungeonKeys,
             EnableLunarArtifactLocations,
             EnableFishingSpots,
             EnableNpcGifts,
@@ -292,6 +321,13 @@ phoa_option_groups: list[OptionGroup] = [
             EnableGEOChallengeRewards,
             EnableOuroborosShrines,
             EnableMoonstoneShops,
+        ],
+    ),
+    OptionGroup(
+        "Dungeon Item Shuffle",
+        [
+            AnuriPearlstoneShuffle,
+            OuroGuardKeyShuffle,
         ],
     ),
     OptionGroup(
