@@ -2846,19 +2846,19 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
         ),
         "Thomas's Lab - Reception bribe": PhoaLocationData( # TODO: currently missable
             region="daea_region",
-            address=0,
+            address=7676526,
             flags=PhoaFlag.NPCGIFTS,
             vanillaItem="50 Rin",
         ),
         "Thomas's Lab - Vending machine": PhoaLocationData(
             region="daea_region",
-            address=0,
+            address=7676527,
             flags=PhoaFlag.SHOPSANITY,
             vanillaItem="Calory Slush",
         ),
         "Thomas's Lab - Binary room": PhoaLocationData(
             region="daea_region",
-            address=0,
+            address=7676528,
             rule=lambda state: logic.has_music_instrument(state),
             flags=PhoaFlag.ENERGYGEM,
             vanillaItem="Energy Gem",
