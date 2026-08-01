@@ -57,6 +57,9 @@ class PhoaItemData(NamedTuple):
 # "Lunar Egg" 1 (filler): (needed for antique shop quest)
 # "Lunar Key" 1 (filler): (needed for antique shop quest)
 # "Antique Cast Iron" 1 (filler): "Antique Shop - Deliver Lunar Artifact 8 bonus"
+# "Spicy Noodles" 1 (filler): "Lake Laboratory - Lan gift after 4th moonstone batch"
+# "Cooked Drake Tail" 1 (filler): "Lake Laboratory - Van gift after 3rd moonstone batch"
+# "Grape Cake" 1 (filler): "Lake Laboratory - Van gift after 2nd moonstone batch"
 # "Unlock Panselo Franway" 1 (progression)
 # "Unlock Atai Franway" 1 (progression)
 # "Unlock Cosette Franway" 1 (progression)
@@ -77,6 +80,20 @@ class DungeonItemSettingGroup(NamedTuple):
 
 # @formatter:off
 item_table: Dict[str, PhoaItemData] = {
+    # FIXME: temp just to generate without error
+    "Lunar Compass": PhoaItemData(144, 1, IC.filler),
+    "Blue Golem Medallion": PhoaItemData(115, 1, IC.filler),
+    "Red Golem Medallion": PhoaItemData(116, 1, IC.filler),
+    "Tailoring Voucher": PhoaItemData(164, 1, IC.filler),
+    "Calory Slush": PhoaItemData(118, 1, IC.filler),
+    "Lucky Earrings": PhoaItemData(26, 1, IC.filler),
+    "GEO Jacket": PhoaItemData(13, 1, IC.filler),
+    "Golden Egg": PhoaItemData(95, 1, IC.filler),
+    "Spicy Noodles": PhoaItemData(152, 1, IC.filler),
+    "Cooked Drake Tail": PhoaItemData(72, 1, IC.filler),
+    "Grape Cake": PhoaItemData(65, 1, IC.filler),
+    "Moon Crystal": PhoaItemData(165, 1, IC.filler),
+    # FIXME:
     "Heart Ruby":                       PhoaItemData(3,     14, IC.useful),
     "Energy Gem":                       PhoaItemData(4,     9,  IC.useful),
     "Moonstone":                        PhoaItemData(5,     37, IC.filler),
