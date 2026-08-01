@@ -2844,7 +2844,7 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
             flags=PhoaFlag.FISHINGSPOT,
             vanillaItem="Moonstone",
         ),
-        "Thomas's Lab - Reception bribe": PhoaLocationData( # TODO: currently missable
+        "Thomas's Lab - Reception bribe": PhoaLocationData(
             region="daea_region",
             address=7676526,
             flags=PhoaFlag.NPCGIFTS,
@@ -2865,20 +2865,20 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
         ),
         "Thomas's Lab - Room 1-1": PhoaLocationData(
             region="daea_region",
-            address=0,
+            address=7676529,
             rule=lambda state: logic.can_hit_switch_from_a_distance(state),
             flags=PhoaFlag.MAINQUEST,
             vanillaItem="Blue Golem Medallion",
         ),
         "Thomas's Lab - Room 1-2": PhoaLocationData(
             region="daea_region",
-            address=0,
+            address=7676530,
             flags=PhoaFlag.MAINQUEST,
             vanillaItem="Blue Golem Medallion",
         ),
         "Thomas's Lab - Room 1-3": PhoaLocationData(
             region="daea_region",
-            address=0,
+            address=7676531,
             # Possible with all ranged weapons
             rule=lambda state: logic.can_hit_switch_from_a_distance(state),
             flags=PhoaFlag.MAINQUEST,
@@ -2886,32 +2886,32 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
         ),
         "Thomas's Lab - Room 1-4": PhoaLocationData(
             region="daea_region",
-            address=0,
+            address=7676532,
             rule=lambda state: logic.can_reasonably_kill_flying_enemies(state),
             flags=PhoaFlag.MAINQUEST,
             vanillaItem="Blue Golem Medallion",
         ),
         "Thomas's Lab - Room 2-1": PhoaLocationData(
             region="daea_region",
-            address=0,
+            address=7676533,
             flags=PhoaFlag.MAINQUEST,
             vanillaItem="Red Golem Medallion",
         ),
         "Thomas's Lab - Room 2-2": PhoaLocationData(
             region="daea_region",
-            address=0,
+            address=7676534,
             flags=PhoaFlag.MAINQUEST,
             vanillaItem="Red Golem Medallion",
         ),
         "Thomas's Lab - Room 2-3": PhoaLocationData(
             region="daea_region",
-            address=0,
+            address=7676535,
             flags=PhoaFlag.MAINQUEST,
             vanillaItem="Red Golem Medallion",
         ),
         "Thomas's Lab - Room 2-4": PhoaLocationData(
             region="daea_region",
-            address=0,
+            address=7676536,
             rule=lambda state: logic.can_reasonably_kill_flying_enemies(state),
             flags=PhoaFlag.MAINQUEST,
             vanillaItem="Red Golem Medallion",
