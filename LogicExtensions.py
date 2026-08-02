@@ -93,8 +93,10 @@ class PhoaLogic:
                 or (self.has_sonic_spear(state) and not exclude_spear)
                 or state.has_any({"Kobold Blaster", "Rocket Boots"}, self.player))
 
-    def can_hit_switch_from_a_distance(self, state: CollectionState, exclude_bombs: bool = False) -> bool:
-        return (self.has_slingshot(state)
+    def can_hit_switch_from_a_distance(self, state: CollectionState,
+                                       exclude_slingshot: bool = False,
+                                       exclude_bombs: bool = False) -> bool:
+        return ((self.has_slingshot(state) and not exclude_slingshot)
                 or (self.has_bombs(state) and not exclude_bombs)
                 or self.has_crossbow(state)
                 or self.has_sonic_spear(state)

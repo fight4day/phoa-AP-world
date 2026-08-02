@@ -581,6 +581,54 @@ def get_exit_data(player: int, options: PhoaOptions) -> list[PhoaExit]:
             rule=lambda state: logic.has_explosives(state),
         ),
         # ouroboros_hideout(great_drake_arena)
+        # Mock exit to White towers
+        PhoaExit(
+            name="mock_atai_region_to_white_towers_entrance",
+            region="atai_region",
+            connection="white_towers(entrance)",
+        ),
+        # white_towers(entrance)
+        # NOTE: Logically (for regions), I'll assume the player has the sonic spear from here
+        PhoaExit(
+            name="white_towers_entrance_to_first_floor",
+            region="white_towers(entrance)",
+            connection="white_towers(main)",
+            rule=lambda state: logic.has_sonic_spear(state),  # Treble shot (even slingshot) also activates switch
+        ),
+        # white_towers(main)
+        PhoaExit(
+            name="white_towers_main_to_entrance",
+            region="white_towers(main)",
+            connection="white_towers(entrance)",
+        ),
+        PhoaExit(
+            name="white_towers_elevator_to_upper",
+            region="white_towers(main)",
+            connection="white_towers(upper)",
+            rule=lambda state: logic.has_bombs(state)
+                               or logic.has_slingshot(state),
+        ),
+        # white_towers(upper)
+        PhoaExit(
+            name="white_towers_upper_to_main",
+            region="white_towers(upper)",
+            connection="white_towers(main)",
+        ),
+        PhoaExit(
+            name="white_towers_gates_to_katash",
+            region="white_towers(upper)",
+            connection="white_towers(katash)",
+            rule=lambda state: logic.has_bombs(state)
+                               or logic.has_slingshot(state)
+                               or logic.has_crossbow(state)
+                               or logic.can_use_spear_bomb(state),
+        ),
+        # white_towers(upper)
+        PhoaExit(
+            name="white_towers_katash_to_upper",
+            region="white_towers(katash)",
+            connection="white_towers(upper)",
+        ),
     ]
 
     return exits
@@ -645,6 +693,11 @@ def create_regions_and_locations(world: MultiWorld, player: int, options: PhoaOp
         create_region(world, player, locations_per_region, "ouroboros_hideout(treasure_room)"),
         create_region(world, player, locations_per_region, "ouroboros_hideout(treasure_room_hidden_area)"),
         create_region(world, player, locations_per_region, "ouroboros_hideout(great_drake_arena)"),
+
+        create_region(world, player, locations_per_region, "white_towers(entrance)"),
+        create_region(world, player, locations_per_region, "white_towers(main)"),
+        create_region(world, player, locations_per_region, "white_towers(upper)"),
+        create_region(world, player, locations_per_region, "white_towers(katash)"),
     ]
 
     world.regions += regions

@@ -77,7 +77,7 @@ class PhoaWorld(World):
 
     def set_rules(self):
         self.multiworld.completion_condition[self.player] = lambda state: state.has(
-            "Defeat Sand Dragon", self.player
+            "Defeat Katash", self.player
         )
 
     def get_filler_item_name(self) -> str:
