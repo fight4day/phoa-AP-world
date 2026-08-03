@@ -1873,7 +1873,8 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
         "White Towers - First floor - Small pot on top of fountain": PhoaLocationData(
             region="white_towers(main)",
             address=7676500,
-            rule=lambda state: logic.can_hit_switch_from_a_distance(state),
+            rule=lambda state: logic.can_hit_switch_from_a_distance(state)
+                               or state.has("Rocket Boots", player),
             flags=PhoaFlag.MOONSTONE,
             vanillaItem="Moonstone",
         ),
@@ -1925,7 +1926,8 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
         "White Towers - Third floor - Knock down the item through the tight space": PhoaLocationData(
             region="white_towers(main)",
             address=7676508,
-            rule=lambda state: logic.can_hit_switch_from_a_distance(state, exclude_slingshot=True, exclude_bombs=True),
+            rule=lambda state: logic.can_hit_switch_from_a_distance(state, exclude_slingshot=True, exclude_bombs=True)
+                               or state.has("Rocket Boots", player),
             flags=PhoaFlag.MOONSTONE,
             vanillaItem="Moonstone",
         ),
@@ -1986,6 +1988,7 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
         "Defeat Katash": PhoaLocationData(
             region="white_towers(katash)",
             address=None,
+            # TODO: This is a bare minimum and needs to be reconsidered
             rule=lambda state: logic.has_sonic_spear(state),
         ),
     }
