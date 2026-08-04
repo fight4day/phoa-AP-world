@@ -583,11 +583,109 @@ def get_exit_data(player: int, options: PhoaOptions) -> list[PhoaExit]:
         # ouroboros_hideout(great_drake_arena)
         # Mock exit to White towers
         PhoaExit(
-            name="mock_atai_region_to_white_towers_entrance",
+            name="mock_entrance",
             region="atai_region",
+            connection="castle_dungeon",
+        ),
+        # castle_dungeon
+        PhoaExit(
+            name="castle_dungeon_to_white_towers_entrance",
+            region="castle_dungeon",
             connection="white_towers(entrance)",
+            rule=lambda state: logic.has_sonic_spear(state),
+        ),
+        PhoaExit(
+            name="castle_dungeon_post_control_room_fight",
+            region="castle_dungeon",
+            connection="castle_dungeon(post_control_room_fight)",
+            rule=lambda state: logic.can_reasonably_defeat_medium_encounters(state),
+        ),
+        PhoaExit(
+            name="castle_dungeon_to_c_hall",
+            region="castle_dungeon",
+            connection="castle_dungeon(c_hall)",
+            rule=lambda state: state.has("Master Keycard C", player),
+        ),
+        PhoaExit(
+            name="castle_dungeon_to_b_hall",
+            region="castle_dungeon",
+            connection="castle_dungeon(b_hall)",
+            rule=lambda state: state.has("Master Keycard B", player),
+        ),
+        PhoaExit(
+            name="castle_dungeon_to_a_hall",
+            region="castle_dungeon",
+            connection="castle_dungeon(a_hall)",
+            rule=lambda state: state.has("Master Keycard A", player),
+        ),
+        # castle_dungeon(post_control_room_fight)
+        PhoaExit(
+            name="castle_dungeon_post_fight_return",
+            region="castle_dungeon(post_control_room_fight)",
+            connection="castle_dungeon",
+        ),
+        PhoaExit(
+            name="castle_dungeon_post_fight_to_c_hall",
+            region="castle_dungeon(post_control_room_fight)",
+            connection="castle_dungeon(c_hall)",
+            rule=lambda state: logic.has_keycards("C", 1, state),
+        ),
+        PhoaExit(
+            name="castle_dungeon_post_fight_to_b_hall",
+            region="castle_dungeon(post_control_room_fight)",
+            connection="castle_dungeon(b_hall)",
+            rule=lambda state: logic.has_keycards("B", 1, state),
+        ),
+        PhoaExit(
+            name="castle_dungeon_post_fight_to_a_hall",
+            region="castle_dungeon(post_control_room_fight)",
+            connection="castle_dungeon(a_hall)",
+            rule=lambda state: logic.has_keycards("A", 1, state),
+        ),
+        # castle_dungeon(c_hall)
+        PhoaExit(
+            name="c_hall_to_c_jail_cell",
+            region="castle_dungeon(c_hall)",
+            connection="castle_dungeon(c_jail_cell)",
+            rule=lambda state: logic.has_keycards("C", 3, state)
+                               or (logic.has_sonic_spear(state) and logic.has_keycards("C", 1, state)),
+        ),
+        # castle_dungeon(b_hall)
+        PhoaExit(
+            name="b_hall_to_b_jail_cell",
+            region="castle_dungeon(b_hall)",
+            connection="castle_dungeon(b_jail_cell)",
+            rule=lambda state: logic.has_keycards("B", 3, state),
+        ),
+        # castle_dungeon(c_hall)
+        PhoaExit(
+            name="castle_dungeon_a_hall_to_main",
+            region="castle_dungeon(a_hall)",
+            connection="castle_dungeon",
+            rule=lambda state: logic.has_keycards("A", 2, state)
+                               or logic.has_sonic_spear(state),
+        ),
+        PhoaExit(
+            name="a_hall_to_arena",
+            region="castle_dungeon(a_hall)",
+            connection="castle_dungeon(a_hall_arena)",
+            rule=lambda state: logic.has_keycards("A", 2, state)
+                               or logic.has_sonic_spear(state),
         ),
         # white_towers(entrance)
+        PhoaExit(
+            name="white_towers_entrance_to_puzzle_room",
+            region="white_towers(entrance)",
+            connection="white_towers(puzzle_room)",
+            rule=lambda state: state.has("Rocket Boots", player)
+                               and state.has("Energy Gem", player, 4),
+        ),
+        PhoaExit(
+            name="white_towers_entrance_to_daea_region",
+            region="white_towers(entrance)",
+            connection="daea_region",
+            rule=lambda state: logic.can_deal_damage(state),
+        ),
         # NOTE: Logically (for regions), I'll assume the player has the sonic spear from here
         PhoaExit(
             name="white_towers_entrance_to_first_floor",
@@ -694,7 +792,17 @@ def create_regions_and_locations(world: MultiWorld, player: int, options: PhoaOp
         create_region(world, player, locations_per_region, "ouroboros_hideout(treasure_room_hidden_area)"),
         create_region(world, player, locations_per_region, "ouroboros_hideout(great_drake_arena)"),
 
+        create_region(world, player, locations_per_region, "castle_dungeon"),
+        create_region(world, player, locations_per_region, "castle_dungeon(post_control_room_fight)"),
+        create_region(world, player, locations_per_region, "castle_dungeon(c_hall)"),
+        create_region(world, player, locations_per_region, "castle_dungeon(c_jail_cell)"),
+        create_region(world, player, locations_per_region, "castle_dungeon(b_hall)"),
+        create_region(world, player, locations_per_region, "castle_dungeon(b_jail_cell)"),
+        create_region(world, player, locations_per_region, "castle_dungeon(a_hall)"),
+        create_region(world, player, locations_per_region, "castle_dungeon(a_hall_arena)"),
+        create_region(world, player, locations_per_region, "daea_region"),
         create_region(world, player, locations_per_region, "white_towers(entrance)"),
+        create_region(world, player, locations_per_region, "white_towers(puzzle_room)"),
         create_region(world, player, locations_per_region, "white_towers(main)"),
         create_region(world, player, locations_per_region, "white_towers(upper)"),
         create_region(world, player, locations_per_region, "white_towers(katash)"),

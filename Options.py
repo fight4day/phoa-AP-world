@@ -153,6 +153,15 @@ class OuroGuardKeyShuffle(DungeonItemShuffle):
     default = 1
 
 
+class KeycardShuffle(DungeonItemShuffle):
+    """Determines where Keycards can be placed.
+    - **Vanilla**: Keeps Keycards at the corresponding guards
+    - **Own Dungeon**: Places Keycards shuffled within their dungeon
+    - **Anywhere**: Keycards can be found across the multiworld"""
+    display_name = "Ouro Guard Key shuffle"
+    default = 1
+
+
 # Quality of life settings
 
 class StartWithWoodenBat(DefaultOnToggle):
@@ -168,6 +177,16 @@ class BundleAnuriPearlstones(Toggle):
 class BundleOuroGuardKeys(Toggle):
     """Bundles Ouro Guard Keys into an Ouro Guard Keyring with infinite uses"""
     display_name = "Bundle Ouro Guard Keys"
+
+
+class BundleKeycards(Choice):
+    """Bundles each type of Keycard into a single Master Keycard.
+    - Yes: Bundles keycards, but keeps the 4 remaining gifts of the terminal guards as locations
+    - Yes plus locations: Removes the 4 remaining gifts of the terminal guards as locations"""
+    display_name = "Bundle Ouro Guard Keys"
+    option_no = 0
+    option_yes = 1
+    option_yes_plus_locations = 2
 
 
 class OpenPanseloGates(Toggle):
@@ -220,9 +239,11 @@ class PhoaOptions(PerGameCommonOptions):
     enable_ouroboros_shrines: EnableOuroborosShrines
     anuri_pearlstone_shuffle: AnuriPearlstoneShuffle
     ouro_guard_key_shuffle: OuroGuardKeyShuffle
+    keycard_shuffle: KeycardShuffle
     start_with_wooden_bat: StartWithWoodenBat
     bundle_anuri_pearlstones: BundleAnuriPearlstones
     bundle_ouro_guard_keys: BundleOuroGuardKeys
+    bundle_keycards: BundleKeycards
     upgradable_bats: UpgradableBats
     upgradable_tools: UpgradableTools
     upgradable_spear: UpgradableSpear
@@ -256,9 +277,11 @@ class PhoaOptions(PerGameCommonOptions):
             "enable_ouroboros_shrines",
             "anuri_pearlstone_shuffle",
             "ouro_guard_key_shuffle",
+            "keycard_shuffle",
             "start_with_wooden_bat",
             "bundle_anuri_pearlstones",
             "bundle_ouro_guard_keys",
+            "bundle_keycards",
             "upgradable_bats",
             "upgradable_tools",
             "upgradable_spear",
@@ -301,6 +324,7 @@ phoa_option_groups: list[OptionGroup] = [
         [
             AnuriPearlstoneShuffle,
             OuroGuardKeyShuffle,
+            KeycardShuffle,
         ],
     ),
     OptionGroup(
@@ -310,6 +334,7 @@ phoa_option_groups: list[OptionGroup] = [
             StartWithWoodenBat,
             BundleAnuriPearlstones,
             BundleOuroGuardKeys,
+            BundleKeycards,
             OpenPanseloGates,
             UpgradableBats,
             UpgradableTools,

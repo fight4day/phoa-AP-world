@@ -53,7 +53,6 @@ class PhoaWorld(World):
         self.create_and_assign_event_items()
 
         location_data = get_location_data(self.player, self.options)
-        print("Anuri Temple - Skeleton above first gate" in location_data)
         item_pool_strings, precollected_items = get_item_pool(self, location_data)
 
         for item in precollected_items:

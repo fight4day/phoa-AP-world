@@ -58,9 +58,17 @@ class PhoaLogic:
         return (state.has("Ouro Guard Key", self.player, amount)
                 or state.has("Ouro Guard Keyring", self.player))
 
+    def has_keycards(self, card_type: str, amount: int, state: CollectionState) -> bool:
+        return (state.has(f"Keycard {card_type}", self.player, amount)
+                or state.has(f"Master Keycard {card_type}", self.player))
+
     def can_use_spear_bomb(self, state: CollectionState) -> bool:
         return (state.has_all({"Sonic Spear", "Spear Bomb"}, self.player)
                 or state.has("Progressive Spear", self.player, 2))
+
+    def can_use_whirlwind(self, state: CollectionState) -> bool:
+        return (state.has_all({"Whirlwind", "Temperance"}, self.player)
+                and self.has_bat(state))
 
     def has_explosives(self, state: CollectionState) -> bool:
         return (self.has_bombs(state)
@@ -84,6 +92,13 @@ class PhoaLogic:
                 or self.has_crossbow(state)
                 or self.has_sonic_spear(state)
                 or state.has_any({"Kobold Blaster", "Rocket Boots"}, self.player))
+
+    def can_reasonably_defeat_medium_encounters(self, state: CollectionState) -> bool:
+        # TODO: should include health/stamina requirements
+        return (self.has_bat(state)
+                or self.has_double_crossbow(state)
+                or self.has_sonic_spear(state)
+                or state.has("Kobold Blaster", self.player))
 
     def can_break_big_object_with_tools(self, state: CollectionState, exclude_spear: bool = False) -> bool:
         return (self.has_bat(state)

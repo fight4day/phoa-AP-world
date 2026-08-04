@@ -31,6 +31,7 @@ class PhoaFlag(Flag):
     OUROBOROS = auto()
     PERRO = auto()
     VAULT = auto()
+    EXTRATERMINAL = auto()
 
 
 class PhoaLocation(Location):
@@ -390,7 +391,7 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
             region="panselo_region",
             address=7676093,
             rule=lambda state: logic.has_sonic_spear(state)
-                               and state.has("Energy Gem", player, 9),  # TODO: 10 without spear trick
+                               and state.has("Energy Gem", player, 10),
             flags=PhoaFlag.RINCONTAINERS,
             vanillaItem="50 Rin",
         ),
@@ -1870,6 +1871,233 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
         #     rule=lambda state: logic.has_sonic_spear(state) and state.has("Prelude of Panselo", player),
         #     vanillaItem="Baroque of Battle",
         # ),
+        "Castle Dungeon - Box high up in boiler room": PhoaLocationData(
+            region="castle_dungeon",
+            address=7676467,
+            rule=lambda state: logic.can_use_whirlwind(state)
+                               or logic.has_bombs(state)
+                               or logic.has_crossbow(state)
+                               or logic.has_sonic_spear(state)
+                               or state.has_any({"Kobold Blaster", "Rocket Boots"}, player),
+            flags=PhoaFlag.MOONSTONE,
+            vanillaItem="Moonstone",
+        ),
+        "Castle Dungeon - Food crate in weapons room": PhoaLocationData(
+            region="castle_dungeon",
+            address=7676468,
+            flags=PhoaFlag.BREAKABLE,
+            vanillaItem="Cheese",
+        ),
+        "Castle Dungeon - Gift 1 from guard controlling C terminal": PhoaLocationData(
+            region="castle_dungeon(post_control_room_fight)",
+            address=7676469,
+            flags=PhoaFlag.DUNGEONITEM,
+            vanillaItem="Keycard C",
+        ),
+        "Castle Dungeon - Gift 2 from guard controlling C terminal": PhoaLocationData(
+            region="castle_dungeon(post_control_room_fight)",
+            address=7676470,
+            flags=PhoaFlag.DUNGEONITEM | PhoaFlag.EXTRATERMINAL,
+            vanillaItem="Keycard C",
+        ),
+        "Castle Dungeon - Gift 3 from guard controlling C terminal": PhoaLocationData(
+            region="castle_dungeon(post_control_room_fight)",
+            address=7676471,
+            flags=PhoaFlag.DUNGEONITEM | PhoaFlag.EXTRATERMINAL,
+            vanillaItem="Keycard C",
+        ),
+        "Castle Dungeon - Gift 4 from guard controlling C terminal": PhoaLocationData(
+            region="castle_dungeon(post_control_room_fight)",
+            address=7676472,
+            flags=PhoaFlag.DUNGEONITEM | PhoaFlag.EXTRATERMINAL,
+            vanillaItem="Keycard C",
+        ),
+        "Castle Dungeon - Gift 5 from guard controlling C terminal": PhoaLocationData(
+            region="castle_dungeon(post_control_room_fight)",
+            address=7676473,
+            flags=PhoaFlag.DUNGEONITEM | PhoaFlag.EXTRATERMINAL,
+            vanillaItem="Keycard C",
+        ),
+        "Castle Dungeon - Gift 1 from guard controlling B terminal": PhoaLocationData(
+            region="castle_dungeon(post_control_room_fight)",
+            address=7676474,
+            rule=lambda state: state.has("Freed terminal B guard", player),
+            flags=PhoaFlag.DUNGEONITEM,
+            vanillaItem="Keycard B",
+        ),
+        "Castle Dungeon - Gift 2 from guard controlling B terminal": PhoaLocationData(
+            region="castle_dungeon(post_control_room_fight)",
+            address=7676475,
+            rule=lambda state: state.has("Freed terminal B guard", player),
+            flags=PhoaFlag.DUNGEONITEM | PhoaFlag.EXTRATERMINAL,
+            vanillaItem="Keycard B",
+        ),
+        "Castle Dungeon - Gift 3 from guard controlling B terminal": PhoaLocationData(
+            region="castle_dungeon(post_control_room_fight)",
+            address=7676476,
+            rule=lambda state: state.has("Freed terminal B guard", player),
+            flags=PhoaFlag.DUNGEONITEM | PhoaFlag.EXTRATERMINAL,
+            vanillaItem="Keycard B",
+        ),
+        "Castle Dungeon - Gift 4 from guard controlling B terminal": PhoaLocationData(
+            region="castle_dungeon(post_control_room_fight)",
+            address=7676477,
+            rule=lambda state: state.has("Freed terminal B guard", player),
+            flags=PhoaFlag.DUNGEONITEM | PhoaFlag.EXTRATERMINAL,
+            vanillaItem="Keycard B",
+        ),
+        "Castle Dungeon - Gift 5 from guard controlling B terminal": PhoaLocationData(
+            region="castle_dungeon(post_control_room_fight)",
+            address=7676478,
+            rule=lambda state: state.has("Freed terminal B guard", player),
+            flags=PhoaFlag.DUNGEONITEM | PhoaFlag.EXTRATERMINAL,
+            vanillaItem="Keycard B",
+        ),
+        "Castle Dungeon - Gift 1 from guard controlling A terminal": PhoaLocationData(
+            region="castle_dungeon(post_control_room_fight)",
+            address=7676479,
+            rule=lambda state: state.has("Freed terminal A guard", player),
+            flags=PhoaFlag.DUNGEONITEM,
+            vanillaItem="Keycard A",
+        ),
+        "Castle Dungeon - Gift 2 from guard controlling A terminal": PhoaLocationData(
+            region="castle_dungeon(post_control_room_fight)",
+            address=7676480,
+            rule=lambda state: state.has("Freed terminal A guard", player),
+            flags=PhoaFlag.DUNGEONITEM | PhoaFlag.EXTRATERMINAL,
+            vanillaItem="Keycard A",
+        ),
+        "Castle Dungeon - Gift 3 from guard controlling A terminal": PhoaLocationData(
+            region="castle_dungeon(post_control_room_fight)",
+            address=7676481,
+            rule=lambda state: state.has("Freed terminal A guard", player),
+            flags=PhoaFlag.DUNGEONITEM | PhoaFlag.EXTRATERMINAL,
+            vanillaItem="Keycard A",
+        ),
+        "Castle Dungeon - Gift 4 from guard controlling A terminal": PhoaLocationData(
+            region="castle_dungeon(post_control_room_fight)",
+            address=7676482,
+            rule=lambda state: state.has("Freed terminal A guard", player),
+            flags=PhoaFlag.DUNGEONITEM | PhoaFlag.EXTRATERMINAL,
+            vanillaItem="Keycard A",
+        ),
+        "Castle Dungeon - Gift 5 from guard controlling A terminal": PhoaLocationData(
+            region="castle_dungeon(post_control_room_fight)",
+            address=7676483,
+            rule=lambda state: state.has("Freed terminal A guard", player),
+            flags=PhoaFlag.DUNGEONITEM | PhoaFlag.EXTRATERMINAL,
+            vanillaItem="Keycard A",
+        ),
+        "Castle Dungeon - Control room chest locked behind songstone 1": PhoaLocationData(
+            region="castle_dungeon(post_control_room_fight)",
+            address=7676484,
+            rule=lambda state: logic.can_hit_switch_from_a_distance(state)
+                               and logic.has_music_instrument(state),
+            flags=PhoaFlag.RINCHESTS,
+            vanillaItem="35 Rin",
+        ),
+        "Castle Dungeon - Control room chest locked behind songstone 2": PhoaLocationData(
+            region="castle_dungeon(post_control_room_fight)",
+            address=7676485,
+            rule=lambda state: logic.can_hit_switch_from_a_distance(state)
+                               and logic.has_music_instrument(state),
+            flags=PhoaFlag.MOONSTONE,
+            vanillaItem="Moonstone",
+        ),
+        "Castle Dungeon - Control room chest locked behind songstone 3": PhoaLocationData(
+            region="castle_dungeon(post_control_room_fight)",
+            address=7676486,
+            rule=lambda state: logic.can_hit_switch_from_a_distance(state)
+                               and logic.has_music_instrument(state),
+            flags=PhoaFlag.RINCHESTS,
+            vanillaItem="35 Rin",
+        ),
+        "Castle Dungeon - C Hall - Food crate at top left balcony": PhoaLocationData(
+            region="castle_dungeon(c_hall)",
+            address=7676487,
+            flags=PhoaFlag.BREAKABLE,
+            vanillaItem="Cosette Cannoli",
+        ),
+        "Castle Dungeon - C Hall - Chest in middle locked door": PhoaLocationData(
+            region="castle_dungeon(c_hall)",
+            address=7676488,
+            rule=lambda state: logic.has_keycards("C", 2, state)
+                               or logic.has_sonic_spear(state),
+            flags=PhoaFlag.RINCHESTS,
+            vanillaItem="25 Rin",
+        ),
+        "Castle Dungeon - C Hall - Food crate in 1-2 cell": PhoaLocationData(
+            region="castle_dungeon(c_jail_cell)",
+            address=7676489,
+            flags=PhoaFlag.BREAKABLE,
+            vanillaItem="Pooki Jerky",
+        ),
+        "Castle Dungeon - B Hall - Box near cannon on balcony": PhoaLocationData(
+            region="castle_dungeon(b_hall)",
+            address=7676490,
+            rule=lambda state: logic.has_keycards("B", 1, state),
+            flags=PhoaFlag.BREAKABLE,
+            vanillaItem="Perro Egg",
+        ),
+        "Castle Dungeon - B Hall - Climb up with sonic spear near jail entrance": PhoaLocationData(
+            region="castle_dungeon(b_hall)",
+            address=7676491,
+            rule=lambda state: logic.has_keycards("B", 2, state)
+                               and logic.has_sonic_spear(state),
+            flags=PhoaFlag.MOONSTONE,
+            vanillaItem="Moonstone",
+        ),
+        "Castle Dungeon - B Hall - Food crate in 2-2 cell": PhoaLocationData(
+            region="castle_dungeon(b_jail_cell)",
+            address=7676492,
+            flags=PhoaFlag.BREAKABLE,
+            vanillaItem="Honey Brew",
+        ),
+        "Castle Dungeon - B Hall - Item locked behind boarded up jail cell": PhoaLocationData(
+            region="castle_dungeon(b_jail_cell)",
+            address=7676493,
+            rule=lambda state: logic.has_explosives(state),
+            flags=PhoaFlag.ENERGYGEM,
+            vanillaItem="Energy Gem",
+        ),
+        "Castle Dungeon - A Hall - Free the prisoners": PhoaLocationData(
+            region="castle_dungeon(a_hall_arena)",
+            address=7676494,
+            rule=lambda state: logic.can_reasonably_defeat_medium_encounters(state),
+            flags=PhoaFlag.MAINQUEST,
+            vanillaItem="Sonic Spear",
+        ),
+        "Daea Castle - Food box 1": PhoaLocationData(
+            region="white_towers(entrance)",
+            address=7676495,
+            flags=PhoaFlag.BREAKABLE,
+            vanillaItem="Raw Meat",
+        ),
+        "Daea Castle - Food box 2": PhoaLocationData(
+            region="white_towers(entrance)",
+            address=7676496,
+            flags=PhoaFlag.BREAKABLE,
+            vanillaItem="Raw Bird",
+        ),
+        "Daea Castle - Lizard at the back of the castle": PhoaLocationData(
+            region="daea_region",
+            address=7676497,
+            flags=PhoaFlag.SMALLANIMALS,
+            vanillaItem="Mystery Meat",
+        ),
+        "White Towers - Castle base - Gift from guard near stairs": PhoaLocationData(
+            region="white_towers(entrance)",
+            address=7676498,
+            flags=PhoaFlag.NPCGIFTS,
+            vanillaItem="Deli Sandwich",
+        ),
+        "White Towers - Castle base - Puzzle room at balcony on the right": PhoaLocationData(
+            region="white_towers(puzzle_room)",
+            address=7676499,
+            rule=lambda state: logic.has_sonic_spear(state),
+            flags=PhoaFlag.HEARTRUBY,
+            vanillaItem="Heart Ruby",
+        ),
         "White Towers - First floor - Small pot on top of fountain": PhoaLocationData(
             region="white_towers(main)",
             address=7676500,
@@ -1985,6 +2213,14 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
             address=None,
             rule=lambda state: logic.can_defeat_great_drake(state),
         ),
+        "Freed terminal B guard": PhoaLocationData(
+            region="castle_dungeon(c_jail_cell)",
+            address=None,
+        ),
+        "Freed terminal A guard": PhoaLocationData(
+            region="castle_dungeon(b_jail_cell)",
+            address=None,
+        ),
         "Defeat Katash": PhoaLocationData(
             region="white_towers(katash)",
             address=None,
@@ -2020,6 +2256,7 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
         (options.enable_ouroboros_shrines <= 0, PhoaFlag.OUROBOROS),
         (options.enable_perros <= 0, PhoaFlag.PERRO),
         (options.enable_ancient_vault <= 0, PhoaFlag.VAULT),
+        (options.bundle_keycards == 2, PhoaFlag.EXTRATERMINAL),
     ]
 
     enabled_flags = PhoaFlag.DEFAULT
