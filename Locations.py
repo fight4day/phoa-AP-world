@@ -2892,53 +2892,53 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
             vanillaItem="Blue Golem Medallion",
         ),
         "Thomas's Lab - Room 2-1": PhoaLocationData(
-            region="daea_region",
+            region="thomas_lab_2",
             address=7676533,
             flags=PhoaFlag.MAINQUEST,
             vanillaItem="Red Golem Medallion",
         ),
         "Thomas's Lab - Room 2-2": PhoaLocationData(
-            region="daea_region",
+            region="thomas_lab_2",
             address=7676534,
             flags=PhoaFlag.MAINQUEST,
             vanillaItem="Red Golem Medallion",
         ),
         "Thomas's Lab - Room 2-3": PhoaLocationData(
-            region="daea_region",
+            region="thomas_lab_2",
             address=7676535,
             flags=PhoaFlag.MAINQUEST,
             vanillaItem="Red Golem Medallion",
         ),
         "Thomas's Lab - Room 2-4": PhoaLocationData(
-            region="daea_region",
+            region="thomas_lab_2",
             address=7676536,
             rule=lambda state: logic.can_reasonably_kill_flying_enemies(state),
             flags=PhoaFlag.MAINQUEST,
             vanillaItem="Red Golem Medallion",
         ),
         "Thomas's Lab - Punching bag minigame": PhoaLocationData(
-            region="daea_region",
-            address=0,
+            region="thomas_lab_3",
+            address=7676537,
             rule=lambda state: logic.has_bat(state),
             flags=PhoaFlag.MINIGAMES,
             vanillaItem="Heart Ruby",
         ),
         "Thomas's Lab - Diary room crate": PhoaLocationData(
-            region="daea_region",
-            address=0,
+            region="thomas_lab_3",
+            address=7676538,
             flags=PhoaFlag.BREAKABLE,
             vanillaItem="Pumpkin Muffin",
         ),
         "Thomas's Lab - Crate behind wrecker room": PhoaLocationData(
-            region="daea_region",
-            address=0,
+            region="thomas_lab_3",
+            address=7676539,
             rule=lambda state: state.has("Defeat Wrecker boss", player),
             flags=PhoaFlag.BREAKABLE,
             vanillaItem="Calory Slush",
         ),
         "Thomas's Lab - Reception blue medallion quest": PhoaLocationData(
             region="daea_region",
-            address=0,
+            address=7676540,
             rule=lambda state: state.has("Defeat Wrecker boss", player)
                                and state.has("Blue Golem Medallion", player, 4),
             flags=PhoaFlag.SIDEQUEST,
@@ -2946,14 +2946,14 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
         ),
         "Thomas's Lab - Reception red medallion quest": PhoaLocationData(
             region="daea_region",
-            address=0,
+            address=7676541,
             rule=lambda state: state.has("Defeat Wrecker boss", player)
                                and state.has("Red Golem Medallion", player, 4),
             flags=PhoaFlag.SIDEQUEST,
             vanillaItem="Moonstone",
         ),
-        "Thomas's Lab - Wrecker room Floret quest": PhoaLocationData( # TODO: quest should be active earlier
-            region="daea_region",
+        "Thomas's Lab - Wrecker room Floret quest": PhoaLocationData(
+            region="thomas_lab_3",
             address=0,
             # Ensure player can buy chocolate
             rule=lambda state: state.has("Defeat Wrecker boss", player)

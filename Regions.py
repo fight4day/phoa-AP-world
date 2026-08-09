@@ -649,6 +649,28 @@ def get_exit_data(player: int, options: PhoaOptions) -> list[PhoaExit]:
         # fight4day
         # daea_region
         PhoaExit(
+            name="daea_region_to_thomas_lab_2",
+            region="daea_region",
+            connection="thomas_lab_2",
+            rule=lambda state: state.has("Blue Golem Medallion", player, 3),
+        ),
+        PhoaExit(
+            name="thomas_lab_2_to_daea_region",
+            region="thomas_lab_2",
+            connection="daea_region",
+        ),
+        PhoaExit(
+            name="thomas_lab_2_to_thomas_lab_3",
+            region="thomas_lab_2",
+            connection="thomas_lab_3",
+            rule=lambda state: state.has("Red Golem Medallion", player, 3),
+        ),
+        PhoaExit(
+            name="thomas_lab_3_to_thomas_lab_2",
+            region="thomas_lab_3",
+            connection="thomas_lab_2",
+        ),
+        PhoaExit(
             name="daea_region_to_lake_laboratory",
             region="daea_region",
             connection="lake_laboratory",
@@ -770,6 +792,8 @@ def create_regions_and_locations(world: MultiWorld, player: int, options: PhoaOp
         create_region(world, player, locations_per_region, "daea_city(geo_dungeon)"),
         create_region(world, player, locations_per_region, "daea_city(seer)"),
         # fight4day
+        create_region(world, player, locations_per_region, "thomas_lab_2"),
+        create_region(world, player, locations_per_region, "thomas_lab_3"),
         create_region(world, player, locations_per_region, "daea_region"),
         create_region(world, player, locations_per_region, "lake_laboratory"),
         create_region(world, player, locations_per_region, "cosette_region"),
