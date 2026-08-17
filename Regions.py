@@ -1,4 +1,6 @@
 from typing import Dict, Callable, Optional, NamedTuple
+
+import Utils
 from BaseClasses import MultiWorld, Region, Location, CollectionState
 from worlds.phoa import get_location_data, PhoaOptions
 from worlds.phoa.Locations import PhoaLocationData
@@ -718,6 +720,209 @@ def get_exit_data(player: int, options: PhoaOptions) -> list[PhoaExit]:
             rule=lambda state: logic.can_use_franway(state, options, "Cosette"),
         ),
         # FIXME: to here
+        # Mock exit to White towers
+        PhoaExit(
+            name="mock_entrance",
+            region="atai_region",
+            connection="daea_tunnel_top_left",
+        ),
+        # daea_tunnel_top_left
+        PhoaExit(
+            name="daea_tunnel_top_left_to_middle",
+            region="daea_tunnel_top_left",
+            connection="daea_tunnel_middle_and_bottom_right",
+        ),
+        PhoaExit(
+            name="daea_tunnel_top_left_to_top_right",
+            region="daea_tunnel_top_left",
+            connection="daea_tunnel_top_right",
+            rule=lambda state: state.has("Rocket Boots", player),
+        ),
+        # daea_tunnel_middle_and_bottom_right
+        PhoaExit(
+            name="daea_tunnel_middle_to_top_left",
+            region="daea_tunnel_middle_and_bottom_right",
+            connection="daea_tunnel_top_left",
+            rule=lambda state: logic.has_slingshot(state)
+                               or logic.has_bombs(state)
+                               or logic.has_sonic_spear(state)
+                               or state.has("Rocket Boots", player),
+        ),
+        PhoaExit(
+            name="daea_tunnel_middle_to_top_right",
+            region="daea_tunnel_middle_and_bottom_right",
+            connection="daea_tunnel_top_right",
+            rule=lambda state: state.has("Daea tunnel gate opened", player) and
+                               (logic.has_slingshot(state)
+                               or logic.has_bombs(state)
+                               or logic.has_sonic_spear(state)
+                               or state.has("Rocket Boots", player)),
+        ),
+        PhoaExit(
+            name="daea_tunnel_middle_to_bottom_left",
+            region="daea_tunnel_middle_and_bottom_right",
+            connection="daea_tunnel_bottom_left",
+            rule=lambda state: logic.has_light_source(state),
+        ),
+        # daea_tunnel_top_right
+        PhoaExit(
+            name="daea_tunnel_top_right_to_middle",
+            region="daea_tunnel_top_right",
+            connection="daea_tunnel_middle_and_bottom_right",
+            rule=lambda state: state.has("Daea tunnel gate opened", player)
+                               or state.has("Life Saver", state),
+        ),
+        PhoaExit(
+            name="daea_tunnel_top_right_to_top_left",
+            region="daea_tunnel_top_right",
+            connection="daea_tunnel_top_left",
+            rule=lambda state: state.has("Rocket Boots", player),
+        ),
+        PhoaExit(
+            name="daea_tunnel_top_right_to_castle_dungeon",
+            region="daea_tunnel_top_right",
+            connection="castle_dungeon",
+        ),
+        # castle_dungeon
+        PhoaExit(
+            name="castle_dungeon_to_white_towers_entrance",
+            region="castle_dungeon",
+            connection="white_towers(entrance)",
+            rule=lambda state: logic.has_sonic_spear(state),
+        ),
+        PhoaExit(
+            name="castle_dungeon_post_control_room_fight",
+            region="castle_dungeon",
+            connection="castle_dungeon(post_control_room_fight)",
+            rule=lambda state: logic.can_reasonably_defeat_medium_encounters(state),
+        ),
+        PhoaExit(
+            name="castle_dungeon_to_c_hall",
+            region="castle_dungeon",
+            connection="castle_dungeon(c_hall)",
+            rule=lambda state: state.has("Master Keycard C", player),
+        ),
+        PhoaExit(
+            name="castle_dungeon_to_b_hall",
+            region="castle_dungeon",
+            connection="castle_dungeon(b_hall)",
+            rule=lambda state: state.has("Master Keycard B", player),
+        ),
+        PhoaExit(
+            name="castle_dungeon_to_a_hall",
+            region="castle_dungeon",
+            connection="castle_dungeon(a_hall)",
+            rule=lambda state: state.has("Master Keycard A", player),
+        ),
+        # castle_dungeon(post_control_room_fight)
+        PhoaExit(
+            name="castle_dungeon_post_fight_return",
+            region="castle_dungeon(post_control_room_fight)",
+            connection="castle_dungeon",
+        ),
+        PhoaExit(
+            name="castle_dungeon_post_fight_to_c_hall",
+            region="castle_dungeon(post_control_room_fight)",
+            connection="castle_dungeon(c_hall)",
+            rule=lambda state: logic.has_keycards("C", 1, state),
+        ),
+        PhoaExit(
+            name="castle_dungeon_post_fight_to_b_hall",
+            region="castle_dungeon(post_control_room_fight)",
+            connection="castle_dungeon(b_hall)",
+            rule=lambda state: logic.has_keycards("B", 1, state),
+        ),
+        PhoaExit(
+            name="castle_dungeon_post_fight_to_a_hall",
+            region="castle_dungeon(post_control_room_fight)",
+            connection="castle_dungeon(a_hall)",
+            rule=lambda state: logic.has_keycards("A", 1, state),
+        ),
+        # castle_dungeon(c_hall)
+        PhoaExit(
+            name="c_hall_to_c_jail_cell",
+            region="castle_dungeon(c_hall)",
+            connection="castle_dungeon(c_jail_cell)",
+            rule=lambda state: logic.has_keycards("C", 3, state)
+                               or (logic.has_sonic_spear(state) and logic.has_keycards("C", 1, state)),
+        ),
+        # castle_dungeon(b_hall)
+        PhoaExit(
+            name="b_hall_to_b_jail_cell",
+            region="castle_dungeon(b_hall)",
+            connection="castle_dungeon(b_jail_cell)",
+            rule=lambda state: logic.has_keycards("B", 3, state),
+        ),
+        # castle_dungeon(c_hall)
+        PhoaExit(
+            name="castle_dungeon_a_hall_to_main",
+            region="castle_dungeon(a_hall)",
+            connection="castle_dungeon",
+            rule=lambda state: logic.has_keycards("A", 2, state)
+                               or logic.has_sonic_spear(state),
+        ),
+        PhoaExit(
+            name="a_hall_to_arena",
+            region="castle_dungeon(a_hall)",
+            connection="castle_dungeon(a_hall_arena)",
+            rule=lambda state: logic.has_keycards("A", 2, state)
+                               or logic.has_sonic_spear(state),
+        ),
+        # white_towers(entrance)
+        PhoaExit(
+            name="white_towers_entrance_to_puzzle_room",
+            region="white_towers(entrance)",
+            connection="white_towers(puzzle_room)",
+            rule=lambda state: state.has("Rocket Boots", player)
+                               and state.has("Energy Gem", player, 4),
+        ),
+        PhoaExit(
+            name="white_towers_entrance_to_daea_region",
+            region="white_towers(entrance)",
+            connection="daea_region",
+            rule=lambda state: logic.can_deal_damage(state),
+        ),
+        # NOTE: Logically (for regions), I'll assume the player has the sonic spear from here
+        PhoaExit(
+            name="white_towers_entrance_to_first_floor",
+            region="white_towers(entrance)",
+            connection="white_towers(main)",
+            rule=lambda state: logic.has_sonic_spear(state),  # Treble shot (even slingshot) also activates switch
+        ),
+        # white_towers(main)
+        PhoaExit(
+            name="white_towers_main_to_entrance",
+            region="white_towers(main)",
+            connection="white_towers(entrance)",
+        ),
+        PhoaExit(
+            name="white_towers_elevator_to_upper",
+            region="white_towers(main)",
+            connection="white_towers(upper)",
+            rule=lambda state: logic.has_bombs(state)
+                               or logic.has_slingshot(state),
+        ),
+        # white_towers(upper)
+        PhoaExit(
+            name="white_towers_upper_to_main",
+            region="white_towers(upper)",
+            connection="white_towers(main)",
+        ),
+        PhoaExit(
+            name="white_towers_gates_to_katash",
+            region="white_towers(upper)",
+            connection="white_towers(katash)",
+            rule=lambda state: logic.has_bombs(state)
+                               or logic.has_slingshot(state)
+                               or logic.has_crossbow(state)
+                               or logic.can_use_spear_bomb(state),
+        ),
+        # white_towers(upper)
+        PhoaExit(
+            name="white_towers_katash_to_upper",
+            region="white_towers(katash)",
+            connection="white_towers(upper)",
+        ),
     ]
 
     return exits
@@ -797,6 +1002,25 @@ def create_regions_and_locations(world: MultiWorld, player: int, options: PhoaOp
         create_region(world, player, locations_per_region, "daea_region"),
         create_region(world, player, locations_per_region, "lake_laboratory"),
         create_region(world, player, locations_per_region, "cosette_region"),
+
+        create_region(world, player, locations_per_region, "daea_tunnel_top_left"),
+        create_region(world, player, locations_per_region, "daea_tunnel_middle_and_bottom_right"),
+        create_region(world, player, locations_per_region, "daea_tunnel_bottom_left"),
+        create_region(world, player, locations_per_region, "daea_tunnel_top_right"),
+        create_region(world, player, locations_per_region, "castle_dungeon"),
+        create_region(world, player, locations_per_region, "castle_dungeon(post_control_room_fight)"),
+        create_region(world, player, locations_per_region, "castle_dungeon(c_hall)"),
+        create_region(world, player, locations_per_region, "castle_dungeon(c_jail_cell)"),
+        create_region(world, player, locations_per_region, "castle_dungeon(b_hall)"),
+        create_region(world, player, locations_per_region, "castle_dungeon(b_jail_cell)"),
+        create_region(world, player, locations_per_region, "castle_dungeon(a_hall)"),
+        create_region(world, player, locations_per_region, "castle_dungeon(a_hall_arena)"),
+        create_region(world, player, locations_per_region, "daea_region"),
+        create_region(world, player, locations_per_region, "white_towers(entrance)"),
+        create_region(world, player, locations_per_region, "white_towers(puzzle_room)"),
+        create_region(world, player, locations_per_region, "white_towers(main)"),
+        create_region(world, player, locations_per_region, "white_towers(upper)"),
+        create_region(world, player, locations_per_region, "white_towers(katash)"),
     ]
 
     world.regions += regions

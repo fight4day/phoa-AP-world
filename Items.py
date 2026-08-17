@@ -93,16 +93,17 @@ item_table: Dict[str, PhoaItemData] = {
     "Cooked Drake Tail": PhoaItemData(72, 1, IC.filler),
     "Grape Cake": PhoaItemData(65, 1, IC.filler),
     "Moon Crystal": PhoaItemData(165, 1, IC.filler),
-    # FIXME:
-    "Heart Ruby":                       PhoaItemData(3,     14, IC.useful),
-    "Energy Gem":                       PhoaItemData(4,     9,  IC.useful),
-    "Moonstone":                        PhoaItemData(5,     37, IC.filler),
+    "Heart Ruby":                       PhoaItemData(3,     17, IC.useful),
+    "Energy Gem":                       PhoaItemData(4,     11, IC.useful),
+    "Moonstone":                        PhoaItemData(5,     47, IC.filler),
     "Wooden Bat":                       PhoaItemData(6,     1,  IC.progression),
     "Composite Bat":                    PhoaItemData(7,     1,  IC.useful),
     "Sky Vest":                         PhoaItemData(11,    1,  IC.useful),
     "Life Saver":                       PhoaItemData(14,    1,  IC.progression),
     "Tusk Strike":                      PhoaItemData(15,    1,  IC.useful),
     "Spear Bomb":                       PhoaItemData(17,    1,  IC.progression),
+    "Temperance":                       PhoaItemData(19,    1,  IC.progression),
+    "Whirlwind":                        PhoaItemData(20,    1,  IC.progression),
     "Treble Shot":                      PhoaItemData(28,    1,  IC.progression),
     "Bandit's Flute":                   PhoaItemData(29,    1,  IC.progression),
     "Slingshot":                        PhoaItemData(30,    1,  IC.progression),
@@ -120,45 +121,54 @@ item_table: Dict[str, PhoaItemData] = {
     "Neutron Lamp":                     PhoaItemData(43,    1,  IC.progression),  # Ignore light requirement option?
     "Remote Bombs":                     PhoaItemData(44,    1,  IC.progression),
     "Doki Herb":                        PhoaItemData(45,    9,  IC.filler),
+    "Deli Sandwich":                    PhoaItemData(46,    1,  IC.filler),
     "Pumpkin Muffin":                   PhoaItemData(47,    1,  IC.filler),
     "Cooked Toad Leg":                  PhoaItemData(49,    1,  IC.filler),
-    "Berry Fruit":                      PhoaItemData(50,    1,  IC.filler),
-    "Perro Egg":                        PhoaItemData(52,    4,  IC.filler),
+    "Berry Fruit":                      PhoaItemData(50,    3,  IC.filler),
+    "Lune Fruit":                       PhoaItemData(51,    1,  IC.filler),
+    "Perro Egg":                        PhoaItemData(52,    5,  IC.filler),
     "Nectear":                          PhoaItemData(53,    13, IC.filler),
-    "Honey Brew":                       PhoaItemData(54,    3,  IC.filler),
-    "Pooki Jerky":                      PhoaItemData(56,    4,  IC.filler),
+    "Honey Brew":                       PhoaItemData(54,    4,  IC.filler),
+    "Pooki Jerky":                      PhoaItemData(56,    5,  IC.filler),
     "Fruit Jam":                        PhoaItemData(57,    2,  IC.filler),
     "Canned Beans":                     PhoaItemData(58,    4,  IC.filler),
     "Potato Lunch":                     PhoaItemData(59,    1,  IC.filler),
     "Curry Bento":                      PhoaItemData(61,    1,  IC.filler),
     "Turtle":                           PhoaItemData(63,    1,  IC.filler),
-    "Cheese":                           PhoaItemData(64,    2,  IC.filler),
+    "Cheese":                           PhoaItemData(64,    3,  IC.filler),
     "Drake Tail":                       PhoaItemData(66,    1,  IC.filler),
     "Milk":                             PhoaItemData(67,    3,  IC.filler),
     "Chocolate":                        PhoaItemData(68,    1,  IC.filler),
-    "Raw Meat":                         PhoaItemData(73,    1,  IC.filler),
+    "Raw Meat":                         PhoaItemData(73,    2,  IC.filler),
     "Big Raw Meat":                     PhoaItemData(74,    1,  IC.filler),
     "Prime Fish Fillet":                PhoaItemData(81,    1,  IC.filler),
+    "Fish Skewer":                      PhoaItemData(84,    1,  IC.filler),
     "Honey Drop":                       PhoaItemData(89,    2,  IC.filler),
     "Anuri Pearlstone":                 PhoaItemData(98,    10, IC.progression),  # Only progression when dungeon is in location pool
+    "Raw Bird":                         PhoaItemData(93,    1,  IC.filler),
     "Lunar Frog":                       PhoaItemData(99,    1,  IC.filler),
     "Lunar Vase":                       PhoaItemData(100,   1,  IC.filler),
-    "Dandelion":                        PhoaItemData(101,   4,  IC.filler),
+    "Dandelion":                        PhoaItemData(101,   5,  IC.filler),
     "Panselo Potato":                   PhoaItemData(102,   4,  IC.filler),
     "Moon Kelp":                        PhoaItemData(104,   1,  IC.filler),
-    "Prickle Fruit":                    PhoaItemData(106,   6,  IC.filler),
+    "Prickle Fruit":                    PhoaItemData(106,   7,  IC.filler),
     "Stink Root":                       PhoaItemData(107,   1,  IC.filler),
     "Ouro Guard Key":                   PhoaItemData(108,   5,  IC.progression),
     "Rubber Ducky":                     PhoaItemData(109,   2,  IC.filler),
     "Ouroboros Proof":                  PhoaItemData(111,   3,  IC.progression),
-    "Mystery Meat":                     PhoaItemData(112,   35, IC.filler),
+    "Mystery Meat":                     PhoaItemData(112,   38, IC.filler),
+    "Keycard C":                        PhoaItemData(119,   5,  IC.progression),  # Only progression when dungeon is in location pool
+    "Keycard B":                        PhoaItemData(120,   5,  IC.progression),  # Only progression when dungeon is in location pool
+    "Keycard A":                        PhoaItemData(121,   5,  IC.progression),  # Only progression when dungeon is in location pool
     "Lisa's ID Card":                   PhoaItemData(122,   1,  IC.progression),
     "Bottle of Wine":                   PhoaItemData(123,   1,  IC.progression),
     "Song of Ouroboros":                PhoaItemData(124,   1,  IC.progression),
     "GEO Song":                         PhoaItemData(125,   1,  IC.progression),
     "Royal Hymn":                       PhoaItemData(126,   1,  IC.progression),
     "Prelude of Panselo":               PhoaItemData(127,   1,  IC.useful),
+    "Cosette Cannoli":                  PhoaItemData(138,   1,  IC.filler),
     "GEO Ticket":                       PhoaItemData(140,   1,  IC.filler),
+    "Lunar Compass":                    PhoaItemData(144,   1,  IC.filler),
     "Baroque of Battle":                PhoaItemData(129,   1,  IC.useful),
     "Perro":                            PhoaItemData(139,   2,  IC.filler),
     "Antique Pin":                      PhoaItemData(141,   1,  IC.filler),
@@ -166,6 +176,7 @@ item_table: Dict[str, PhoaItemData] = {
     "Lunar Drake":                      PhoaItemData(145,   1,  IC.filler),
     "Strange Urn":                      PhoaItemData(161,   1,  IC.filler),
     "Mysterious Golem Head":            PhoaItemData(166,   1,  IC.filler),
+    "House Soup":                       PhoaItemData(167,   1,  IC.filler),
     "Saffron Milk":                     PhoaItemData(177,   2,  IC.filler),
     "Vala Bean":                        PhoaItemData(178,   1,  IC.filler),
     "Falafel":                          PhoaItemData(179,   1,  IC.filler),
@@ -175,7 +186,10 @@ item_table: Dict[str, PhoaItemData] = {
     "Honey Bun":                        PhoaItemData(205,   3,  IC.filler),
     "Spell of Rejuvenation":            PhoaItemData(216,   1,  IC.useful),
     "Anuri Pearlstone Necklace":        PhoaItemData(217,   1,  IC.progression),  # Only progression when dungeon is in location pool
-    "Ouro Guard Keyring":               PhoaItemData(218,   1,  IC.progression),
+    "Ouro Guard Keyring":               PhoaItemData(218,   1,  IC.progression),  # Only progression when dungeon is in location pool
+    "Master Keycard C":                 PhoaItemData(219,   1,  IC.progression),  # Only progression when dungeon is in location pool
+    "Master Keycard B":                 PhoaItemData(220,   1,  IC.progression),  # Only progression when dungeon is in location pool
+    "Master Keycard A":                 PhoaItemData(221,   1,  IC.progression),  # Only progression when dungeon is in location pool
     "Progressive Prelude of Panselo":   PhoaItemData(292,   2,  IC.useful),
     "Progressive Bat":                  PhoaItemData(293,   2,  IC.useful),
     "Progressive Slingshot":            PhoaItemData(294,   2,  IC.progression),
@@ -185,14 +199,14 @@ item_table: Dict[str, PhoaItemData] = {
     "Progressive Crossbow":             PhoaItemData(298,   2,  IC.progression),
     "Progressive Fishing Rod":          PhoaItemData(299,   2,  IC.useful),
     "1 Rin":                            PhoaItemData(301,   4,  IC.filler),
-    "5 Rin":                            PhoaItemData(305,   1,  IC.filler),
+    "5 Rin":                            PhoaItemData(305,   2,  IC.filler),
     "9 Rin":                            PhoaItemData(309,   1,  IC.filler),
     "15 Rin":                           PhoaItemData(315,   3,  IC.filler),
     "20 Rin":                           PhoaItemData(320,   7,  IC.filler),
-    "25 Rin":                           PhoaItemData(325,   6,  IC.filler),
-    "30 Rin":                           PhoaItemData(330,   8,  IC.filler),
-    "35 Rin":                           PhoaItemData(335,   10, IC.filler),
-    "40 Rin":                           PhoaItemData(340,   2,  IC.filler),
+    "25 Rin":                           PhoaItemData(325,   8,  IC.filler),
+    "30 Rin":                           PhoaItemData(330,   10, IC.filler),
+    "35 Rin":                           PhoaItemData(335,   13, IC.filler),
+    "40 Rin":                           PhoaItemData(340,   3,  IC.filler),
     "45 Rin":                           PhoaItemData(345,   2,  IC.filler),
     "50 Rin":                           PhoaItemData(350,   4,  IC.filler),
 }
@@ -210,10 +224,13 @@ upgrade_groups = [
 ]
 
 dungeon_item_setting_groups = [
-    DungeonItemSettingGroup("anuri_pearlstone_shuffle", "bundle_anuri_pearlstones", "Anuri Temple", "Anuri Pearlstone",
-                            "Anuri Pearlstone Necklace"),
-    DungeonItemSettingGroup("ouro_guard_key_shuffle", "bundle_ouro_guard_keys", "Ouroboros Hideout", "Ouro Guard Key",
-                            "Ouro Guard Keyring"),
+    DungeonItemSettingGroup("anuri_pearlstone_shuffle", "bundle_anuri_pearlstones", "Anuri Temple",
+                            "Anuri Pearlstone", "Anuri Pearlstone Necklace"),
+    DungeonItemSettingGroup("ouro_guard_key_shuffle", "bundle_ouro_guard_keys", "Ouroboros Hideout",
+                            "Ouro Guard Key", "Ouro Guard Keyring"),
+    DungeonItemSettingGroup("keycard_shuffle", "bundle_keycards", "Castle Dungeon", "Keycard C", "Master Keycard C"),
+    DungeonItemSettingGroup("keycard_shuffle", "bundle_keycards", "Castle Dungeon", "Keycard B", "Master Keycard B"),
+    DungeonItemSettingGroup("keycard_shuffle", "bundle_keycards", "Castle Dungeon", "Keycard A", "Master Keycard A"),
 ]
 
 item_inclusion_priority: list[str] = \
@@ -221,11 +238,12 @@ item_inclusion_priority: list[str] = \
      "Progressive Prelude of Panselo", "Prelude of Panselo", "Spell of Rejuvenation", "Baroque of Battle", "Sky Vest",
      "Tusk Strike", "Energy Gem", "Heart Ruby", "Dragon's Scale", "50 Rin", "45 Rin", "40 Rin", "35 Rin", "30 Rin",
      "25 Rin", "20 Rin", "15 Rin", "Perro", "Honey Brew", "Curry Bento", "Honey Drop", "Rubber Ducky", "Stink Root",
-     "Pumpkin Muffin", "Honey Bun", "Cooked Toad Leg", "Saffron Milk", "Milk", "Cheese", "Canned Beans", "Pooki Jerky",
-     "Panselo Potato", "Mystery Meat", "Chocolate", "Falafel", "Desert Squash", "Cooked Squash", "Big Raw Meat",
-     "Raw Meat", "Drake Tail", "Prime Fish Fillet", "Fruit Jam", "Vala Bean", "Berry Fruit", "Perro Egg", "Nectear",
-     "Prickle Fruit", "Moon Kelp", "Doki Herb", "Dandelion", "9 Rin", "5 Rin", "1 Rin", "Strange Urn", "Lunar Frog",
-     "Lunar Vase", "Lunar Drake", "Moonstone", "Antique Pin", "Turtle", "Mysterious Golem Head"]
+     "House Soup", "Fish Skewer", "Deli Sandwich", "Pumpkin Muffin", "Honey Bun", "Cooked Toad Leg", "Saffron Milk",
+     "Milk", "Cheese", "Canned Beans", "Pooki Jerky", "Cosette Cannoli", "Panselo Potato", "Mystery Meat", "Chocolate",
+     "Falafel", "Desert Squash", "Cooked Squash", "Big Raw Meat", "Raw Meat", "Raw Bird", "Drake Tail",
+     "Prime Fish Fillet", "Fruit Jam", "Vala Bean", "Berry Fruit", "Perro Egg", "Nectear", "Prickle Fruit",
+     "Moon Kelp", "Doki Herb", "Lune Fruit", "Dandelion", "9 Rin", "5 Rin", "1 Rin", "Strange Urn", "Lunar Frog",
+     "Lunar Vase", "Lunar Drake", "Lunar Compass", "Moonstone", "Antique Pin", "Turtle", "Mysterious Golem Head"]
 
 
 def get_item_pool(world: "PhoaWorld", locations: dict[str, PhoaLocationData]) -> tuple[list[str], list[str]]:
@@ -375,10 +393,8 @@ def filter_dungeon_items(world: "PhoaWorld", location_data: dict[str, PhoaLocati
     # For vanilla placements
     if (getattr(world.options, dungeon_item_info.shuffle_option) ==
             getattr(world.options, dungeon_item_info.shuffle_option).option_vanilla):
-        i = 0
         while dungeon_item_name in item_pool_strings:
             item_pool_strings.remove(dungeon_item_name)
-            i += 1
 
         for location_name in dungeon_locations:
             if location_data[location_name].vanillaItem == dungeon_item_info.dungeon_item:
