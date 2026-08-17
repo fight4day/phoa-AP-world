@@ -1162,7 +1162,7 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
             address=7676230,
             rule=lambda state: logic.can_break_big_object_with_tools(state),
             flags=PhoaFlag.RINCHESTS,
-            vanillaItem="Ouroboros Scroll",
+            vanillaItem="35 Rin",
         ),
         "Atai Town - Metro train car crate": PhoaLocationData(
             region="atai_town(metro)",
@@ -1871,6 +1871,70 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
         #     rule=lambda state: logic.has_sonic_spear(state) and state.has("Prelude of Panselo", player),
         #     vanillaItem="Baroque of Battle",
         # ),
+        "Daea tunnel - Mouse in top left tunnel": PhoaLocationData(
+            region="daea_tunnel_top_left",
+            address=7676458,
+            rule=lambda state: logic.can_reasonably_kill_mice(state),
+            flags=PhoaFlag.SMALLANIMALS,
+            vanillaItem="Mystery Meat",
+        ),
+        "Daea tunnel - Chest guarded by Slargummies": PhoaLocationData(
+            region="daea_tunnel_top_left",
+            address=7676459,
+            rule=lambda state: logic.can_reasonably_kill_enemies(state, exclude_slingshot=True),
+            flags=PhoaFlag.RINCHESTS,
+            vanillaItem="30 Rin",
+        ),
+        "Daea tunnel - Mouse in middle room": PhoaLocationData(
+            region="daea_tunnel_middle_and_bottom_right",
+            address=7676460,
+            rule=lambda state: logic.can_reasonably_kill_mice(state),
+            flags=PhoaFlag.SMALLANIMALS,
+            vanillaItem="Mystery Meat",
+        ),
+        "Daea tunnel - Item hidden in crate at bottom of middle room": PhoaLocationData(
+            region="daea_tunnel_middle_and_bottom_right",
+            address=7676461,
+            flags=PhoaFlag.MOONSTONE,
+            vanillaItem="Moonstone",
+        ),
+        "Daea tunnel - Mouse in bottom left tunnel": PhoaLocationData(
+            region="daea_tunnel_bottom_left",
+            address=7676462,
+            flags=PhoaFlag.SMALLANIMALS,
+            vanillaItem="Mystery Meat",
+        ),
+        "Daea tunnel - Mouse at the end of bottom left tunnel": PhoaLocationData(
+            region="daea_tunnel_bottom_left",
+            address=7676463,
+            rule=lambda state: (state.has("Rocket Boots", player) or state.has("Life Saver", player)) and
+                               (logic.has_sonic_spear(state)
+                                or logic.has_crossbow(state)
+                                or state.has("Kobold Blaster", player)),
+            flags=PhoaFlag.SMALLANIMALS,
+            vanillaItem="Mystery Meat",
+        ),
+        "Daea tunnel - Item at the end of bottom left tunnel": PhoaLocationData(
+            region="daea_tunnel_bottom_left",
+            address=7676464,
+            rule=lambda state: state.has("Rocket Boots", player) or state.has("Life Saver", player),
+            flags=PhoaFlag.HEARTRUBY,
+            vanillaItem="Heart Ruby",
+        ),
+        "Daea tunnel - Defeat the glowing Slargummy": PhoaLocationData(
+            region="daea_tunnel_top_right",
+            address=7676465,
+            rule=lambda state: logic.has_light_source(state)
+                               and logic.can_reasonably_kill_enemies(state),
+            flags=PhoaFlag.MOONSTONE,
+            vanillaItem="Moonstone",
+        ),
+        "Daea tunnel - Choose the right statue": PhoaLocationData(
+            region="daea_tunnel_top_right",
+            address=7676466,
+            flags=PhoaFlag.MOONSTONE,
+            vanillaItem="Moonstone",
+        ),
         "Castle Dungeon - Box high up in boiler room": PhoaLocationData(
             region="castle_dungeon",
             address=7676467,
@@ -2212,6 +2276,10 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
             region="ouroboros_hideout(great_drake_arena)",
             address=None,
             rule=lambda state: logic.can_defeat_great_drake(state),
+        ),
+        "Daea tunnel gate opened": PhoaLocationData(
+            region="daea_tunnel_bottom_left",
+            address=None,
         ),
         "Freed terminal B guard": PhoaLocationData(
             region="castle_dungeon(c_jail_cell)",

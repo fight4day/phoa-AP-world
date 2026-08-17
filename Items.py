@@ -30,9 +30,9 @@ class DungeonItemSettingGroup(NamedTuple):
 
 # @formatter:off
 item_table: Dict[str, PhoaItemData] = {
-    "Heart Ruby":                       PhoaItemData(3,     16, IC.useful),
-    "Energy Gem":                       PhoaItemData(4,     10, IC.useful),
-    "Moonstone":                        PhoaItemData(5,     45, IC.filler),
+    "Heart Ruby":                       PhoaItemData(3,     17, IC.useful),
+    "Energy Gem":                       PhoaItemData(4,     11, IC.useful),
+    "Moonstone":                        PhoaItemData(5,     47, IC.filler),
     "Wooden Bat":                       PhoaItemData(6,     1,  IC.progression),
     "Composite Bat":                    PhoaItemData(7,     1,  IC.useful),
     "Sky Vest":                         PhoaItemData(11,    1,  IC.useful),
@@ -61,7 +61,7 @@ item_table: Dict[str, PhoaItemData] = {
     "Deli Sandwich":                    PhoaItemData(46,    1,  IC.filler),
     "Pumpkin Muffin":                   PhoaItemData(47,    1,  IC.filler),
     "Cooked Toad Leg":                  PhoaItemData(49,    1,  IC.filler),
-    "Berry Fruit":                      PhoaItemData(50,    2,  IC.filler),
+    "Berry Fruit":                      PhoaItemData(50,    3,  IC.filler),
     "Lune Fruit":                       PhoaItemData(51,    1,  IC.filler),
     "Perro Egg":                        PhoaItemData(52,    5,  IC.filler),
     "Nectear":                          PhoaItemData(53,    13, IC.filler),
@@ -85,7 +85,7 @@ item_table: Dict[str, PhoaItemData] = {
     "Raw Bird":                         PhoaItemData(93,    1,  IC.filler),
     "Lunar Frog":                       PhoaItemData(99,    1,  IC.filler),
     "Lunar Vase":                       PhoaItemData(100,   1,  IC.filler),
-    "Dandelion":                        PhoaItemData(101,   4,  IC.filler),
+    "Dandelion":                        PhoaItemData(101,   5,  IC.filler),
     "Panselo Potato":                   PhoaItemData(102,   4,  IC.filler),
     "Moon Kelp":                        PhoaItemData(104,   1,  IC.filler),
     "Prickle Fruit":                    PhoaItemData(106,   7,  IC.filler),
@@ -93,7 +93,7 @@ item_table: Dict[str, PhoaItemData] = {
     "Ouro Guard Key":                   PhoaItemData(108,   5,  IC.progression),
     "Rubber Ducky":                     PhoaItemData(109,   2,  IC.filler),
     "Ouroboros Proof":                  PhoaItemData(111,   3,  IC.progression),
-    "Mystery Meat":                     PhoaItemData(112,   36, IC.filler),
+    "Mystery Meat":                     PhoaItemData(112,   38, IC.filler),
     "Keycard C":                        PhoaItemData(119,   5,  IC.progression),  # Only progression when dungeon is in location pool
     "Keycard B":                        PhoaItemData(120,   5,  IC.progression),  # Only progression when dungeon is in location pool
     "Keycard A":                        PhoaItemData(121,   5,  IC.progression),  # Only progression when dungeon is in location pool
@@ -141,8 +141,8 @@ item_table: Dict[str, PhoaItemData] = {
     "15 Rin":                           PhoaItemData(315,   3,  IC.filler),
     "20 Rin":                           PhoaItemData(320,   7,  IC.filler),
     "25 Rin":                           PhoaItemData(325,   8,  IC.filler),
-    "30 Rin":                           PhoaItemData(330,   9,  IC.filler),
-    "35 Rin":                           PhoaItemData(335,   11, IC.filler),
+    "30 Rin":                           PhoaItemData(330,   10, IC.filler),
+    "35 Rin":                           PhoaItemData(335,   13, IC.filler),
     "40 Rin":                           PhoaItemData(340,   3,  IC.filler),
     "45 Rin":                           PhoaItemData(345,   2,  IC.filler),
     "50 Rin":                           PhoaItemData(350,   4,  IC.filler),

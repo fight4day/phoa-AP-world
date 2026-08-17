@@ -1,4 +1,6 @@
 from typing import Dict, Callable, Optional, NamedTuple
+
+import Utils
 from BaseClasses import MultiWorld, Region, Location, CollectionState
 from worlds.phoa import get_location_data, PhoaOptions
 from worlds.phoa.Locations import PhoaLocationData
@@ -585,6 +587,63 @@ def get_exit_data(player: int, options: PhoaOptions) -> list[PhoaExit]:
         PhoaExit(
             name="mock_entrance",
             region="atai_region",
+            connection="daea_tunnel_top_left",
+        ),
+        # daea_tunnel_top_left
+        PhoaExit(
+            name="daea_tunnel_top_left_to_middle",
+            region="daea_tunnel_top_left",
+            connection="daea_tunnel_middle_and_bottom_right",
+        ),
+        PhoaExit(
+            name="daea_tunnel_top_left_to_top_right",
+            region="daea_tunnel_top_left",
+            connection="daea_tunnel_top_right",
+            rule=lambda state: state.has("Rocket Boots", player),
+        ),
+        # daea_tunnel_middle_and_bottom_right
+        PhoaExit(
+            name="daea_tunnel_middle_to_top_left",
+            region="daea_tunnel_middle_and_bottom_right",
+            connection="daea_tunnel_top_left",
+            rule=lambda state: logic.has_slingshot(state)
+                               or logic.has_bombs(state)
+                               or logic.has_sonic_spear(state)
+                               or state.has("Rocket Boots", player),
+        ),
+        PhoaExit(
+            name="daea_tunnel_middle_to_top_right",
+            region="daea_tunnel_middle_and_bottom_right",
+            connection="daea_tunnel_top_right",
+            rule=lambda state: state.has("Daea tunnel gate opened", player) and
+                               (logic.has_slingshot(state)
+                               or logic.has_bombs(state)
+                               or logic.has_sonic_spear(state)
+                               or state.has("Rocket Boots", player)),
+        ),
+        PhoaExit(
+            name="daea_tunnel_middle_to_bottom_left",
+            region="daea_tunnel_middle_and_bottom_right",
+            connection="daea_tunnel_bottom_left",
+            rule=lambda state: logic.has_light_source(state),
+        ),
+        # daea_tunnel_top_right
+        PhoaExit(
+            name="daea_tunnel_top_right_to_middle",
+            region="daea_tunnel_top_right",
+            connection="daea_tunnel_middle_and_bottom_right",
+            rule=lambda state: state.has("Daea tunnel gate opened", player)
+                               or state.has("Life Saver", state),
+        ),
+        PhoaExit(
+            name="daea_tunnel_top_right_to_top_left",
+            region="daea_tunnel_top_right",
+            connection="daea_tunnel_top_left",
+            rule=lambda state: state.has("Rocket Boots", player),
+        ),
+        PhoaExit(
+            name="daea_tunnel_top_right_to_castle_dungeon",
+            region="daea_tunnel_top_right",
             connection="castle_dungeon",
         ),
         # castle_dungeon
@@ -792,6 +851,10 @@ def create_regions_and_locations(world: MultiWorld, player: int, options: PhoaOp
         create_region(world, player, locations_per_region, "ouroboros_hideout(treasure_room_hidden_area)"),
         create_region(world, player, locations_per_region, "ouroboros_hideout(great_drake_arena)"),
 
+        create_region(world, player, locations_per_region, "daea_tunnel_top_left"),
+        create_region(world, player, locations_per_region, "daea_tunnel_middle_and_bottom_right"),
+        create_region(world, player, locations_per_region, "daea_tunnel_bottom_left"),
+        create_region(world, player, locations_per_region, "daea_tunnel_top_right"),
         create_region(world, player, locations_per_region, "castle_dungeon"),
         create_region(world, player, locations_per_region, "castle_dungeon(post_control_room_fight)"),
         create_region(world, player, locations_per_region, "castle_dungeon(c_hall)"),
