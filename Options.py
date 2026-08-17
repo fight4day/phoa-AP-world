@@ -108,7 +108,7 @@ class EnableRinLocations(Choice):
 
 class EnableTrapChests(Toggle):
     """Includes chests that usually contain only 1 Rin"""
-    display_name = "Include small animal drops"
+    display_name = "Include trap chests"
 
 
 class EnableGEOChallengeRewards(Toggle):
