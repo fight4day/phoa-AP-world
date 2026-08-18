@@ -1,4 +1,5 @@
 from BaseClasses import CollectionState
+from .Options import PhoaOptions
 
 
 class PhoaLogic:
@@ -58,6 +59,21 @@ class PhoaLogic:
         return (state.has("Ouro Guard Key", self.player, amount)
                 or state.has("Ouro Guard Keyring", self.player))
 
+    def has_lunar_artifacts(self, amount: int, state: CollectionState) -> bool:
+        return state.has_from_list([
+                "Lunar Frog",
+                "Lunar Vase",
+                "Lunar Drake",
+                "Lunar Compass",
+                "Lunar Trident",
+                "Lunar Crown",
+                "Lunar Comb",
+                "Lunar Watch",
+                "Lunar Goblet",
+                "Lunar Medal",
+                "Lunar Egg",
+                "Lunar Key",
+            ], self.player, amount)
     def has_keycards(self, card_type: str, amount: int, state: CollectionState) -> bool:
         return (state.has(f"Keycard {card_type}", self.player, amount)
                 or state.has(f"Master Keycard {card_type}", self.player))
@@ -85,13 +101,20 @@ class PhoaLogic:
                 or (state.has("Refurbished Crank Lamp", self.player) and not exclude_lamp)
                 or state.has("Kobold Blaster", self.player))
 
-    def can_reasonably_kill_enemies(self, state: CollectionState, exclude_slingshot: bool = False) -> bool:
+    def can_reasonably_kill_enemies(self, state: CollectionState, exclude_slingshot: bool = False,  exclude_rocket_boots: bool = False) -> bool:
         return (self.has_bat(state)
                 or (self.has_slingshot(state) and not exclude_slingshot)
                 or self.has_bombs(state)
                 or self.has_crossbow(state)
                 or self.has_sonic_spear(state)
-                or state.has_any({"Kobold Blaster", "Rocket Boots"}, self.player))
+                or state.has("Kobold Blaster", self.player)
+                or state.has("Rocket Boots", self.player) and not exclude_rocket_boots)
+
+    def can_reasonably_kill_flying_enemies(self, state: CollectionState, exclude_slingshot: bool = False) -> bool:
+        return ((self.has_slingshot(state) and not exclude_slingshot)
+                or self.has_bombs(state)
+                or self.has_crossbow(state)
+                or state.has("Kobold Blaster", self.player))
 
     def can_reasonably_defeat_medium_encounters(self, state: CollectionState) -> bool:
         # TODO: should include health/stamina requirements
@@ -136,7 +159,7 @@ class PhoaLogic:
                 or self.has_double_crossbow(state) and state.has("Energy Gem", self.player, 4)
                 or self.can_use_spear_bomb(state)
                 or state.has("Kobold Blaster", self.player))
-
+    
     def can_clear_ancient_vault(self, state: CollectionState) -> bool:
         # TODO: Even with this it's almost impossible
         return (state.has("Spheralis", self.player)
@@ -149,3 +172,32 @@ class PhoaLogic:
         # TODO: This is a bare minimum and needs to be reconsidered
         return ((self.has_bombs(state) and self.has_bat(state))
                 or state.has("Kobold Blaster", self.player))
+
+    def can_defeat_wrecker(self, state: CollectionState) -> bool:
+        # TODO: This is a bare minimum and needs to be reconsidered
+        return self.has_bat(state)
+    
+    def can_do_fran_quest_chain(self, state: CollectionState, quest_number: int) -> bool:
+        # TODO: adjust moonstone cost for Thomas shop later
+        return (self.has_explosives(state)
+                and (state.can_reach_region("panselo_region", self.player) or state.can_reach_region("atai_region", self.player))
+                and (state.has("Moonstone", self.player, quest_number * 10)) if quest_number > 0 else True)
+
+    def can_use_franway(self, state: CollectionState, options: PhoaOptions, franway_region: str) -> bool:
+        match franway_region:
+            case "Panselo":
+                quest_number = 1
+            case "Atai":
+                quest_number = 2
+            case "Cosette":
+                quest_number = 3
+            case _:
+                raise Exception(f"Unknown region received: {franway_region}")
+
+        match options.franway_unlock_mode.value:
+            case 0:
+                return options.enable_moonstone_shops and self.can_do_fran_quest_chain(state, quest_number)
+            case 1:
+                return state.has(f"Unlock {franway_region} Franway", self.player)
+            case 2:
+                return True

@@ -121,6 +121,14 @@ class EnableOuroborosShrines(Toggle):
     display_name = "Include Ouroboros shrines"
 
 
+class EnableMoonstoneShops(Toggle):
+    """
+    Includes the rewards from Fran's quest chain and Thomas' shop
+    Note that this adds 90 progression items. Enabling these rewards requires you to add enough locations
+    """
+    display_name = "Include Moonstone shops"
+
+
 # Dungeon item shuffle
 
 class DungeonItemShuffle(Choice):
@@ -194,6 +202,20 @@ class OpenPanseloGates(Toggle):
     display_name = "Open Panselo gates"
 
 
+class FranwayUnlockMode(Choice):
+    """
+    How the Franway teleporters are unlocked
+    vanilla - unlocks them by following Fran's questline. If this is chosen and Moonstone shops are disabled, Franways are considered out of logic
+    items - adds an unlock item for each teleporter
+    unlocked - starts with all Franways unlocked
+    """
+    display_name = "Franway unlock mode"
+    option_vanilla = 0
+    option_items = 1
+    option_unlocked = 2
+    default = 1
+
+
 class UpgradableBats(Toggle):
     """Instead of finding bats of random tiers, upgrade up one tier every time you find a bat"""
     display_name = "Upgradable bats"
@@ -237,6 +259,7 @@ class PhoaOptions(PerGameCommonOptions):
     enable_trap_chests: EnableTrapChests
     enable_geo_challenge_rewards: EnableGEOChallengeRewards
     enable_ouroboros_shrines: EnableOuroborosShrines
+    enable_moonstone_shops: EnableMoonstoneShops
     anuri_pearlstone_shuffle: AnuriPearlstoneShuffle
     ouro_guard_key_shuffle: OuroGuardKeyShuffle
     keycard_shuffle: KeycardShuffle
@@ -249,6 +272,7 @@ class PhoaOptions(PerGameCommonOptions):
     upgradable_spear: UpgradableSpear
     upgradable_prelude: UpgradablePrelude
     open_panselo_gates: OpenPanseloGates
+    franway_unlock_mode: FranwayUnlockMode
     keep_excluded_status_upgrades_in_item_pool: KeepExcludedStatusUpgradesInItemPool
     death_link: DeathLink
 
@@ -275,6 +299,7 @@ class PhoaOptions(PerGameCommonOptions):
             "enable_trap_chests",
             "enable_geo_challenge_rewards",
             "enable_ouroboros_shrines",
+            "enable_moonstone_shops",
             "anuri_pearlstone_shuffle",
             "ouro_guard_key_shuffle",
             "keycard_shuffle",
@@ -287,6 +312,7 @@ class PhoaOptions(PerGameCommonOptions):
             "upgradable_spear",
             "upgradable_prelude",
             "open_panselo_gates",
+            "franway_unlock_mode",
             "keep_excluded_status_upgrades_in_item_pool",
             "death_link",
         )
@@ -317,6 +343,7 @@ phoa_option_groups: list[OptionGroup] = [
             EnableTrapChests,
             EnableGEOChallengeRewards,
             EnableOuroborosShrines,
+            EnableMoonstoneShops,
         ],
     ),
     OptionGroup(
@@ -336,6 +363,7 @@ phoa_option_groups: list[OptionGroup] = [
             BundleOuroGuardKeys,
             BundleKeycards,
             OpenPanseloGates,
+            FranwayUnlockMode,
             UpgradableBats,
             UpgradableTools,
             UpgradableSpear,

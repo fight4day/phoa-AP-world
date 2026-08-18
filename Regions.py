@@ -583,6 +583,143 @@ def get_exit_data(player: int, options: PhoaOptions) -> list[PhoaExit]:
             rule=lambda state: logic.has_explosives(state),
         ),
         # ouroboros_hideout(great_drake_arena)
+        # FIXME: from here
+        # ET
+        # moonlight_ravine
+        PhoaExit(
+            name="atai_region_to_moonlight_ravine_south",
+            region="atai_region",
+            connection="moonlight_ravine(south)",
+        ),
+        PhoaExit(
+            name="moonlight_ravine_south_to_wilds",
+            region="moonlight_ravine(south)",
+            connection="moonlight_ravine(wilds)",
+            rule=lambda state: state.has("Life Saver", player)
+                               or state.has("Rocket Boots", player),
+        ),
+        PhoaExit(
+            name="moonlight_ravine_wilds_to_north",
+            region="moonlight_ravine(wilds)",
+            connection="moonlight_ravine(north)",
+            rule=lambda state: state.has("Life Saver", player)
+                               or state.has("Rocket Boots", player),
+        ),
+        PhoaExit(
+            name="moonlight_ravine_north_to_daea_region",
+            region="moonlight_ravine(north)",
+            connection="daea_region",
+        ),
+
+        PhoaExit(
+            name="atai_region_to_kingdom_bridge_south",
+            region="atai_region",
+            connection="kingdom_bridge(south)",
+        ),
+        PhoaExit(
+            name="kingdom_bridge_south_kingdom_bridge_north",
+            region="kingdom_bridge(south)",
+            connection="kingdom_bridge(north)",
+            rule=lambda state: (state.has("Life Saver", player)
+                               and logic.has_sonic_spear(state))
+                               or state.has("Rocket Boots", player),
+        ),
+        PhoaExit(
+            name="kingdom_bridge_north_to_daea_region",
+            region="kingdom_bridge(north)",
+            connection="daea_region",
+        ),
+
+        PhoaExit(
+            name="daea_region_to_daea_city",
+            region="daea_region",
+            connection="daea_city",
+        ),
+        PhoaExit(
+            name="daea_city_to_geo_dungeon",
+            region="daea_city",
+            connection="daea_city(geo_dungeon)",
+            rule=lambda state: state.has("Rocket Boots", player),
+        ),
+        PhoaExit(
+            name="daea_city_to_seer",
+            region="daea_city",
+            connection="daea_city(seer)",
+            rule=lambda state: state.has("Rocket Boots", player),
+        ),
+
+        # fight4day
+        # daea_region
+        PhoaExit(
+            name="daea_region_to_thomas_lab_2",
+            region="daea_region",
+            connection="thomas_lab_2",
+            rule=lambda state: state.has("Blue Golem Medallion", player, 3),
+        ),
+        PhoaExit(
+            name="thomas_lab_2_to_daea_region",
+            region="thomas_lab_2",
+            connection="daea_region",
+        ),
+        PhoaExit(
+            name="thomas_lab_2_to_thomas_lab_3",
+            region="thomas_lab_2",
+            connection="thomas_lab_3",
+            rule=lambda state: state.has("Red Golem Medallion", player, 3),
+        ),
+        PhoaExit(
+            name="thomas_lab_3_to_thomas_lab_2",
+            region="thomas_lab_3",
+            connection="thomas_lab_2",
+        ),
+        PhoaExit(
+            name="daea_region_to_lake_laboratory",
+            region="daea_region",
+            connection="lake_laboratory",
+        ),
+        PhoaExit(
+            name="lake_laboratory_to_daea_region",
+            region="lake_laboratory",
+            connection="daea_region",
+        ),
+        # Franways
+        PhoaExit(
+            name="lake_laboratory_to_panselo_region",
+            region="lake_laboratory",
+            connection="panselo_region",
+            rule=lambda state: logic.can_use_franway(state, options, "Panselo"),
+        ),
+        PhoaExit(
+            name="panselo_region_to_lake_laboratory",
+            region="panselo_region",
+            connection="lake_laboratory",
+            rule=lambda state: logic.can_use_franway(state, options, "Panselo"),
+        ),
+        PhoaExit(
+            name="lake_laboratory_to_atai_region",
+            region="lake_laboratory",
+            connection="atai_region",
+            rule=lambda state: logic.can_use_franway(state, options, "Atai"),
+        ),
+        PhoaExit(
+            name="atai_region_to_lake_laboratory",
+            region="atai_region",
+            connection="lake_laboratory",
+            rule=lambda state: logic.can_use_franway(state, options, "Atai"),
+        ),
+        PhoaExit(
+            name="lake_laboratory_to_cosette_region",
+            region="lake_laboratory",
+            connection="cosette_region",
+            rule=lambda state: logic.can_use_franway(state, options, "Cosette"),
+        ),
+        PhoaExit(
+            name="cosette_region_to_lake_laboratory",
+            region="cosette_region",
+            connection="lake_laboratory",
+            rule=lambda state: logic.can_use_franway(state, options, "Cosette"),
+        ),
+        # FIXME: to here
         # Mock exit to White towers
         PhoaExit(
             name="mock_entrance",
@@ -850,6 +987,21 @@ def create_regions_and_locations(world: MultiWorld, player: int, options: PhoaOp
         create_region(world, player, locations_per_region, "ouroboros_hideout(treasure_room)"),
         create_region(world, player, locations_per_region, "ouroboros_hideout(treasure_room_hidden_area)"),
         create_region(world, player, locations_per_region, "ouroboros_hideout(great_drake_arena)"),
+        # ET
+        create_region(world, player, locations_per_region, "moonlight_ravine(south)"),
+        create_region(world, player, locations_per_region, "moonlight_ravine(wilds)"),
+        create_region(world, player, locations_per_region, "moonlight_ravine(north)"),
+        create_region(world, player, locations_per_region, "kingdom_bridge(south)"),
+        create_region(world, player, locations_per_region, "kingdom_bridge(north)"),
+        create_region(world, player, locations_per_region, "daea_city"),
+        create_region(world, player, locations_per_region, "daea_city(geo_dungeon)"),
+        create_region(world, player, locations_per_region, "daea_city(seer)"),
+        # fight4day
+        create_region(world, player, locations_per_region, "thomas_lab_2"),
+        create_region(world, player, locations_per_region, "thomas_lab_3"),
+        create_region(world, player, locations_per_region, "daea_region"),
+        create_region(world, player, locations_per_region, "lake_laboratory"),
+        create_region(world, player, locations_per_region, "cosette_region"),
 
         create_region(world, player, locations_per_region, "daea_tunnel_top_left"),
         create_region(world, player, locations_per_region, "daea_tunnel_middle_and_bottom_right"),

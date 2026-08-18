@@ -19,6 +19,56 @@ class PhoaItemData(NamedTuple):
     amount: int
     type: IC
 
+# TODO: update items at the end
+# ET
+# fight4day
+# Updated counts
+# "Energy Gem" +6: "Daea Region - Cave ledge item", "Lake Laboratory - Fran 3rd moonstone batch", "GEO Base - Prize counter item 3", "Thomas's Lab - Binary room item", "Antique Shop - Deliver Lunar Artifact 4 bonus", "First Wall - Turret item"
+# "40 Rin" +13: "Daea Region - Cave chest", "Antique Shop - Deliver Lunar Artifact 1-12"
+# "50 Rin" +1: "Thomas's Lab - Reception bribe"
+# "Perro" +1: "Daea Region - Perro Hide and Seek"
+# "Ouroboros Scroll" +1: "Daea Region - Cupid's Fountain Ouroboros shrine"
+# "GEO Ticket" +3: "Daea Region - GEO house reward", "GEO Base - GEO reward", forgot a previous one
+# "Heart Ruby" +8: "Lake Laboratory - Fran 1st moonstone batch", "Lake Laboratory - Fran 5th moonstone batch", "GEO Base - Prize counter item 2", "Thomas's Lab - Punching bag minigame", "Thomas's Lab - Wrecker room Floret quest", "Antique Shop - Deliver Lunar Artifact 12 bonus", "Antique Shop - Basement puzzle", "First Wall - Cafeteria waiter quest"
+# "Antique Pin" +1: - (needed for "GEO Base - Georgia quest 2")
+# "Honey Drop" +1: "GEO Base - Attic crate"
+# "Moonstone" +5: "GEO Base - Pond fish", "Thomas's Lab - Reception blue medallion quest", "Thomas's Lab - Reception red medallion quest", "First Wall - Bottom right guard room crate", "First Wall - Mother/daughter quest"
+# "Pumpkin Muffin" +1: "Thomas's Lab - Diary room crate"
+# "Mystery Meat" +1: "Antique Shop - Basement mouse"
+# "Cheese" +1: "First Wall - Cafeteria crate"
+# "Raw Meat" +1: "First Wall - Storage crate"
+#
+# New items
+# "Tailoring Voucher" 2 (filler): "Lake Laboratory - Fran freedom quest", "Lake Laboratory - Fran 2nd moonstone batch"
+# "Moon Crystal" 1 (filler for now, progression for Aurantia): "Lake Laboratory - Fran 4th moonstone batch"
+# "Golden Egg" 1 (filler): "GEO Base - Prize counter item 1"
+# "GEO Jacket" 1 (useful): "GEO Base - Prize counter item 4"
+# "Lucky Earrings" 1 (filler): "GEO Base - Georgia quest 1"
+# "Calory Slush" 2 (filler): "Thomas's Lab - Vending machine", "Thomas's Lab - Crate behind wrecker room"
+# "Blue Golem Medallion" 4 (progression): "Thomas's Lab - Room 1-1", "Thomas's Lab - Room 1-2", "Thomas's Lab - Room 1-3", "Thomas's Lab - Room 1-4"
+# "Red Golem Medallion" 4 (progression): "Thomas's Lab - Room 2-1", "Thomas's Lab - Room 2-2", "Thomas's Lab - Room 2-3", "Thomas's Lab - Room 2-4"
+# "Lunar Compass" 1 (filler): (needed for antique shop quest)
+# "Lunar Trident" 1 (filler): (needed for antique shop quest)
+# "Lunar Crown" 1 (filler): (needed for antique shop quest)
+# "Lunar Comb" 1 (filler): (needed for antique shop quest)
+# "Lunar Watch" 1 (filler): (needed for antique shop quest)
+# "Lunar Goblet" 1 (filler): (needed for antique shop quest)
+# "Lunar Medal" 1 (filler): (needed for antique shop quest)
+# "Lunar Egg" 1 (filler): (needed for antique shop quest)
+# "Lunar Key" 1 (filler): (needed for antique shop quest)
+# "Antique Cast Iron" 1 (filler): "Antique Shop - Deliver Lunar Artifact 8 bonus"
+# "Spicy Noodles" 1 (filler): "Lake Laboratory - Lan gift after 4th moonstone batch"
+# "Cooked Drake Tail" 1 (filler): "Lake Laboratory - Van gift after 3rd moonstone batch"
+# "Grape Cake" 1 (filler): "Lake Laboratory - Van gift after 2nd moonstone batch"
+# "Unlock Panselo Franway" 1 (progression)
+# "Unlock Atai Franway" 1 (progression)
+# "Unlock Cosette Franway" 1 (progression)
+#
+# Other changes
+# 50 Moonstones progression if EnableMoonstoneShops option is active (later 90 with Thomas's shop)
+# Geo tickets progression if shop option is active
+# Antique Pins progression if sidequest option is active
+# 12 lunar items progression if sidequest option is active
 
 class DungeonItemSettingGroup(NamedTuple):
     shuffle_option: str
@@ -30,6 +80,19 @@ class DungeonItemSettingGroup(NamedTuple):
 
 # @formatter:off
 item_table: Dict[str, PhoaItemData] = {
+    # FIXME: temp just to generate without error
+    "Lunar Compass": PhoaItemData(144, 1, IC.filler),
+    "Blue Golem Medallion": PhoaItemData(115, 1, IC.filler),
+    "Red Golem Medallion": PhoaItemData(116, 1, IC.filler),
+    "Tailoring Voucher": PhoaItemData(164, 1, IC.filler),
+    "Calory Slush": PhoaItemData(118, 1, IC.filler),
+    "Lucky Earrings": PhoaItemData(26, 1, IC.filler),
+    "GEO Jacket": PhoaItemData(13, 1, IC.filler),
+    "Golden Egg": PhoaItemData(95, 1, IC.filler),
+    "Spicy Noodles": PhoaItemData(152, 1, IC.filler),
+    "Cooked Drake Tail": PhoaItemData(72, 1, IC.filler),
+    "Grape Cake": PhoaItemData(65, 1, IC.filler),
+    "Moon Crystal": PhoaItemData(165, 1, IC.filler),
     "Heart Ruby":                       PhoaItemData(3,     17, IC.useful),
     "Energy Gem":                       PhoaItemData(4,     11, IC.useful),
     "Moonstone":                        PhoaItemData(5,     47, IC.filler),
