@@ -1,6 +1,5 @@
 from typing import Dict, Callable, Optional, NamedTuple
 
-import Utils
 from BaseClasses import MultiWorld, Region, Location, CollectionState
 from worlds.phoa import get_location_data, PhoaOptions
 from worlds.phoa.Locations import PhoaLocationData
@@ -65,6 +64,12 @@ def get_exit_data(player: int, options: PhoaOptions) -> list[PhoaExit]:
             region="panselo_region",
             connection="atai_region",
         ),
+        PhoaExit(
+            name="panselo_region_to_lake_laboratory",
+            region="panselo_region",
+            connection="lake_laboratory",
+            rule=lambda state: logic.can_use_franway(state, "Panselo", options),
+        ),
         # anuri_temple(main_entrance)
         PhoaExit(
             name="anuri_temple_main_exit",
@@ -75,7 +80,7 @@ def get_exit_data(player: int, options: PhoaOptions) -> list[PhoaExit]:
             name="anuri_temple_pearl_entrance",
             region="anuri_temple(main_entrance)",
             connection="anuri_temple(main)",
-            rule=lambda state: logic.has_anuri_pearlstones(1, state)
+            rule=lambda state: logic.has_anuri_pearlstones(state, 1)
         ),
         PhoaExit(
             name="anuri_temple_top_floor_boulder",
@@ -96,7 +101,7 @@ def get_exit_data(player: int, options: PhoaOptions) -> list[PhoaExit]:
             name="anuri_temple_door_to_scaber_maze",
             region="anuri_temple(top_floor)",
             connection="anuri_temple(scaber_switch_maze)",
-            rule=lambda state: logic.has_anuri_pearlstones(10, state)
+            rule=lambda state: logic.has_anuri_pearlstones(state, 10)
         ),
         # anuri_temple(main)
         PhoaExit(
@@ -108,7 +113,7 @@ def get_exit_data(player: int, options: PhoaOptions) -> list[PhoaExit]:
             name="anuri_temple_to_tall_tower_puzzle_room",
             region="anuri_temple(main)",
             connection="anuri_temple(tall_tower_puzzle_room)",
-            rule=lambda state: logic.has_anuri_pearlstones(10, state),
+            rule=lambda state: logic.has_anuri_pearlstones(state, 10),
         ),
         PhoaExit(
             name="anuri_temple_to_side_entrance",
@@ -132,7 +137,7 @@ def get_exit_data(player: int, options: PhoaOptions) -> list[PhoaExit]:
             name="anuri_temple_to_slargummy",
             region="anuri_temple(main)",
             connection="anuri_temple(slargummy_boss)",
-            rule=lambda state: logic.has_anuri_pearlstones(6, state),
+            rule=lambda state: logic.has_anuri_pearlstones(state, 6),
         ),
         # anuri_temple(side_entrance)
         PhoaExit(
@@ -165,14 +170,14 @@ def get_exit_data(player: int, options: PhoaOptions) -> list[PhoaExit]:
             name="anuri_temple_to_post_pond",
             region="anuri_temple(pond)",
             connection="anuri_temple(post_pond)",
-            rule=lambda state: logic.has_anuri_pearlstones(9, state),
+            rule=lambda state: logic.has_anuri_pearlstones(state, 9),
         ),
         # anuri_temple(post_pond)
         PhoaExit(
             name="anuri_temple_to_dive_room",
             region="anuri_temple(post_pond)",
             connection="anuri_temple(dive_room)",
-            rule=lambda state: logic.has_anuri_pearlstones(10, state),
+            rule=lambda state: logic.has_anuri_pearlstones(state, 10),
         ),
         PhoaExit(
             name="anuri_temple_to_urn_room",
@@ -201,6 +206,25 @@ def get_exit_data(player: int, options: PhoaOptions) -> list[PhoaExit]:
             name="atai_region_to_sand_drifts_access_cave",
             region="atai_region",
             connection="sand_drifts_region(access_cave)",
+        ),
+        PhoaExit(
+            name="atai_region_to_moonlight_ravine_south",
+            region="atai_region",
+            connection="moonlight_ravine(south)",
+        ),
+        PhoaExit(
+            name="kingdom_bridge_south_kingdom_bridge_north",
+            region="atai_region",
+            connection="daea_region",
+            rule=lambda state: (state.has("Life Saver", player)
+                                and logic.has_sonic_spear(state))
+                               or state.has("Rocket Boots", player),
+        ),
+        PhoaExit(
+            name="atai_region_to_lake_laboratory",
+            region="atai_region",
+            connection="lake_laboratory",
+            rule=lambda state: logic.can_use_franway(state, "Atai", options),
         ),
         # adars_house
         PhoaExit(
@@ -271,7 +295,7 @@ def get_exit_data(player: int, options: PhoaOptions) -> list[PhoaExit]:
             name="atai_town_metro_to_sand_drifts",
             region="atai_town(metro)",
             connection="sand_drifts(metro_stairwell)",
-            rule=lambda state: logic.has_ouro_guard_keys(5, state),
+            rule=lambda state: logic.has_ouro_guard_keys(state, 5),
         ),
         PhoaExit(
             name="atai_metro_to_town",
@@ -387,7 +411,7 @@ def get_exit_data(player: int, options: PhoaOptions) -> list[PhoaExit]:
             name="sand_drifts_metro_stairwell_to_atai_metro",
             region="sand_drifts(metro_stairwell)",
             connection="atai_town(metro)",
-            rule=lambda state: logic.has_ouro_guard_keys(5, state),
+            rule=lambda state: logic.has_ouro_guard_keys(state, 5),
         ),
         # ouroboros_hideout(tower_top)
         PhoaExit(
@@ -463,7 +487,7 @@ def get_exit_data(player: int, options: PhoaOptions) -> list[PhoaExit]:
             name="forlorn_ruins_through_key_door_to_obstacle_course",
             region="forlorn_ruins",
             connection="forlorn_ruins(arrow_obstacle_room)",
-            rule=lambda state: logic.has_ouro_guard_keys(5, state),
+            rule=lambda state: logic.has_ouro_guard_keys(state, 5),
         ),
         PhoaExit(
             name="forlorn_ruins_to_metal_crates_puzzle_area",
@@ -512,7 +536,7 @@ def get_exit_data(player: int, options: PhoaOptions) -> list[PhoaExit]:
             name="forlorn_ruins_east_key_door_in_basement",
             region="forlorn_ruins(east)",
             connection="forlorn_ruins(dragon_snare_puzzle_room)",
-            rule=lambda state: logic.has_ouro_guard_keys(5, state),
+            rule=lambda state: logic.has_ouro_guard_keys(state, 5),
         ),
         PhoaExit(
             name="forlorn_ruins_to_ouroboros_hideout",
@@ -535,13 +559,13 @@ def get_exit_data(player: int, options: PhoaOptions) -> list[PhoaExit]:
             name="ouroboros_hideout_to_prison",
             region="ouroboros_hideout",
             connection="ouroboros_hideout(prison)",
-            rule=lambda state: logic.has_ouro_guard_keys(5, state),
+            rule=lambda state: logic.has_ouro_guard_keys(state, 5),
         ),
         PhoaExit(
             name="ouroboros_hideout_to_storage",
             region="ouroboros_hideout",
             connection="ouroboros_hideout(storage)",
-            rule=lambda state: logic.has_ouro_guard_keys(5, state),
+            rule=lambda state: logic.has_ouro_guard_keys(state, 5),
         ),
         PhoaExit(
             name="ouroboros_hideout_to_infant_drake_arena",
@@ -582,19 +606,24 @@ def get_exit_data(player: int, options: PhoaOptions) -> list[PhoaExit]:
             connection="ouroboros_hideout(treasure_room_hidden_area)",
             rule=lambda state: logic.has_explosives(state),
         ),
-        # ouroboros_hideout(great_drake_arena)
-        # FIXME: from here
-        # ET
-        # moonlight_ravine
+        # moonlight_ravine(south)
         PhoaExit(
-            name="atai_region_to_moonlight_ravine_south",
-            region="atai_region",
-            connection="moonlight_ravine(south)",
+            name="moonlight_ravine_south_to_atai",
+            region="moonlight_ravine(south)",
+            connection="atai_region",
         ),
         PhoaExit(
             name="moonlight_ravine_south_to_wilds",
             region="moonlight_ravine(south)",
             connection="moonlight_ravine(wilds)",
+            rule=lambda state: state.has("Life Saver", player)
+                               or state.has("Rocket Boots", player),
+        ),
+        # moonlight_ravine(wilds)
+        PhoaExit(
+            name="moonlight_ravine_wilds_to_south",
+            region="moonlight_ravine(wilds)",
+            connection="moonlight_ravine(south)",
             rule=lambda state: state.has("Life Saver", player)
                                or state.has("Rocket Boots", player),
         ),
@@ -605,36 +634,79 @@ def get_exit_data(player: int, options: PhoaOptions) -> list[PhoaExit]:
             rule=lambda state: state.has("Life Saver", player)
                                or state.has("Rocket Boots", player),
         ),
+        # moonlight_ravine(north)
+        PhoaExit(
+            name="moonlight_ravine_north_to_wilds",
+            region="moonlight_ravine(north)",
+            connection="moonlight_ravine(wilds)",
+            rule=lambda state: state.has("Life Saver", player)
+                               or state.has("Rocket Boots", player),
+        ),
         PhoaExit(
             name="moonlight_ravine_north_to_daea_region",
             region="moonlight_ravine(north)",
             connection="daea_region",
         ),
-
-        PhoaExit(
-            name="atai_region_to_kingdom_bridge_south",
-            region="atai_region",
-            connection="kingdom_bridge(south)",
-        ),
-        PhoaExit(
-            name="kingdom_bridge_south_kingdom_bridge_north",
-            region="kingdom_bridge(south)",
-            connection="kingdom_bridge(north)",
-            rule=lambda state: (state.has("Life Saver", player)
-                               and logic.has_sonic_spear(state))
-                               or state.has("Rocket Boots", player),
-        ),
-        PhoaExit(
-            name="kingdom_bridge_north_to_daea_region",
-            region="kingdom_bridge(north)",
-            connection="daea_region",
-        ),
-
+        # daea_region
         PhoaExit(
             name="daea_region_to_daea_city",
             region="daea_region",
             connection="daea_city",
         ),
+        PhoaExit(
+            name="daea_region_to_thomas_lab_2",
+            region="daea_region",
+            connection="thomas_lab_2",
+            rule=lambda state: logic.has_golem_medallions(state, 3, "Blue"),
+        ),
+        PhoaExit(
+            name="daea_region_to_lake_laboratory",
+            region="daea_region",
+            connection="lake_laboratory",
+        ),
+        # thomas_lab_2
+        PhoaExit(
+            name="thomas_lab_2_to_daea_region",
+            region="thomas_lab_2",
+            connection="daea_region",
+        ),
+        PhoaExit(
+            name="thomas_lab_2_to_thomas_lab_3",
+            region="thomas_lab_2",
+            connection="thomas_lab_3",
+            rule=lambda state: logic.has_golem_medallions(state, 3, "Red"),
+        ),
+        # thomas_lab_3
+        PhoaExit(
+            name="thomas_lab_3_to_thomas_lab_2",
+            region="thomas_lab_3",
+            connection="thomas_lab_2",
+        ),
+        # Franways
+        PhoaExit(
+            name="lake_laboratory_to_daea_region",
+            region="lake_laboratory",
+            connection="daea_region",
+        ),
+        PhoaExit(
+            name="lake_laboratory_to_panselo_region",
+            region="lake_laboratory",
+            connection="panselo_region",
+            rule=lambda state: logic.can_use_franway(state, "Panselo", options),
+        ),
+        PhoaExit(
+            name="lake_laboratory_to_atai_region",
+            region="lake_laboratory",
+            connection="atai_region",
+            rule=lambda state: logic.can_use_franway(state, "Atai", options),
+        ),
+        PhoaExit(
+            name="lake_laboratory_to_cosette_region",
+            region="lake_laboratory",
+            connection="cosette_region",
+            rule=lambda state: logic.can_use_franway(state, "Cosette", options),
+        ),
+        # daea_city
         PhoaExit(
             name="daea_city_to_geo_dungeon",
             region="daea_city",
@@ -647,83 +719,9 @@ def get_exit_data(player: int, options: PhoaOptions) -> list[PhoaExit]:
             connection="daea_city(seer)",
             rule=lambda state: state.has("Rocket Boots", player),
         ),
-
-        # fight4day
-        # daea_region
         PhoaExit(
-            name="daea_region_to_thomas_lab_2",
-            region="daea_region",
-            connection="thomas_lab_2",
-            rule=lambda state: state.has("Blue Golem Medallion", player, 3),
-        ),
-        PhoaExit(
-            name="thomas_lab_2_to_daea_region",
-            region="thomas_lab_2",
-            connection="daea_region",
-        ),
-        PhoaExit(
-            name="thomas_lab_2_to_thomas_lab_3",
-            region="thomas_lab_2",
-            connection="thomas_lab_3",
-            rule=lambda state: state.has("Red Golem Medallion", player, 3),
-        ),
-        PhoaExit(
-            name="thomas_lab_3_to_thomas_lab_2",
-            region="thomas_lab_3",
-            connection="thomas_lab_2",
-        ),
-        PhoaExit(
-            name="daea_region_to_lake_laboratory",
-            region="daea_region",
-            connection="lake_laboratory",
-        ),
-        PhoaExit(
-            name="lake_laboratory_to_daea_region",
-            region="lake_laboratory",
-            connection="daea_region",
-        ),
-        # Franways
-        PhoaExit(
-            name="lake_laboratory_to_panselo_region",
-            region="lake_laboratory",
-            connection="panselo_region",
-            rule=lambda state: logic.can_use_franway(state, options, "Panselo"),
-        ),
-        PhoaExit(
-            name="panselo_region_to_lake_laboratory",
-            region="panselo_region",
-            connection="lake_laboratory",
-            rule=lambda state: logic.can_use_franway(state, options, "Panselo"),
-        ),
-        PhoaExit(
-            name="lake_laboratory_to_atai_region",
-            region="lake_laboratory",
-            connection="atai_region",
-            rule=lambda state: logic.can_use_franway(state, options, "Atai"),
-        ),
-        PhoaExit(
-            name="atai_region_to_lake_laboratory",
-            region="atai_region",
-            connection="lake_laboratory",
-            rule=lambda state: logic.can_use_franway(state, options, "Atai"),
-        ),
-        PhoaExit(
-            name="lake_laboratory_to_cosette_region",
-            region="lake_laboratory",
-            connection="cosette_region",
-            rule=lambda state: logic.can_use_franway(state, options, "Cosette"),
-        ),
-        PhoaExit(
-            name="cosette_region_to_lake_laboratory",
-            region="cosette_region",
-            connection="lake_laboratory",
-            rule=lambda state: logic.can_use_franway(state, options, "Cosette"),
-        ),
-        # FIXME: to here
-        # Mock exit to White towers
-        PhoaExit(
-            name="mock_entrance",
-            region="atai_region",
+            name="daea_city_to_tunnels",
+            region="daea_city",
             connection="daea_tunnel_top_left",
         ),
         # daea_tunnel_top_left
@@ -754,9 +752,9 @@ def get_exit_data(player: int, options: PhoaOptions) -> list[PhoaExit]:
             connection="daea_tunnel_top_right",
             rule=lambda state: state.has("Daea tunnel gate opened", player) and
                                (logic.has_slingshot(state)
-                               or logic.has_bombs(state)
-                               or logic.has_sonic_spear(state)
-                               or state.has("Rocket Boots", player)),
+                                or logic.has_bombs(state)
+                                or logic.has_sonic_spear(state)
+                                or state.has("Rocket Boots", player)),
         ),
         PhoaExit(
             name="daea_tunnel_middle_to_bottom_left",
@@ -824,48 +822,48 @@ def get_exit_data(player: int, options: PhoaOptions) -> list[PhoaExit]:
             name="castle_dungeon_post_fight_to_c_hall",
             region="castle_dungeon(post_control_room_fight)",
             connection="castle_dungeon(c_hall)",
-            rule=lambda state: logic.has_keycards("C", 1, state),
+            rule=lambda state: logic.has_keycards(state, 1, "C"),
         ),
         PhoaExit(
             name="castle_dungeon_post_fight_to_b_hall",
             region="castle_dungeon(post_control_room_fight)",
             connection="castle_dungeon(b_hall)",
-            rule=lambda state: logic.has_keycards("B", 1, state),
+            rule=lambda state: logic.has_keycards(state, 1, "B"),
         ),
         PhoaExit(
             name="castle_dungeon_post_fight_to_a_hall",
             region="castle_dungeon(post_control_room_fight)",
             connection="castle_dungeon(a_hall)",
-            rule=lambda state: logic.has_keycards("A", 1, state),
+            rule=lambda state: logic.has_keycards(state, 1, "A"),
         ),
         # castle_dungeon(c_hall)
         PhoaExit(
             name="c_hall_to_c_jail_cell",
             region="castle_dungeon(c_hall)",
             connection="castle_dungeon(c_jail_cell)",
-            rule=lambda state: logic.has_keycards("C", 3, state)
-                               or (logic.has_sonic_spear(state) and logic.has_keycards("C", 1, state)),
+            rule=lambda state: logic.has_keycards(state, 3, "C")
+                               or (logic.has_sonic_spear(state) and logic.has_keycards(state, 1, "C")),
         ),
         # castle_dungeon(b_hall)
         PhoaExit(
             name="b_hall_to_b_jail_cell",
             region="castle_dungeon(b_hall)",
             connection="castle_dungeon(b_jail_cell)",
-            rule=lambda state: logic.has_keycards("B", 3, state),
+            rule=lambda state: logic.has_keycards(state, 3, "B"),
         ),
         # castle_dungeon(c_hall)
         PhoaExit(
             name="castle_dungeon_a_hall_to_main",
             region="castle_dungeon(a_hall)",
             connection="castle_dungeon",
-            rule=lambda state: logic.has_keycards("A", 2, state)
+            rule=lambda state: logic.has_keycards(state, 2, "A")
                                or logic.has_sonic_spear(state),
         ),
         PhoaExit(
             name="a_hall_to_arena",
             region="castle_dungeon(a_hall)",
             connection="castle_dungeon(a_hall_arena)",
-            rule=lambda state: logic.has_keycards("A", 2, state)
+            rule=lambda state: logic.has_keycards(state, 2, "A")
                                or logic.has_sonic_spear(state),
         ),
         # white_towers(entrance)
@@ -922,6 +920,13 @@ def get_exit_data(player: int, options: PhoaOptions) -> list[PhoaExit]:
             name="white_towers_katash_to_upper",
             region="white_towers(katash)",
             connection="white_towers(upper)",
+        ),
+        # cosette_region
+        PhoaExit(
+            name="cosette_region_to_lake_laboratory",
+            region="cosette_region",
+            connection="lake_laboratory",
+            rule=lambda state: logic.can_use_franway(state, "Cosette", options),
         ),
     ]
 
@@ -987,22 +992,17 @@ def create_regions_and_locations(world: MultiWorld, player: int, options: PhoaOp
         create_region(world, player, locations_per_region, "ouroboros_hideout(treasure_room)"),
         create_region(world, player, locations_per_region, "ouroboros_hideout(treasure_room_hidden_area)"),
         create_region(world, player, locations_per_region, "ouroboros_hideout(great_drake_arena)"),
-        # ET
         create_region(world, player, locations_per_region, "moonlight_ravine(south)"),
         create_region(world, player, locations_per_region, "moonlight_ravine(wilds)"),
         create_region(world, player, locations_per_region, "moonlight_ravine(north)"),
-        create_region(world, player, locations_per_region, "kingdom_bridge(south)"),
-        create_region(world, player, locations_per_region, "kingdom_bridge(north)"),
         create_region(world, player, locations_per_region, "daea_city"),
         create_region(world, player, locations_per_region, "daea_city(geo_dungeon)"),
         create_region(world, player, locations_per_region, "daea_city(seer)"),
-        # fight4day
         create_region(world, player, locations_per_region, "thomas_lab_2"),
         create_region(world, player, locations_per_region, "thomas_lab_3"),
         create_region(world, player, locations_per_region, "daea_region"),
         create_region(world, player, locations_per_region, "lake_laboratory"),
         create_region(world, player, locations_per_region, "cosette_region"),
-
         create_region(world, player, locations_per_region, "daea_tunnel_top_left"),
         create_region(world, player, locations_per_region, "daea_tunnel_middle_and_bottom_right"),
         create_region(world, player, locations_per_region, "daea_tunnel_bottom_left"),
@@ -1015,7 +1015,6 @@ def create_regions_and_locations(world: MultiWorld, player: int, options: PhoaOp
         create_region(world, player, locations_per_region, "castle_dungeon(b_jail_cell)"),
         create_region(world, player, locations_per_region, "castle_dungeon(a_hall)"),
         create_region(world, player, locations_per_region, "castle_dungeon(a_hall_arena)"),
-        create_region(world, player, locations_per_region, "daea_region"),
         create_region(world, player, locations_per_region, "white_towers(entrance)"),
         create_region(world, player, locations_per_region, "white_towers(puzzle_room)"),
         create_region(world, player, locations_per_region, "white_towers(main)"),

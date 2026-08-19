@@ -4,7 +4,7 @@ from worlds.AutoWorld import WebWorld, World
 from .Options import PhoaOptions, phoa_option_groups
 from .Locations import PhoaLocation, get_location_data, PhoaLocationData
 from .Items import PhoaItem, item_table, PhoaItemData, get_item_pool, dungeon_item_setting_groups, \
-    DungeonItemSettingGroup, filter_dungeon_items, fill_dungeon_items_in_own_dungeon
+    DungeonItemSettingGroup, filter_dungeon_items, fill_dungeon_items_in_own_dungeon, item_inclusion_priority
 from .Regions import create_regions_and_locations
 
 
@@ -106,6 +106,38 @@ class PhoaWorld(World):
                 or options.enable_fishing_spots
                 or options.enable_ancient_vault):
             self.progression_item_classifications_overrides.append("Energy Gem")
+        if options.enable_sidequests:
+            self.progression_item_classifications_overrides.append("Ouroboros Scroll")
+            self.progression_item_classifications_overrides.append("Antique Pin")
+            self.progression_item_classifications_overrides.append("Prelude of Panselo")
+            self.progression_item_classifications_overrides.append("Progressive Prelude of Panselo")
+            self.progression_item_classifications_overrides.append("Baroque of Battle")
+            self.progression_item_classifications_overrides.append("Lullaby of Ava")
+        if options.enable_geo_shop:
+            self.progression_item_classifications_overrides.append("GEO Ticket")
+        if options.enable_geo_challenge_rewards:
+            self.progression_item_classifications_overrides.append("GEO Song")
+        if options.enable_ouroboros_scroll_rewards:
+            self.progression_item_classifications_overrides.append("Ouroboros Scroll")
+        if options.enable_lunar_artifact_quest:
+            self.progression_item_classifications_overrides.append("Lunar Frog")
+            self.progression_item_classifications_overrides.append("Lunar Vase")
+            self.progression_item_classifications_overrides.append("Lunar Drake")
+            self.progression_item_classifications_overrides.append("Lunar Compass")
+            self.progression_item_classifications_overrides.append("Lunar Trident")
+            self.progression_item_classifications_overrides.append("Lunar Crown")
+            self.progression_item_classifications_overrides.append("Lunar Comb")
+            self.progression_item_classifications_overrides.append("Lunar Watch")
+            self.progression_item_classifications_overrides.append("Lunar Goblet")
+            self.progression_item_classifications_overrides.append("Lunar Medal")
+            self.progression_item_classifications_overrides.append("Lunar Egg")
+            self.progression_item_classifications_overrides.append("Lunar Key")
+        if options.franway_unlock_mode == 3:
+            self.progression_item_classifications_overrides.append("Panselo Franway Teleporter")
+            self.progression_item_classifications_overrides.append("Atai Franway Teleporter")
+            self.progression_item_classifications_overrides.append("Cosette Franway Teleporter")
+        if options.franway_unlock_mode in (1, 2) or options.enable_moonstone_shops:
+            self.progression_item_classifications_overrides.append("Moonstone")
 
     def pre_fill(self) -> None:
         for dungeon_item_setting_group in dungeon_item_setting_groups:
