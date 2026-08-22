@@ -2260,12 +2260,13 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
             flags=PhoaFlag.SHOPSANITY,
             vanillaItem="Fishing Rod",
         ),
-        "Daea City - Blacksmith dream ore quest": PhoaLocationData(
-            region="daea_city",
-            address=7676376,
-            flags=PhoaFlag.SIDEQUEST,
-            vanillaItem="Night Star",
-        ),
+        # "Daea City - Blacksmith dream ore quest": PhoaLocationData( # TODO: trading sequence
+        #     region="daea_city",
+        #     address=7676376,
+        #     rule=lambda state: state.has("Dream Ore", player),
+        #     flags=PhoaFlag.SIDEQUEST,
+        #     vanillaItem="Night Star",
+        # ),
         "Daea City - Residential house lady quest": PhoaLocationData(
             region="daea_city",
             address=7676377,
