@@ -2214,6 +2214,7 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
         "Kingdom Bridge - GEO dungeon item": PhoaLocationData(
             region="daea_region",
             address=7676178,
+            rule=lambda state: logic.has_explosives(state),
             flags=PhoaFlag.GEOCHALLENGE,
             vanillaItem="GEO Ticket",
         ),
