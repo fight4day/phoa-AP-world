@@ -2039,7 +2039,7 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
             region="moonlight_ravine(wilds)",
             address=7676352,
             rule=lambda state: state.has("Life Saver", player)
-                               and (logic.can_use_spear_bomb(state)
+                               and (logic.can_use_spear_bomb_midair(state)
                                     or state.has("Kobold Blaster", player)),
             flags=PhoaFlag.MOONSTONE,
             vanillaItem="Moonstone",
