@@ -2081,7 +2081,7 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
             flags=PhoaFlag.SMALLANIMALS,
             vanillaItem="Mystery Meat",
         ),
-        "Moonlight Ravine - Wilds room 4 underwater item 2": PhoaLocationData(
+        "Moonlight Ravine - Wilds room 4 underwater Trident": PhoaLocationData(
             region="moonlight_ravine(wilds)",
             address=7676358,
             rule=lambda state: state.has("Life Saver", player)
@@ -2090,28 +2090,28 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
             flags=PhoaFlag.LUNARARTIFACT,
             vanillaItem="Lunar Trident",
         ),
-        "Moonlight Ravine - Wilds room 4 underwater item 3": PhoaLocationData(
+        "Moonlight Ravine - Wilds room 4 underwater item 2": PhoaLocationData(
             region="moonlight_ravine(wilds)",
             address=7676359,
             rule=lambda state: state.has("Life Saver", player),
             flags=PhoaFlag.FREESTANDING,
             vanillaItem="Moon Kelp",
         ),
-        "Moonlight Ravine - Wilds room 4 underwater item 4": PhoaLocationData(
+        "Moonlight Ravine - Wilds room 4 underwater Energy Gem": PhoaLocationData(
             region="moonlight_ravine(wilds)",
             address=7676360,
             rule=lambda state: state.has("Life Saver", player),
             flags=PhoaFlag.ENERGYGEM,
             vanillaItem="Energy Gem",
         ),
-        "Moonlight Ravine - Wilds room 4 underwater item 5": PhoaLocationData(
+        "Moonlight Ravine - Wilds room 4 underwater item 3": PhoaLocationData(
             region="moonlight_ravine(wilds)",
             address=7676361,
             rule=lambda state: state.has("Life Saver", player),
             flags=PhoaFlag.FREESTANDING,
             vanillaItem="Moon Kelp",
         ),
-        "Moonlight Ravine - Wilds room 4 underwater item 6": PhoaLocationData(
+        "Moonlight Ravine - Wilds room 4 underwater item 4": PhoaLocationData(
             region="moonlight_ravine(wilds)",
             address=7676362,
             rule=lambda state: state.has("Life Saver", player),
