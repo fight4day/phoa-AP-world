@@ -2381,12 +2381,18 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
         "Daea City - Troubadours Alto quest item": PhoaLocationData(
             region="daea_city",
             address=7676393,
+            rule=lambda state: state.can_reach_region("panselo_region", player)
+                               and state.can_reach_region("atai_region", player)
+                               and state.can_reach_region("ouroboros_hideout", player),
             flags=PhoaFlag.SIDEQUEST | PhoaFlag.HEARTRUBY,
             vanillaItem="Heart Ruby",
         ),
         "Daea City - Troubadours Forte quest item": PhoaLocationData(  # RECURRING
             region="daea_city",
             address=7676394,
+            rule=lambda state: state.can_reach_region("panselo_region", player)
+                               and state.can_reach_region("atai_region", player)
+                               and state.can_reach_region("ouroboros_hideout", player),
             flags=PhoaFlag.SIDEQUEST,
             vanillaItem="35 Rin",
         ),
