@@ -213,11 +213,18 @@ def get_exit_data(player: int, options: PhoaOptions) -> list[PhoaExit]:
             connection="moonlight_ravine(south)",
         ),
         PhoaExit(
-            name="kingdom_bridge_south_kingdom_bridge_north",
+            name="kingdom_bridge_south_to_kingdom_bridge_north",
             region="atai_region",
             connection="daea_region",
             rule=lambda state: (state.has("Life Saver", player)
                                 and logic.has_sonic_spear(state))
+                               or state.has("Rocket Boots", player),
+        ),
+        PhoaExit(
+            name="kingdom_bridge_north_to_kingdom_bridge_south",
+            region="daea_region",
+            connection="atai_region",
+            rule=lambda state: state.has("Life Saver", player)
                                or state.has("Rocket Boots", player),
         ),
         PhoaExit(
