@@ -2081,7 +2081,7 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
             flags=PhoaFlag.SMALLANIMALS,
             vanillaItem="Mystery Meat",
         ),
-        "Moonlight Ravine - Wilds room 4 underwater Trident": PhoaLocationData(
+        "Moonlight Ravine - Wilds room 4 underwater item below rocks": PhoaLocationData(
             region="moonlight_ravine(wilds)",
             address=7676358,
             rule=lambda state: state.has("Life Saver", player)
@@ -2097,7 +2097,7 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
             flags=PhoaFlag.FREESTANDING,
             vanillaItem="Moon Kelp",
         ),
-        "Moonlight Ravine - Wilds room 4 underwater Energy Gem": PhoaLocationData(
+        "Moonlight Ravine - Wilds room 4 deep underwater item": PhoaLocationData(
             region="moonlight_ravine(wilds)",
             address=7676360,
             rule=lambda state: state.has("Life Saver", player),
