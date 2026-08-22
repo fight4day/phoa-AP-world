@@ -2230,6 +2230,14 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
             flags=PhoaFlag.GEOCHALLENGE,
             vanillaItem="GEO Ticket",
         ),
+        "Daea City - Windmill pot": PhoaLocationData(
+            region="daea_city",
+            address=7676549,
+            rule=lambda state: logic.has_slingshot(state)
+                               or logic.has_crossbow(state),
+            flags=PhoaFlag.MOONSTONE,
+            vanillaItem="Moonstone",
+        ),
         "Daea City - Blacksmith shop item 1": PhoaLocationData(
             region="daea_city",
             address=7676371,
