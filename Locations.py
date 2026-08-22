@@ -2048,7 +2048,7 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
             region="moonlight_ravine(wilds)",
             address=7676353,
             rule=lambda state: state.has("Life Saver", player)
-                               and logic.has_explosives(state),
+                               and logic.has_explosives_midair(state),
             flags=PhoaFlag.RINCHESTS,
             vanillaItem="30 Rin",
         ),
