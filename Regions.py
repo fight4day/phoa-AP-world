@@ -718,7 +718,9 @@ def get_exit_data(player: int, options: PhoaOptions) -> list[PhoaExit]:
             name="daea_city_to_geo_dungeon",
             region="daea_city",
             connection="daea_city(geo_dungeon)",
-            rule=lambda state: state.has("Rocket Boots", player),
+            rule=lambda state: state.has("Rocket Boots", player)
+                               and logic.has_music_instrument(state)
+                               and state.has("GEO Song", player),
         ),
         PhoaExit(
             name="daea_city_to_seer",
