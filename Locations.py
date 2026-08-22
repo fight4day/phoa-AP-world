@@ -2542,18 +2542,21 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
         "Daea City - Tunnel pantry crate 1": PhoaLocationData(
             region="daea_city",
             address=7676415,
+            rule=lambda state: logic.has_music_instrument(state),
             flags=PhoaFlag.BREAKABLE,
             vanillaItem="Big Raw Meat",
         ),
         "Daea City - Tunnel pantry crate 2": PhoaLocationData(
             region="daea_city",
             address=7676416,
+            rule=lambda state: logic.has_music_instrument(state),
             flags=PhoaFlag.BREAKABLE,
             vanillaItem="Gourmet Fish Fillet",
         ),
         "Daea City - Tunnel pantry chest": PhoaLocationData(
             region="daea_city",
             address=7676417,
+            rule=lambda state: logic.has_music_instrument(state),
             flags=PhoaFlag.RINCHESTS,
             vanillaItem="100 Rin",
         ),
