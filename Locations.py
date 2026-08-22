@@ -2206,7 +2206,8 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
         "Kingdom Bridge - Tower upper turret pot": PhoaLocationData(
             region="daea_region",
             address=7676179,
-            rule=lambda state: logic.has_sonic_spear(state),
+            rule=lambda state: logic.has_sonic_spear(state)
+                               and logic.has_music_instrument(state),
             flags=PhoaFlag.MOONSTONE,
             vanillaItem="Moonstone",
         ),
