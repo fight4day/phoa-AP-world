@@ -97,6 +97,12 @@ class PhoaLogic:
         return (state.has_all({"Sonic Spear", "Spear Bomb"}, self.player)
                 or state.has("Progressive Spear", self.player, 2))
 
+    def can_use_spear_bomb_midair(self, state: CollectionState) -> bool:
+        return state.has("Temperance", self.player) and (
+                 state.has_all({"Sonic Spear", "Spear Bomb"}, self.player)
+                 or state.has("Progressive Spear", self.player, 2)
+               )
+
     def can_use_whirlwind(self, state: CollectionState) -> bool:
         return (state.has_all({"Whirlwind", "Temperance"}, self.player)
                 and self.has_bat(state))
