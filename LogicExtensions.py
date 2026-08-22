@@ -112,6 +112,11 @@ class PhoaLogic:
                 or self.can_use_spear_bomb(state)
                 or state.has("Kobold Blaster", self.player))
 
+    def has_explosives_midair(self, state: CollectionState) -> bool:
+        return (self.has_bombs(state)
+                or self.can_use_spear_bomb_midair(state)
+                or state.has("Kobold Blaster", self.player))
+
     def can_deal_damage(self, state: CollectionState, exclude_rocket_boots=False, exclude_lamp=False) -> bool:
         return (self.has_bat(state)
                 or self.has_slingshot(state)
