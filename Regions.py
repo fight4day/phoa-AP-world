@@ -887,7 +887,6 @@ def get_exit_data(player: int, options: PhoaOptions) -> list[PhoaExit]:
             name="white_towers_entrance_to_daea_region",
             region="white_towers(entrance)",
             connection="daea_region",
-            rule=lambda state: logic.can_deal_damage(state),
         ),
         # NOTE: Logically (for regions), I'll assume the player has the sonic spear from here
         PhoaExit(
