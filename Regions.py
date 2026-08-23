@@ -743,7 +743,8 @@ def get_exit_data(player: int, options: PhoaOptions) -> list[PhoaExit]:
             name="daea_tunnel_top_left_to_top_right",
             region="daea_tunnel_top_left",
             connection="daea_tunnel_top_right",
-            rule=lambda state: state.has("Rocket Boots", player),
+            rule=lambda state: state.has("Daea tunnel gate opened", player) and
+                               state.has("Rocket Boots", player),
         ),
         # daea_tunnel_middle_and_bottom_right
         PhoaExit(
