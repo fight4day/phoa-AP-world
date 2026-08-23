@@ -3442,7 +3442,7 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
             flags=PhoaFlag.BREAKABLE,
             vanillaItem="Fish Skewer",
         ),
-        "White Towers - Third floor - Knock down the item through the tight space": PhoaLocationData(
+        "White Towers - Third floor - Item in tight space": PhoaLocationData(
             region="white_towers(main)",
             address=7676542,
             rule=lambda state: logic.can_hit_switch_from_a_distance(state, exclude_slingshot=True, exclude_bombs=True)
