@@ -3124,6 +3124,7 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
         "Daea tunnel - Mouse in bottom left tunnel": PhoaLocationData(
             region="daea_tunnel_bottom_left",
             address=7676496,
+            rule=lambda state: logic.can_reasonably_kill_mice(state),
             flags=PhoaFlag.SMALLANIMALS,
             vanillaItem="Mystery Meat",
         ),
