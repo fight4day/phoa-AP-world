@@ -3439,8 +3439,8 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
             region="white_towers(main)",
             address=7676541,
             rule=lambda state: logic.has_sonic_spear(state),
-            flags=PhoaFlag.BREAKABLE,
-            vanillaItem="Fish Skewer",
+            flags=PhoaFlag.HEARTRUBY,
+            vanillaItem="Heart Ruby",
         ),
         "White Towers - Third floor - Item in tight space": PhoaLocationData(
             region="white_towers(main)",
