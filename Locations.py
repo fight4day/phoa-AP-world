@@ -3372,6 +3372,7 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
         "Daea Castle - Lizard at the back of the castle": PhoaLocationData(
             region="daea_region",
             address=7676531,
+            rule=lambda state: logic.can_reasonably_kill_enemies(state),
             flags=PhoaFlag.SMALLANIMALS,
             vanillaItem="Mystery Meat",
         ),
