@@ -102,13 +102,14 @@ class PhoaWorld(World):
             self.progression_item_classifications_overrides.append("Progressive Fishing Rod")
         if (options.enable_rin_locations > 1
                 or options.enable_minigames
+                or options.enable_heart_ruby_locations
                 or options.enable_moonstone_locations
                 or options.enable_fishing_spots
                 or options.enable_ancient_vault):
             self.progression_item_classifications_overrides.append("Energy Gem")
         if options.enable_sidequests:
-            self.progression_item_classifications_overrides.append("Ouroboros Scroll")
             self.progression_item_classifications_overrides.append("Antique Pin")
+            self.progression_item_classifications_overrides.append("GEO Song")
             self.progression_item_classifications_overrides.append("Prelude of Panselo")
             self.progression_item_classifications_overrides.append("Progressive Prelude of Panselo")
             self.progression_item_classifications_overrides.append("Baroque of Battle")
@@ -138,6 +139,7 @@ class PhoaWorld(World):
             self.progression_item_classifications_overrides.append("Cosette Franway Teleporter")
         if options.franway_unlock_mode in (1, 2) or options.enable_moonstone_shops:
             self.progression_item_classifications_overrides.append("Moonstone")
+            self.progression_item_classifications_overrides.append("Moonstone Bundle")
 
     def pre_fill(self) -> None:
         for dungeon_item_setting_group in dungeon_item_setting_groups:

@@ -160,7 +160,7 @@ item_table: dict[str, PhoaItemData] = {
     "Ouro Guard Keyring":               PhoaItemData(218,   1,  IC.progression),  # Only progression when dungeon is in location pool
     "Big Blue Golem Medallion":         PhoaItemData(219,   1,  IC.progression),  # Only progression when dungeon is in location pool
     "Big Red Golem Medallion":          PhoaItemData(220,   1,  IC.progression),  # Only progression when dungeon is in location pool
-    "Moonstone Bundle":                 PhoaItemData(221,   7,  IC.progression),  # 10
+    "Moonstone Bundle":                 PhoaItemData(221,   6,  IC.progression),  # 10
     "Panselo Franway Teleporter":       PhoaItemData(222,   1,  IC.filler),
     "Atai Franway Teleporter":          PhoaItemData(223,   1,  IC.filler),
     "Cosette Franway Teleporter":       PhoaItemData(224,   1,  IC.filler),
@@ -265,6 +265,8 @@ def get_item_pool(world: "PhoaWorld", locations: dict[str, PhoaLocationData]) ->
         for location in locations.values()
     ]
 
+    if world.options.bundle_moonstones:
+        items_from_locations = bundle_moonstones_in_list(items_from_locations)
     items_from_locations = [item for item in items_from_locations if item not in set(progression_items)]
     items_from_locations = [item for item in items_from_locations if item not in set(useful_items)]
 
@@ -366,6 +368,15 @@ def build_replacement_map(options: PhoaOptions) -> dict[str, str]:
             mapping[dungeon_item_setting_group.dungeon_item] = dungeon_item_setting_group.dungeon_item_bundle
 
     return mapping
+
+
+def bundle_moonstones_in_list(item_list: list[str]):
+    bundles_to_add = item_list.count("Moonstone") // 10
+
+    result = [item for item in item_list if item != "Moonstone"]
+    result.extend(["Moonstone Bundle"] * bundles_to_add)
+
+    return result
 
 
 def filter_dungeon_items(world: "PhoaWorld", location_data: dict[str, PhoaLocationData],
