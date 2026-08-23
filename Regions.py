@@ -753,8 +753,7 @@ def get_exit_data(player: int, options: PhoaOptions) -> list[PhoaExit]:
             connection="daea_tunnel_top_left",
             rule=lambda state: logic.has_slingshot(state)
                                or logic.has_bombs(state)
-                               or logic.has_sonic_spear(state)
-                               or state.has("Rocket Boots", player),
+                               or logic.has_sonic_spear(state),
         ),
         PhoaExit(
             name="daea_tunnel_middle_to_top_right",
@@ -763,8 +762,7 @@ def get_exit_data(player: int, options: PhoaOptions) -> list[PhoaExit]:
             rule=lambda state: state.has("Daea tunnel gate opened", player) and
                                (logic.has_slingshot(state)
                                 or logic.has_bombs(state)
-                                or logic.has_sonic_spear(state)
-                                or state.has("Rocket Boots", player)),
+                                or logic.has_sonic_spear(state)),
         ),
         PhoaExit(
             name="daea_tunnel_middle_to_bottom_left",
