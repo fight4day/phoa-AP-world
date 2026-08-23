@@ -2234,7 +2234,8 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
             region="daea_city",
             address=7676549,
             rule=lambda state: logic.has_slingshot(state)
-                               or logic.has_crossbow(state),
+                               or logic.has_crossbow(state)
+                               or logic.can_use_whirlwind(state),
             flags=PhoaFlag.MOONSTONE,
             vanillaItem="Moonstone",
         ),
