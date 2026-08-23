@@ -3164,9 +3164,10 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
             address=7676501,
             rule=lambda state: logic.can_use_whirlwind(state)
                                or logic.has_bombs(state)
-                               or logic.has_crossbow(state)
                                or logic.has_sonic_spear(state)
-                               or state.has_any({"Kobold Blaster", "Rocket Boots"}, player),
+                               or state.has("Kobold Blaster", player)
+                               or (state.has("Rocket Boots", player) and 
+                                   logic.can_deal_damage(state, exclude_rocket_boots=True, exclude_lamp=True)),
             flags=PhoaFlag.MOONSTONE,
             vanillaItem="Moonstone",
         ),
