@@ -3359,6 +3359,7 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
         "Daea Castle - Food box 1": PhoaLocationData(
             region="white_towers(entrance)",
             address=7676529,
+            rule=lambda state: logic.can_break_big_object_with_tools(state),
             flags=PhoaFlag.BREAKABLE,
             vanillaItem="Raw Meat",
         ),
