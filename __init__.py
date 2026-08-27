@@ -1,3 +1,5 @@
+from typing import Counter
+
 from BaseClasses import Tutorial, Item
 from BaseClasses import ItemClassification as IC
 from worlds.AutoWorld import WebWorld, World
@@ -42,6 +44,7 @@ class PhoaWorld(World):
 
     def generate_early(self) -> None:
         self._determine_item_classifications_overrides()
+        # self.compare_item_amounts(get_location_data(-1, None), item_table)
 
     def create_item(self, name: str) -> PhoaItem:
         item_classification = IC.progression \
@@ -145,3 +148,16 @@ class PhoaWorld(World):
     def pre_fill(self) -> None:
         for dungeon_item_setting_group in dungeon_item_setting_groups:
             fill_dungeon_items_in_own_dungeon(self, dungeon_item_setting_group)
+
+    def compare_item_amounts(self, locations: dict[str, PhoaLocationData], items: dict[str, PhoaItemData]) -> None:
+        item_counts = Counter()
+
+        for location_data in locations.values():
+            item_counts[location_data.vanillaItem] += 1
+
+        for item_name, item_data in items.items():
+            item_counts[item_name] -= item_data.amount
+
+        for item_name, item_count in item_counts.items():
+            if item_count != 0:
+                print(f"{item_name}: {item_count}")
