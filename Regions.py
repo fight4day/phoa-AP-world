@@ -213,11 +213,18 @@ def get_exit_data(player: int, options: PhoaOptions) -> list[PhoaExit]:
             connection="moonlight_ravine(south)",
         ),
         PhoaExit(
-            name="kingdom_bridge_south_kingdom_bridge_north",
+            name="kingdom_bridge_south_to_kingdom_bridge_north",
             region="atai_region",
             connection="daea_region",
             rule=lambda state: (state.has("Life Saver", player)
                                 and logic.has_sonic_spear(state))
+                               or state.has("Rocket Boots", player),
+        ),
+        PhoaExit(
+            name="kingdom_bridge_north_to_kingdom_bridge_south",
+            region="daea_region",
+            connection="atai_region",
+            rule=lambda state: state.has("Life Saver", player)
                                or state.has("Rocket Boots", player),
         ),
         PhoaExit(
@@ -711,7 +718,9 @@ def get_exit_data(player: int, options: PhoaOptions) -> list[PhoaExit]:
             name="daea_city_to_geo_dungeon",
             region="daea_city",
             connection="daea_city(geo_dungeon)",
-            rule=lambda state: state.has("Rocket Boots", player),
+            rule=lambda state: state.has("Rocket Boots", player)
+                               and logic.has_music_instrument(state)
+                               and state.has("GEO Song", player),
         ),
         PhoaExit(
             name="daea_city_to_seer",
@@ -734,7 +743,8 @@ def get_exit_data(player: int, options: PhoaOptions) -> list[PhoaExit]:
             name="daea_tunnel_top_left_to_top_right",
             region="daea_tunnel_top_left",
             connection="daea_tunnel_top_right",
-            rule=lambda state: state.has("Rocket Boots", player),
+            rule=lambda state: state.has("Daea tunnel gate opened", player) and
+                               state.has("Rocket Boots", player),
         ),
         # daea_tunnel_middle_and_bottom_right
         PhoaExit(
@@ -743,8 +753,7 @@ def get_exit_data(player: int, options: PhoaOptions) -> list[PhoaExit]:
             connection="daea_tunnel_top_left",
             rule=lambda state: logic.has_slingshot(state)
                                or logic.has_bombs(state)
-                               or logic.has_sonic_spear(state)
-                               or state.has("Rocket Boots", player),
+                               or logic.has_sonic_spear(state),
         ),
         PhoaExit(
             name="daea_tunnel_middle_to_top_right",
@@ -753,8 +762,7 @@ def get_exit_data(player: int, options: PhoaOptions) -> list[PhoaExit]:
             rule=lambda state: state.has("Daea tunnel gate opened", player) and
                                (logic.has_slingshot(state)
                                 or logic.has_bombs(state)
-                                or logic.has_sonic_spear(state)
-                                or state.has("Rocket Boots", player)),
+                                or logic.has_sonic_spear(state)),
         ),
         PhoaExit(
             name="daea_tunnel_middle_to_bottom_left",
@@ -774,7 +782,8 @@ def get_exit_data(player: int, options: PhoaOptions) -> list[PhoaExit]:
             name="daea_tunnel_top_right_to_top_left",
             region="daea_tunnel_top_right",
             connection="daea_tunnel_top_left",
-            rule=lambda state: state.has("Rocket Boots", player),
+            rule=lambda state: state.has("Daea tunnel gate opened", player) and
+                               state.has("Rocket Boots", player),
         ),
         PhoaExit(
             name="daea_tunnel_top_right_to_castle_dungeon",
@@ -878,7 +887,6 @@ def get_exit_data(player: int, options: PhoaOptions) -> list[PhoaExit]:
             name="white_towers_entrance_to_daea_region",
             region="white_towers(entrance)",
             connection="daea_region",
-            rule=lambda state: logic.can_deal_damage(state),
         ),
         # NOTE: Logically (for regions), I'll assume the player has the sonic spear from here
         PhoaExit(

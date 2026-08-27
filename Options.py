@@ -190,7 +190,7 @@ class KeycardShuffle(DungeonItemShuffle):
     - **Vanilla**: Keeps Keycards at the corresponding guards
     - **Own Dungeon**: Places Keycards shuffled within their dungeon
     - **Anywhere**: Keycards can be found across the multiworld"""
-    display_name = "Ouro Guard Key shuffle"
+    display_name = "Keycard shuffle"
     default = 0
 
 
