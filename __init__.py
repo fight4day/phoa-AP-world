@@ -114,6 +114,7 @@ class PhoaWorld(World):
             self.progression_item_classifications_overrides.append("Progressive Prelude of Panselo")
             self.progression_item_classifications_overrides.append("Baroque of Battle")
             self.progression_item_classifications_overrides.append("Lullaby of Ava")
+            self.progression_item_classifications_overrides.append("Stack of Letters")
         if options.enable_geo_shop:
             self.progression_item_classifications_overrides.append("GEO Ticket")
         if options.enable_geo_challenge_rewards:

@@ -134,6 +134,41 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
             flags=PhoaFlag.BREAKABLE,
             vanillaItem="Panselo Potato",
         ),
+        "Panselo Village - Panselo Shop Box 1 after defeating Birdy": PhoaLocationData(
+            region="panselo_village",
+            address=7676551,
+            rule=lambda state: state.has("Defeat Sand Dragon", player),
+            flags=PhoaFlag.BREAKABLE,
+            vanillaItem="Berry Fruit",
+        ),
+        "Panselo Village - Panselo Shop Box 2 after defeating Birdy": PhoaLocationData(
+            region="panselo_village",
+            address=7676552,
+            rule=lambda state: state.has("Defeat Sand Dragon", player),
+            flags=PhoaFlag.BREAKABLE,
+            vanillaItem="Toad Leg",
+        ),
+        "Panselo Village - Panselo Shop Box 3 after defeating Birdy": PhoaLocationData(
+            region="panselo_village",
+            address=7676553,
+            rule=lambda state: state.has("Defeat Sand Dragon", player),
+            flags=PhoaFlag.BREAKABLE,
+            vanillaItem="Milk",
+        ),
+        "Panselo Village - Panselo Shop Box 4 after defeating Birdy": PhoaLocationData(
+            region="panselo_village",
+            address=7676554,
+            rule=lambda state: state.has("Defeat Sand Dragon", player),
+            flags=PhoaFlag.BREAKABLE,
+            vanillaItem="Panselo Potato",
+        ),
+        "Panselo Village - Panselo Shop Box 5 after defeating Birdy": PhoaLocationData(
+            region="panselo_village",
+            address=7676555,
+            rule=lambda state: state.has("Defeat Sand Dragon", player),
+            flags=PhoaFlag.BREAKABLE,
+            vanillaItem="Raw Bird",
+        ),
         "Panselo Village - Dojo high up punchbag": PhoaLocationData(
             region="panselo_village",
             address=7676082,
@@ -208,6 +243,20 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
             rule=lambda state: state.has("Slargummy boss defeated", player),
             flags=PhoaFlag.NPCGIFTS,
             vanillaItem="Potato Lunch",
+        ),
+        "Panselo Village - Seth's gift lunch": PhoaLocationData(
+            region="panselo_village",
+            address=7676550,
+            rule=lambda state: state.has("Defeat Sand Dragon", player),
+            flags=PhoaFlag.NPCGIFTS,
+            vanillaItem="Potato Lunch",
+        ),
+        "Panselo Village - Win Seth's coin flip": PhoaLocationData(
+            region="panselo_village",
+            address=7676556,
+            rule=lambda state: state.has("Defeat Sand Dragon", player),
+            flags=PhoaFlag.NPCGIFTS,
+            vanillaItem="Panselo Potato",
         ),
         "Panselo Village - Warehouse Chest": PhoaLocationData(
             region="panselo_village",
@@ -995,6 +1044,13 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
             flags=PhoaFlag.MAINQUEST,
             vanillaItem="Song of Ouroboros",
         ),
+        "Atai Town - Help Birdy in Prison": PhoaLocationData(
+            region="atai_town",
+            address=7676560,
+            rule=lambda state: state.has("Defeat Sand Dragon", player),
+            flags=PhoaFlag.SIDEQUEST | PhoaFlag.HEARTRUBY,
+            vanillaItem="Heart Ruby",
+        ),
         "Atai Town - Storage room hidden behind carpet": PhoaLocationData(
             region="atai_town",
             address=7676204,
@@ -1190,6 +1246,12 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
             flags=PhoaFlag.NPCGIFTS,
             vanillaItem="Cooked Squash",
         ),
+        "Atai Town - Mansion secret attic": PhoaLocationData(
+            region="atai_town",
+            address=7676557,
+            flags=PhoaFlag.SIDEQUEST,
+            vanillaItem="Stack of Letters",
+        ),
         "Atai Town - Mansion storage pot": PhoaLocationData(
             region="atai_town",
             address=7676233,
@@ -1207,6 +1269,18 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
             address=7676235,
             flags=PhoaFlag.SMALLANIMALS,
             vanillaItem="Mystery Meat",
+        ),
+        "Atai Town - Gift 1 from Mikail after helping the mayor": PhoaLocationData(
+            region="atai_town",
+            address=7676558,
+            flags=PhoaFlag.SIDEQUEST,
+            vanillaItem="150 Rin",
+        ),
+        "Atai Town - Gift 2 from Mikail after helping the mayor": PhoaLocationData(
+            region="atai_town",
+            address=7676559,
+            flags=PhoaFlag.SIDEQUEST | PhoaFlag.HEARTRUBY,
+            vanillaItem="Heart Ruby",
         ),
         "Atai Town - West sewer pipe room chest": PhoaLocationData(
             region="atai_town(sewer)",
