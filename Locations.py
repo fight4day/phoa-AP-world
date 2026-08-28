@@ -3600,7 +3600,7 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
             region="white_towers(katash)",
             address=None,
             # TODO: This is a bare minimum and needs to be reconsidered
-            rule=lambda state: logic.has_sonic_spear(state),
+            rule=lambda state: logic.can_defeat_katash(state),
         ),
     }
 
