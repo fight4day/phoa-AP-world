@@ -14,6 +14,7 @@ class PhoaFlag(Flag):
     MOONSTONE = auto()
     DUNGEONITEM = auto()
     LUNARARTIFACT = auto()
+    LUNARARTIFACTQUEST = auto()
     FISHINGSPOT = auto()
     NPCGIFTS = auto()
     PLANTO = auto()
@@ -29,9 +30,15 @@ class PhoaFlag(Flag):
     MINIGAMES = auto()
     TRAPCHEST = auto()
     OUROBOROS = auto()
+    ATRI = auto()
+    MOONSTONESHOP = auto()
+    GEOSHOP = auto()
     PERRO = auto()
     VAULT = auto()
     EXTRATERMINAL = auto()
+
+    def __or__(self, other: "PhoaFlag") -> "PhoaFlag":
+        return PhoaFlag(self._value_ | other._value_)
 
 
 class PhoaLocation(Location):
@@ -127,6 +134,41 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
             flags=PhoaFlag.BREAKABLE,
             vanillaItem="Panselo Potato",
         ),
+        "Panselo Village - Panselo Shop Box 1 after defeating Birdy": PhoaLocationData(
+            region="panselo_village",
+            address=7676551,
+            rule=lambda state: state.has("Defeat Sand Dragon", player),
+            flags=PhoaFlag.BREAKABLE,
+            vanillaItem="Berry Fruit",
+        ),
+        "Panselo Village - Panselo Shop Box 2 after defeating Birdy": PhoaLocationData(
+            region="panselo_village",
+            address=7676552,
+            rule=lambda state: state.has("Defeat Sand Dragon", player),
+            flags=PhoaFlag.BREAKABLE,
+            vanillaItem="Toad Leg",
+        ),
+        "Panselo Village - Panselo Shop Box 3 after defeating Birdy": PhoaLocationData(
+            region="panselo_village",
+            address=7676553,
+            rule=lambda state: state.has("Defeat Sand Dragon", player),
+            flags=PhoaFlag.BREAKABLE,
+            vanillaItem="Milk",
+        ),
+        "Panselo Village - Panselo Shop Box 4 after defeating Birdy": PhoaLocationData(
+            region="panselo_village",
+            address=7676554,
+            rule=lambda state: state.has("Defeat Sand Dragon", player),
+            flags=PhoaFlag.BREAKABLE,
+            vanillaItem="Panselo Potato",
+        ),
+        "Panselo Village - Panselo Shop Box 5 after defeating Birdy": PhoaLocationData(
+            region="panselo_village",
+            address=7676555,
+            rule=lambda state: state.has("Defeat Sand Dragon", player),
+            flags=PhoaFlag.BREAKABLE,
+            vanillaItem="Raw Bird",
+        ),
         "Panselo Village - Dojo high up punchbag": PhoaLocationData(
             region="panselo_village",
             address=7676082,
@@ -138,7 +180,7 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
             region="panselo_village",
             address=7676089,
             rule=lambda state: logic.has_music_instrument(state),
-            flags=PhoaFlag.SIDEQUEST,  # Main
+            flags=PhoaFlag.SIDEQUEST,
             vanillaItem="Prelude of Panselo",
         ),
         "Panselo Village - Inside coop": PhoaLocationData(
@@ -192,7 +234,7 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
         "Panselo Village - Kitt's money for the milk": PhoaLocationData(
             region="panselo_village",
             address=7676078,
-            flags=PhoaFlag.SIDEQUEST,  # Obscure
+            flags=PhoaFlag.SIDEQUEST,
             vanillaItem="20 Rin",
         ),
         "Panselo Village - Amanda's gift lunch": PhoaLocationData(
@@ -201,6 +243,20 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
             rule=lambda state: state.has("Slargummy boss defeated", player),
             flags=PhoaFlag.NPCGIFTS,
             vanillaItem="Potato Lunch",
+        ),
+        "Panselo Village - Seth's gift lunch": PhoaLocationData(
+            region="panselo_village",
+            address=7676550,
+            rule=lambda state: state.has("Defeat Sand Dragon", player),
+            flags=PhoaFlag.NPCGIFTS,
+            vanillaItem="Potato Lunch",
+        ),
+        "Panselo Village - Win Seth's coin flip": PhoaLocationData(
+            region="panselo_village",
+            address=7676556,
+            rule=lambda state: state.has("Defeat Sand Dragon", player),
+            flags=PhoaFlag.NPCGIFTS,
+            vanillaItem="Panselo Potato",
         ),
         "Panselo Village - Warehouse Chest": PhoaLocationData(
             region="panselo_village",
@@ -656,7 +712,7 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
             region="anuri_temple(pond)",
             address=7676025,
             rule=lambda state: logic.has_fishing_rod(state),
-            flags=PhoaFlag.FISHINGSPOT,
+            flags=PhoaFlag.MOONSTONE | PhoaFlag.FISHINGSPOT,
             vanillaItem="Moonstone",
         ),
         "Anuri Temple - Bart's head crater": PhoaLocationData(
@@ -988,6 +1044,13 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
             flags=PhoaFlag.MAINQUEST,
             vanillaItem="Song of Ouroboros",
         ),
+        "Atai Town - Help Birdy in Prison": PhoaLocationData(
+            region="atai_town",
+            address=7676560,
+            rule=lambda state: state.has("Defeat Sand Dragon", player),
+            flags=PhoaFlag.SIDEQUEST | PhoaFlag.HEARTRUBY,
+            vanillaItem="Heart Ruby",
+        ),
         "Atai Town - Storage room hidden behind carpet": PhoaLocationData(
             region="atai_town",
             address=7676204,
@@ -1183,6 +1246,12 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
             flags=PhoaFlag.NPCGIFTS,
             vanillaItem="Cooked Squash",
         ),
+        "Atai Town - Mansion secret attic": PhoaLocationData(
+            region="atai_town",
+            address=7676557,
+            flags=PhoaFlag.SIDEQUEST,
+            vanillaItem="Stack of Letters",
+        ),
         "Atai Town - Mansion storage pot": PhoaLocationData(
             region="atai_town",
             address=7676233,
@@ -1200,6 +1269,18 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
             address=7676235,
             flags=PhoaFlag.SMALLANIMALS,
             vanillaItem="Mystery Meat",
+        ),
+        "Atai Town - Gift 1 from Mikail after helping the mayor": PhoaLocationData(
+            region="atai_town",
+            address=7676558,
+            flags=PhoaFlag.SIDEQUEST,
+            vanillaItem="150 Rin",
+        ),
+        "Atai Town - Gift 2 from Mikail after helping the mayor": PhoaLocationData(
+            region="atai_town",
+            address=7676559,
+            flags=PhoaFlag.SIDEQUEST | PhoaFlag.HEARTRUBY,
+            vanillaItem="Heart Ruby",
         ),
         "Atai Town - West sewer pipe room chest": PhoaLocationData(
             region="atai_town(sewer)",
@@ -1343,27 +1424,37 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
         "Ancient Vault - Printer item 1": PhoaLocationData(
             region="ancient_vault(printer_room)",
             address=7676330,
-            flags=PhoaFlag.VAULT,
+            flags=PhoaFlag.VAULT | PhoaFlag.HEARTRUBY,
             vanillaItem="Heart Ruby",
         ),
         "Ancient Vault - Printer item 2": PhoaLocationData(
             region="ancient_vault(printer_room)",
             address=7676331,
-            flags=PhoaFlag.VAULT,
+            flags=PhoaFlag.VAULT | PhoaFlag.ENERGYGEM,
             vanillaItem="Energy Gem",
         ),
-        "Daetai Bridge - Broken bridge chest": PhoaLocationData(
+        "Kingdom Bridge - Broken bridge chest": PhoaLocationData(
             region="atai_region",
             address=7676190,
             flags=PhoaFlag.RINCHESTS,
             vanillaItem="35 Rin",
         ),
-        "Daetai Bridge - Songstone chest": PhoaLocationData(
+        "Kingdom Bridge - Songstone chest": PhoaLocationData(
             region="atai_region",
             address=7676189,
             rule=lambda state: logic.has_music_instrument(state),
             flags=PhoaFlag.RINCHESTS,
             vanillaItem="45 Rin",
+        ),
+        "Kingdom Bridge - South fish item": PhoaLocationData(
+            region="atai_region",
+            address=7676186,
+            rule=lambda state: (logic.has_fishing_rod(state)
+                                and state.has("Energy Gem", player, 2))
+                               or (logic.has_serpant_rod(state)
+                                   and state.has("Energy Gem", player, 1)),
+            flags=PhoaFlag.MOONSTONE | PhoaFlag.FISHINGSPOT,
+            vanillaItem="Moonstone",
         ),
         "Atai Region - Northwest cave chest": PhoaLocationData(
             region="atai_region",
@@ -1426,7 +1517,7 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
                                 and state.has("Energy Gem", player, 4))
                                or (logic.has_serpant_rod(state)
                                    and state.has("Energy Gem", player, 2)),
-            flags=PhoaFlag.FISHINGSPOT,
+            flags=PhoaFlag.ENERGYGEM | PhoaFlag.FISHINGSPOT,
             vanillaItem="Energy Gem",
         ),
         "Atai Region - Oasis Ouroboros shrine": PhoaLocationData(
@@ -1744,7 +1835,7 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
         "Ouroboros Hideout - Ruby's gift": PhoaLocationData(
             region="ouroboros_hideout(prison)",
             address=7676310,
-            flags=PhoaFlag.SIDEQUEST,
+            flags=PhoaFlag.HEARTRUBY,
             vanillaItem="Heart Ruby",
         ),
         "Ouroboros Hideout - Storage item 1": PhoaLocationData(
@@ -1788,16 +1879,17 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
             region="ouroboros_hideout",
             address=7676317,
             rule=lambda state: logic.can_balo(state),
-            flags=PhoaFlag.NPCGIFTS,
+            flags=PhoaFlag.ENERGYGEM,
             vanillaItem="Energy Gem",
         ),
-        # "Ouroboros Hideout - Box breaker challenge 2": PhoaLocationData(
-        #     region="ouroboros_hideout",
-        #     address=7676318,
-        #     # Needs rule
-        #     flags=PhoaFlag.NPCGIFTS,
-        #     vanillaItem="Heart Ruby",
-        # ),
+        "Ouroboros Hideout - Box breaker challenge 2": PhoaLocationData(
+            region="ouroboros_hideout",
+            address=7676318,
+            rule=lambda state: state.has("Defeat Sand Dragon", player)
+                               and logic.can_balo(state),  # TODO: Logic currently is similar to challenge 1
+            flags=PhoaFlag.HEARTRUBY,
+            vanillaItem="Heart Ruby",
+        ),
         "Ouroboros Hideout - Drake hatchery guard": PhoaLocationData(
             region="ouroboros_hideout(infant_drake_arena)",
             address=7676319,
@@ -1850,63 +1942,1269 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
             flags=PhoaFlag.DUNGEONITEM,
             vanillaItem="Ouroboros Proof",
         ),
-        # "Ouroboros Hideout - Atri training 1": PhoaLocationData(  # 2 Ouroboros Scrolls
-        #     region="ouroboros_hideout(great_drake_arena)",
-        #     address=7676327,
-        #     flags=PhoaFlag.NPCGIFTS,
-        #     rule=lambda state: logic.has_sonic_spear(state),
-        #     vanillaItem="Spear Bomb",
+        "Ouroboros Hideout - Atri training 1": PhoaLocationData(
+            region="ouroboros_hideout(great_drake_arena)",
+            address=7676327,
+            rule=lambda state: state.has("Defeat Sand Dragon", player)
+                               and logic.has_sonic_spear(state)
+                               and state.has("Ouroboros Scroll", player, 2),
+            flags=PhoaFlag.ATRI,
+            vanillaItem="Spear Bomb",
+        ),
+        "Ouroboros Hideout - Atri training 2": PhoaLocationData(
+            region="ouroboros_hideout(great_drake_arena)",
+            address=7676328,
+            rule=lambda state: state.has("Defeat Sand Dragon", player)
+                               and logic.has_sonic_spear(state)
+                               and logic.has_prelude_of_panselo(state)
+                               and state.has("Ouroboros Scroll", player, 4),
+            flags=PhoaFlag.ATRI,
+            vanillaItem="Spell of Rejuvenation",
+        ),
+        "Ouroboros Hideout - Atri training 3": PhoaLocationData(
+            region="ouroboros_hideout(great_drake_arena)",
+            address=7676329,
+            rule=lambda state: state.has("Defeat Sand Dragon", player)
+                               and logic.has_sonic_spear(state)
+                               and logic.has_prelude_of_panselo(state)
+                               and state.has("Ouroboros Scroll", player, 6),
+            flags=PhoaFlag.ATRI,
+            vanillaItem="Baroque of Battle",
+        ),
+        "Moonlight Ravine - South town shop item 1": PhoaLocationData(
+            region="moonlight_ravine(south)",
+            address=7676332,
+            flags=PhoaFlag.SHOPSANITY,
+            vanillaItem="Fishing Rod",
+        ),
+        "Moonlight Ravine - South town shop item 2": PhoaLocationData(
+            region="moonlight_ravine(south)",
+            address=7676333,
+            flags=PhoaFlag.SHOPSANITY,
+            vanillaItem="Cooked Knife Krill",  # 3 of them
+        ),
+        "Moonlight Ravine - South town shop item 3": PhoaLocationData(
+            region="moonlight_ravine(south)",
+            address=7676334,
+            flags=PhoaFlag.SHOPSANITY,
+            vanillaItem="Sushi",  # 2 of them
+        ),
+        "Moonlight Ravine - South town shop item 4": PhoaLocationData(
+            region="moonlight_ravine(south)",
+            address=7676335,
+            flags=PhoaFlag.SHOPSANITY,
+            vanillaItem="Fish Skewer",
+        ),
+        "Moonlight Ravine -  South town crate under shop": PhoaLocationData(
+            region="moonlight_ravine(south)",
+            address=7676336,
+            flags=PhoaFlag.BREAKABLE,
+            vanillaItem="Honey Drop",
+        ),
+        "Moonlight Ravine -  South town hidden NPC": PhoaLocationData(
+            region="moonlight_ravine(south)",
+            address=7676337,
+            flags=PhoaFlag.MOONSTONE,
+            vanillaItem="Moonstone",
+        ),
+
+        "Moonlight Ravine - Wilds room 1 underwater item 1": PhoaLocationData(
+            region="moonlight_ravine(wilds)",
+            address=7676338,
+            rule=lambda state: state.has("Life Saver", player),
+            flags=PhoaFlag.FREESTANDING,
+            vanillaItem="Moon Kelp",
+        ),
+        "Moonlight Ravine - Wilds room 1 underwater item 2": PhoaLocationData(
+            region="moonlight_ravine(wilds)",
+            address=7676339,
+            rule=lambda state: state.has("Life Saver", player),
+            flags=PhoaFlag.FREESTANDING,
+            vanillaItem="Moon Kelp",
+        ),
+        "Moonlight Ravine - Wilds room 1 underwater item 3": PhoaLocationData(
+            region="moonlight_ravine(wilds)",
+            address=7676340,
+            rule=lambda state: state.has("Life Saver", player),
+            flags=PhoaFlag.FREESTANDING,
+            vanillaItem="Moon Kelp",
+        ),
+        "Moonlight Ravine - Wilds room 1 chest": PhoaLocationData(
+            region="moonlight_ravine(wilds)",
+            address=7676341,
+            rule=lambda state: state.has("Life Saver", player),
+            flags=PhoaFlag.RINCHESTS,
+            vanillaItem="30 Rin",
+        ),
+        "Moonlight Ravine - Wilds room 1 underwater item 4": PhoaLocationData(
+            region="moonlight_ravine(wilds)",
+            address=7676342,
+            rule=lambda state: state.has("Life Saver", player),
+            flags=PhoaFlag.FREESTANDING,
+            vanillaItem="Moon Kelp",
+        ),
+
+        "Moonlight Ravine - Wilds room 2 underwater item 1": PhoaLocationData(
+            region="moonlight_ravine(wilds)",
+            address=7676343,
+            rule=lambda state: state.has("Life Saver", player),
+            flags=PhoaFlag.FREESTANDING,
+            vanillaItem="Moon Kelp",
+        ),
+        "Moonlight Ravine - Wilds room 2 underwater item 2": PhoaLocationData(
+            region="moonlight_ravine(wilds)",
+            address=7676344,
+            rule=lambda state: state.has("Life Saver", player),
+            flags=PhoaFlag.FREESTANDING,
+            vanillaItem="Moon Kelp",
+        ),
+        "Moonlight Ravine - Wilds room 2 pot": PhoaLocationData(
+            region="moonlight_ravine(wilds)",
+            address=7676345,
+            flags=PhoaFlag.MOONSTONE,
+            vanillaItem="Moonstone",
+        ),
+        "Moonlight Ravine - Wilds room 2 underwater item 3": PhoaLocationData(
+            region="moonlight_ravine(wilds)",
+            address=7676346,
+            rule=lambda state: state.has("Life Saver", player),
+            flags=PhoaFlag.FREESTANDING,
+            vanillaItem="Moon Kelp",
+        ),
+        "Moonlight Ravine - Wilds room 2 underwater item 4": PhoaLocationData(
+            region="moonlight_ravine(wilds)",
+            address=7676347,
+            rule=lambda state: state.has("Life Saver", player),
+            flags=PhoaFlag.FREESTANDING,
+            vanillaItem="Moon Kelp",
+        ),
+        "Moonlight Ravine - Wilds room 2 alcove item": PhoaLocationData(
+            region="moonlight_ravine(wilds)",
+            address=7676348,
+            rule=lambda state: logic.has_explosives(state)
+                               and state.has("Life Saver", player),
+            flags=PhoaFlag.LUNARARTIFACT,
+            vanillaItem="Lunar Crown",
+        ),
+
+        "Moonlight Ravine - Wilds room 3 underwater item 1": PhoaLocationData(
+            region="moonlight_ravine(wilds)",
+            address=7676349,
+            rule=lambda state: state.has("Life Saver", player),
+            flags=PhoaFlag.FREESTANDING,
+            vanillaItem="Moon Kelp",
+        ),
+        "Moonlight Ravine - Wilds room 3 pot": PhoaLocationData(
+            region="moonlight_ravine(wilds)",
+            address=7676350,
+            rule=lambda state: logic.has_sonic_spear(state)
+                               or state.has("Rocket Boots", player),
+            flags=PhoaFlag.MOONSTONE,
+            vanillaItem="Moonstone",
+        ),
+        "Moonlight Ravine - Wilds room 3 underwater item 2": PhoaLocationData(
+            region="moonlight_ravine(wilds)",
+            address=7676351,
+            rule=lambda state: state.has("Life Saver", player),
+            flags=PhoaFlag.FREESTANDING,
+            vanillaItem="Moon Kelp",
+        ),
+        "Moonlight Ravine - Wilds room 3 water crevice pot": PhoaLocationData(
+            region="moonlight_ravine(wilds)",
+            address=7676352,
+            rule=lambda state: state.has("Life Saver", player)
+                               and (logic.can_use_spear_bomb_midair(state)
+                                    or state.has("Kobold Blaster", player)),
+            flags=PhoaFlag.MOONSTONE,
+            vanillaItem="Moonstone",
+        ),
+        "Moonlight Ravine - Wilds room 3 wall chest": PhoaLocationData(
+            region="moonlight_ravine(wilds)",
+            address=7676353,
+            rule=lambda state: state.has("Life Saver", player)
+                               and logic.has_explosives_midair(state),
+            flags=PhoaFlag.RINCHESTS,
+            vanillaItem="30 Rin",
+        ),
+        "Moonlight Ravine - Wilds room 3 underwater item 3": PhoaLocationData(
+            region="moonlight_ravine(wilds)",
+            address=7676354,
+            rule=lambda state: state.has("Life Saver", player),
+            flags=PhoaFlag.FREESTANDING,
+            vanillaItem="Moon Kelp",
+        ),
+        "Moonlight Ravine - Wilds room 3 underwater item 4": PhoaLocationData(
+            region="moonlight_ravine(wilds)",
+            address=7676355,
+            rule=lambda state: state.has("Life Saver", player),
+            flags=PhoaFlag.FREESTANDING,
+            vanillaItem="Moon Kelp",
+        ),
+
+        "Moonlight Ravine - Wilds room 4 underwater item 1": PhoaLocationData(
+            region="moonlight_ravine(wilds)",
+            address=7676356,
+            rule=lambda state: state.has("Life Saver", player),
+            flags=PhoaFlag.FREESTANDING,
+            vanillaItem="Moon Kelp",
+        ),
+        "Moonlight Ravine - Wilds room 4 lizard": PhoaLocationData(
+            region="moonlight_ravine(wilds)",
+            address=7676357,
+            rule=lambda state: logic.can_reasonably_kill_mice(state),
+            flags=PhoaFlag.SMALLANIMALS,
+            vanillaItem="Mystery Meat",
+        ),
+        "Moonlight Ravine - Wilds room 4 underwater item below rocks": PhoaLocationData(
+            region="moonlight_ravine(wilds)",
+            address=7676358,
+            rule=lambda state: state.has("Life Saver", player)
+                               and logic.has_sonic_spear(state)
+                               and logic.has_explosives(state),
+            flags=PhoaFlag.LUNARARTIFACT,
+            vanillaItem="Lunar Trident",
+        ),
+        "Moonlight Ravine - Wilds room 4 underwater item 2": PhoaLocationData(
+            region="moonlight_ravine(wilds)",
+            address=7676359,
+            rule=lambda state: state.has("Life Saver", player),
+            flags=PhoaFlag.FREESTANDING,
+            vanillaItem="Moon Kelp",
+        ),
+        "Moonlight Ravine - Wilds room 4 deep underwater item": PhoaLocationData(
+            region="moonlight_ravine(wilds)",
+            address=7676360,
+            rule=lambda state: state.has("Life Saver", player),
+            flags=PhoaFlag.ENERGYGEM,
+            vanillaItem="Energy Gem",
+        ),
+        "Moonlight Ravine - Wilds room 4 underwater item 3": PhoaLocationData(
+            region="moonlight_ravine(wilds)",
+            address=7676361,
+            rule=lambda state: state.has("Life Saver", player),
+            flags=PhoaFlag.FREESTANDING,
+            vanillaItem="Moon Kelp",
+        ),
+        "Moonlight Ravine - Wilds room 4 underwater item 4": PhoaLocationData(
+            region="moonlight_ravine(wilds)",
+            address=7676362,
+            rule=lambda state: state.has("Life Saver", player),
+            flags=PhoaFlag.FREESTANDING,
+            vanillaItem="Moon Kelp",
+        ),
+
+        "Moonlight Ravine - North town underwater item 1": PhoaLocationData(
+            region="moonlight_ravine(north)",
+            address=7676363,
+            rule=lambda state: state.has("Life Saver", player),
+            flags=PhoaFlag.FREESTANDING,
+            vanillaItem="Moon Kelp",
+        ),
+        "Moonlight Ravine - North town Bo running challenge item": PhoaLocationData(
+            region="moonlight_ravine(north)",
+            address=7676364,
+            rule=lambda state: state.has("Life Saver", player)
+                               or state.has("Rocket Boots", player),
+            flags=PhoaFlag.SIDEQUEST,
+            vanillaItem="40 Rin",
+        ),
+        "Moonlight Ravine - North town underwater item 2": PhoaLocationData(
+            region="moonlight_ravine(north)",
+            address=7676365,
+            rule=lambda state: state.has("Life Saver", player),
+            flags=PhoaFlag.FREESTANDING,
+            vanillaItem="Moon Kelp",
+        ),
+        "Moonlight Ravine - North town underwater item 3": PhoaLocationData(
+            region="moonlight_ravine(north)",
+            address=7676366,
+            rule=lambda state: state.has("Life Saver", player),
+            flags=PhoaFlag.FREESTANDING,
+            vanillaItem="Moon Kelp",
+        ),
+        "Moonlight Ravine - North town fish item": PhoaLocationData(
+            region="moonlight_ravine(north)",
+            address=7676367,
+            rule=lambda state: (logic.has_fishing_rod(state)
+                                and state.has("Energy Gem", player, 8))
+                               or (logic.has_serpant_rod(state)
+                                   and state.has("Energy Gem", player, 4)),
+            flags=PhoaFlag.MOONSTONE | PhoaFlag.FISHINGSPOT,
+            vanillaItem="Moonstone",
+        ),
+        "Moonlight Ravine - North town hidden chest": PhoaLocationData(
+            region="moonlight_ravine(north)",
+            address=7676368,
+            flags=PhoaFlag.RINCHESTS,
+            vanillaItem="30 Rin",
+        ),
+        "Kingdom Bridge - Tower crate 1": PhoaLocationData(
+            region="daea_region",
+            address=7676185,
+            flags=PhoaFlag.BREAKABLE,
+            vanillaItem="Drake Tail",
+        ),
+        "Kingdom Bridge - Tower crate mouse": PhoaLocationData(
+            region="daea_region",
+            address=7676184,
+            rule=lambda state: logic.can_reasonably_kill_mice(state),
+            flags=PhoaFlag.SMALLANIMALS,
+            vanillaItem="Mystery Meat",
+        ),
+        "Kingdom Bridge - Tower lower chest": PhoaLocationData(
+            region="daea_region",
+            address=7676183,
+            flags=PhoaFlag.RINCHESTS,
+            vanillaItem="20 Rin",
+        ),
+        "Kingdom Bridge - Tower crate 2": PhoaLocationData(
+            region="daea_region",
+            address=7676182,
+            flags=PhoaFlag.BREAKABLE,
+            vanillaItem="Saffron Milk",
+        ),
+        "Kingdom Bridge - North turret pot": PhoaLocationData(
+            region="daea_region",
+            address=7676181,
+            flags=PhoaFlag.MOONSTONE,
+            vanillaItem="Moonstone",
+        ),
+        "Kingdom Bridge - Tower upper turret chest": PhoaLocationData(
+            region="daea_region",
+            address=7676180,
+            rule=lambda state: logic.has_sonic_spear(state)
+                               and logic.has_music_instrument(state),
+            flags=PhoaFlag.RINCHESTS,
+            vanillaItem="50 Rin",
+        ),
+        "Kingdom Bridge - Tower upper turret pot": PhoaLocationData(
+            region="daea_region",
+            address=7676179,
+            rule=lambda state: logic.has_sonic_spear(state)
+                               and logic.has_music_instrument(state),
+            flags=PhoaFlag.MOONSTONE,
+            vanillaItem="Moonstone",
+        ),
+        "Kingdom Bridge - GEO dungeon item": PhoaLocationData(
+            region="daea_region",
+            address=7676178,
+            rule=lambda state: logic.has_explosives(state),
+            flags=PhoaFlag.GEOCHALLENGE,
+            vanillaItem="GEO Ticket",
+        ),
+        "Daea City - West side bird lady quest": PhoaLocationData(  # FACT CHECK
+            region="daea_city",
+            address=7676369,
+            flags=PhoaFlag.ENERGYGEM,
+            vanillaItem="Energy Gem",
+        ),
+        "Daea City - GEO dungeon item": PhoaLocationData(
+            region="daea_city(geo_dungeon)",
+            address=7676370,
+            flags=PhoaFlag.GEOCHALLENGE,
+            vanillaItem="GEO Ticket",
+        ),
+        "Daea City - Windmill pot": PhoaLocationData(
+            region="daea_city",
+            address=7676549,
+            rule=lambda state: logic.has_slingshot(state)
+                               or logic.has_crossbow(state)
+                               or logic.can_use_whirlwind(state),
+            flags=PhoaFlag.MOONSTONE,
+            vanillaItem="Moonstone",
+        ),
+        "Daea City - Blacksmith shop item 1": PhoaLocationData(
+            region="daea_city",
+            address=7676371,
+            flags=PhoaFlag.SHOPSANITY,
+            vanillaItem="Crank Lamp",
+        ),
+        "Daea City - Blacksmith shop item 2": PhoaLocationData(
+            region="daea_city",
+            address=7676372,
+            flags=PhoaFlag.SHOPSANITY,
+            vanillaItem="Steel Bat",
+        ),
+        "Daea City - Blacksmith shop item 3": PhoaLocationData(
+            region="daea_city",
+            address=7676373,
+            flags=PhoaFlag.SHOPSANITY,
+            vanillaItem="Jade Hauberk",
+        ),
+        "Daea City - Blacksmith shop item 4": PhoaLocationData(
+            region="daea_city",
+            address=7676374,
+            flags=PhoaFlag.SHOPSANITY,
+            vanillaItem="Civilian Crossbow",
+        ),
+        "Daea City - Blacksmith shop item 5": PhoaLocationData(
+            region="daea_city",
+            address=7676375,
+            flags=PhoaFlag.SHOPSANITY,
+            vanillaItem="Fishing Rod",
+        ),
+        # "Daea City - Blacksmith dream ore quest": PhoaLocationData( # TODO: trading sequence
+        #     region="daea_city",
+        #     address=7676376,
+        #     rule=lambda state: state.has("Dream Ore", player),
+        #     flags=PhoaFlag.SIDEQUEST,
+        #     vanillaItem="Night Star",
         # ),
-        # "Ouroboros Hideout - Atri training 2": PhoaLocationData(  # 4 Ouroboros Scrolls Total
-        #     region="ouroboros_hideout(great_drake_arena)",
-        #     address=7676328,
-        #     flags=PhoaFlag.NPCGIFTS,
-        #     rule=lambda state: logic.has_sonic_spear(state) and state.has("Prelude of Panselo", player),
-        #     vanillaItem="Spell of Rejuvination",
+        "Daea City - Residential house lady quest": PhoaLocationData(
+            region="daea_city",
+            address=7676377,
+            rule=lambda state: state.can_reach_region("atai_region", player)
+                               or state.can_reach_region("atai_town", player),
+            flags=PhoaFlag.SIDEQUEST,
+            vanillaItem="60 Rin",
+        ),
+        "Daea City - Residential house grandmother": PhoaLocationData(
+            region="daea_city",
+            address=7676378,
+            flags=PhoaFlag.MOONSTONE,
+            vanillaItem="Moonstone",
+        ),
+        "Daea City - West alley pot": PhoaLocationData(
+            region="daea_city",
+            address=7676379,
+            rule=lambda state: logic.has_sonic_spear(state),
+            flags=PhoaFlag.MOONSTONE,
+            vanillaItem="Moonstone",
+        ),
+        "Daea City - West alley mouse": PhoaLocationData(
+            region="daea_city",
+            address=7676380,
+            rule=lambda state: logic.can_reasonably_kill_mice(state),
+            flags=PhoaFlag.SMALLANIMALS,
+            vanillaItem="Mystery Meat",
+        ),
+        "Daea City - Student dormitory chest": PhoaLocationData(
+            region="daea_city",
+            address=7676381,
+            rule=lambda state: logic.has_sonic_spear(state),
+            flags=PhoaFlag.RINCHESTS,
+            vanillaItem="35 Rin",
+        ),
+        "Daea City - Blue Lobster pantry crate 1": PhoaLocationData(
+            region="daea_city",
+            address=7676382,
+            flags=PhoaFlag.BREAKABLE,
+            vanillaItem="Grape Juice",
+        ),
+        "Daea City - Blue Lobster pantry crate 2": PhoaLocationData(
+            region="daea_city",
+            address=7676383,
+            flags=PhoaFlag.BREAKABLE,
+            vanillaItem="Macaron",
+        ),
+        "Daea City - Blue Lobster pantry mouse": PhoaLocationData(
+            region="daea_city",
+            address=7676384,
+            rule=lambda state: logic.can_reasonably_kill_mice(state),
+            flags=PhoaFlag.SMALLANIMALS,
+            vanillaItem="Mystery Meat",
+        ),
+        "Daea City - Bo running challenge": PhoaLocationData(
+            region="daea_city",
+            address=7676385,
+            flags=PhoaFlag.SIDEQUEST,
+            vanillaItem="50 Rin",
+        ),
+        "Daea City - Blue Lobster shop item 1": PhoaLocationData(
+            region="daea_city",
+            address=7676386,
+            flags=PhoaFlag.SHOPSANITY,
+            vanillaItem="Deli Sandwich",
+        ),
+        "Daea City - Blue Lobster shop item 2": PhoaLocationData(
+            region="daea_city",
+            address=7676387,
+            flags=PhoaFlag.SHOPSANITY,
+            vanillaItem="House Soup",
+        ),
+        "Daea City - Blue Lobster shop item 3": PhoaLocationData(
+            region="daea_city",
+            address=7676388,
+            flags=PhoaFlag.SHOPSANITY,
+            vanillaItem="Blue Lobster Special",
+        ),
+        "Daea City - Blue Lobster shop item 4": PhoaLocationData(
+            region="daea_city",
+            address=7676389,
+            flags=PhoaFlag.SHOPSANITY,
+            vanillaItem="Milk",
+        ),
+        "Daea City - Blue Lobster shop item 5": PhoaLocationData(
+            region="daea_city",
+            address=7676390,
+            flags=PhoaFlag.SHOPSANITY,
+            vanillaItem="Honey Brew",
+        ),
+        "Daea City - Blue Lobster shop item 6": PhoaLocationData(
+            region="daea_city",
+            address=7676391,
+            flags=PhoaFlag.SHOPSANITY,
+            vanillaItem="Grape Juice",
+        ),
+        "Daea City - Library songstone puzzle": PhoaLocationData(
+            region="daea_city",
+            address=7676392,
+            rule=lambda state: logic.has_music_instrument(state),
+            flags=PhoaFlag.ENERGYGEM,
+            vanillaItem="Energy Gem",
+        ),
+        "Daea City - Troubadours Alto quest item": PhoaLocationData(
+            region="daea_city",
+            address=7676393,
+            rule=lambda state: state.can_reach_region("panselo_region", player)
+                               and state.can_reach_region("atai_region", player)
+                               and state.can_reach_region("ouroboros_hideout", player),
+            flags=PhoaFlag.SIDEQUEST | PhoaFlag.HEARTRUBY,
+            vanillaItem="Heart Ruby",
+        ),
+        "Daea City - Troubadours Forte quest item": PhoaLocationData(  # RECURRING
+            region="daea_city",
+            address=7676394,
+            rule=lambda state: state.can_reach_region("panselo_region", player)
+                               and state.can_reach_region("atai_region", player)
+                               and state.can_reach_region("ouroboros_hideout", player),
+            flags=PhoaFlag.SIDEQUEST,
+            vanillaItem="35 Rin",
+        ),
+        "Daea City - East alley mouse": PhoaLocationData(
+            region="daea_city",
+            address=7676395,
+            rule=lambda state: logic.can_reasonably_kill_mice(state),
+            flags=PhoaFlag.SMALLANIMALS,
+            vanillaItem="Mystery Meat",
+        ),
+        "Daea City - East alley balcony item": PhoaLocationData(
+            region="daea_city",
+            address=7676396,
+            flags=PhoaFlag.HEARTRUBY,
+            vanillaItem="Heart Ruby",
+        ),
+        "Daea City - East alley Faun Fountain quest (Song of Ouroboros)": PhoaLocationData(
+            region="daea_city",
+            address=7676397,
+            rule=lambda state: logic.has_music_instrument(state)
+                               and state.has("Song of Ouroboros", player),
+            flags=PhoaFlag.SIDEQUEST,
+            vanillaItem="20 Rin",
+        ),
+        "Daea City - East alley Faun Fountain quest (GEO Song)": PhoaLocationData(
+            region="daea_city",
+            address=7676398,
+            rule=lambda state: logic.has_music_instrument(state)
+                               and state.has("GEO Song", player),
+            flags=PhoaFlag.SIDEQUEST,
+            vanillaItem="20 Rin",
+        ),
+        "Daea City - East alley Faun Fountain quest (Royal Hymn)": PhoaLocationData(
+            region="daea_city",
+            address=7676399,
+            rule=lambda state: logic.has_music_instrument(state)
+                               and state.has("Royal Hymn", player),
+            flags=PhoaFlag.SIDEQUEST,
+            vanillaItem="20 Rin",
+        ),
+        "Daea City - East alley Faun Fountain quest (Prelude of Panselo)": PhoaLocationData(
+            region="daea_city",
+            address=7676400,
+            rule=lambda state: logic.has_music_instrument(state)
+                               and logic.has_prelude_of_panselo(state),
+            flags=PhoaFlag.SIDEQUEST,
+            vanillaItem="20 Rin",
+        ),
+        "Daea City - East alley Faun Fountain quest (Baroque of Battle)": PhoaLocationData(
+            region="daea_city",
+            address=7676401,
+            rule=lambda state: logic.has_music_instrument(state)
+                               and state.has("Baroque of Battle", player),
+            flags=PhoaFlag.SIDEQUEST,
+            vanillaItem="20 Rin",
+        ),
+        "Daea City - East alley Faun Fountain quest (Lullaby of Ava)": PhoaLocationData(
+            region="daea_city",
+            address=7676402,
+            rule=lambda state: logic.has_music_instrument(state)
+                               and state.has("Lullaby of Ava", player),
+            flags=PhoaFlag.SIDEQUEST,
+            vanillaItem="20 Rin",
+        ),
+        "Daea City - East alley Faun Fountain quest (All Songs)": PhoaLocationData(
+            region="daea_city",
+            address=7676403,
+            rule=lambda state: logic.has_music_instrument(state)
+                               and state.has("Song of Ouroboros", player)
+                               and state.has("GEO Song", player)
+                               and state.has("Royal Hymn", player)
+                               and logic.has_prelude_of_panselo(state)
+                               and state.has("Baroque of Battle", player)
+                               and state.has("Lullaby of Ava", player),
+            flags=PhoaFlag.SIDEQUEST,
+            vanillaItem="50 Rin",
+        ),
+        "Daea City - Bakery shop item 1": PhoaLocationData(
+            region="daea_city",
+            address=7676404,
+            flags=PhoaFlag.SHOPSANITY,
+            vanillaItem="Puff Pastry",
+        ),
+        "Daea City - Bakery shop item 2": PhoaLocationData(
+            region="daea_city",
+            address=7676405,
+            flags=PhoaFlag.SHOPSANITY,
+            vanillaItem="Macaron",  # 2 of them
+        ),
+        "Daea City - Bakery shop item 3": PhoaLocationData(
+            region="daea_city",
+            address=7676406,
+            flags=PhoaFlag.SHOPSANITY,
+            vanillaItem="Grape Cake",
+        ),
+        "Daea City - Bakery shop item 4": PhoaLocationData(
+            region="daea_city",
+            address=7676407,
+            flags=PhoaFlag.SHOPSANITY,
+            vanillaItem="Chocolate",  # 3 of them
+        ),
+        "Daea City - Shooting gallery item 1": PhoaLocationData(  # TODO: Check requirements
+            region="daea_city",
+            address=7676408,
+            rule=lambda state: logic.can_clear_atai_expert_gallery(state),
+            flags=PhoaFlag.MINIGAMES,
+            vanillaItem="Rubber Ducky",
+        ),
+        "Daea City - Shooting gallery item 2": PhoaLocationData(
+            region="daea_city",
+            address=7676409,
+            rule=lambda state: logic.can_clear_atai_expert_gallery(state),
+            flags=PhoaFlag.MINIGAMES | PhoaFlag.HEARTRUBY,
+            vanillaItem="Heart Ruby",
+        ),
+        "Daea City - Shooting gallery item 3": PhoaLocationData(
+            region="daea_city",
+            address=7676410,
+            rule=lambda state: logic.can_clear_atai_expert_gallery(state),
+            flags=PhoaFlag.MINIGAMES | PhoaFlag.MOONSTONE,
+            vanillaItem="Moonstone",
+        ),
+        "Daea City - Guard tower balcony crate": PhoaLocationData(
+            region="daea_city",
+            address=7676411,
+            flags=PhoaFlag.BREAKABLE,
+            vanillaItem="Grape Cake",
+        ),
+        "Daea City - Dojo Teraka's lesson": PhoaLocationData(  # NOT SURE IF THIS IS SHOPSANITY
+            region="daea_city",
+            address=7676412,
+            flags=PhoaFlag.SIDEQUEST,
+            vanillaItem="Concentrate",
+        ),
+        "Daea City - Dojo Teraka quest": PhoaLocationData(
+            region="daea_city",
+            address=7676413,
+            flags=PhoaFlag.MOONSTONE,
+            vanillaItem="Moonstone",
+        ),
+        "Daea City - Noodle shop item": PhoaLocationData(
+            region="daea_city",
+            address=7676414,
+            flags=PhoaFlag.SHOPSANITY,
+            vanillaItem="Spicy Noodles",
+        ),
+        "Daea City - Tunnel pantry crate 1": PhoaLocationData(
+            region="daea_city",
+            address=7676415,
+            rule=lambda state: logic.has_music_instrument(state),
+            flags=PhoaFlag.BREAKABLE,
+            vanillaItem="Big Raw Meat",
+        ),
+        "Daea City - Tunnel pantry crate 2": PhoaLocationData(
+            region="daea_city",
+            address=7676416,
+            rule=lambda state: logic.has_music_instrument(state),
+            flags=PhoaFlag.BREAKABLE,
+            vanillaItem="Gourmet Fish Fillet",
+        ),
+        "Daea City - Tunnel pantry chest": PhoaLocationData(
+            region="daea_city",
+            address=7676417,
+            rule=lambda state: logic.has_music_instrument(state),
+            flags=PhoaFlag.RINCHESTS,
+            vanillaItem="100 Rin",
+        ),
+        "Daea City - Tunnel kitchen crate": PhoaLocationData(
+            region="daea_city",
+            address=7676418,
+            flags=PhoaFlag.BREAKABLE,
+            vanillaItem="Raw Bird",
+        ),
+        "Daea City - Tunnel kitchen Chef Basil quest 1": PhoaLocationData(
+            region="daea_city",
+            address=7676419,
+            rule=lambda state: state.can_reach_region("moonlight_ravine(wilds)", player),  # Knife Krill
+            flags=PhoaFlag.SIDEQUEST,
+            vanillaItem="10 Rin",
+        ),
+        "Daea City - Tunnel kitchen Chef Basil quest 2": PhoaLocationData(
+            region="daea_city",
+            address=7676420,
+            rule=lambda state: state.can_reach_region("atai_town", player),  # Desert Squash
+            flags=PhoaFlag.SIDEQUEST,
+            vanillaItem="20 Rin",
+        ),
+        # Requires Subterra access
+        # "Daea City - Tunnel kitchen Chef Basil quest 3": PhoaLocationData(
+        #     region="daea_city",
+        #     address=7676421,
+        #     flags=PhoaFlag.MOONSTONE | PhoaFlag.SIDEQUEST, # Amber Fish Fillet
+        #     vanillaItem="Moonstone",
         # ),
-        # "Ouroboros Hideout - Atri training 3": PhoaLocationData(  # 6 Ouroboros Scrolls Total
-        #     region="ouroboros_hideout(great_drake_arena)",
-        #     address=7676329,
-        #     flags=PhoaFlag.NPCGIFTS,
-        #     rule=lambda state: logic.has_sonic_spear(state) and state.has("Prelude of Panselo", player),
-        #     vanillaItem="Baroque of Battle",
+        # Requires Cosette access
+        # "Daea City - Tunnel kitchen Chef Basil quest 4": PhoaLocationData(
+        #     # ARBOAR MEAT CAN BE GAINED FROM THAT ONE COSETTE ROOM BUT IT'S A ONE-TIME CHANCE
+        #     # MAYBE WE JUST ALLOW THE ARBOAR TO ALWAYS SPAWN OR REQUIRE IT AFTER AURANTIA
+        #     region="daea_city",
+        #     address=7676422,
+        #     flags=PhoaFlag.SIDEQUEST, # Arboar Meat
+        #     vanillaItem="Elixir",
         # ),
+        "Daea City - Ballroom under the stage": PhoaLocationData(
+            region="daea_city",
+            address=7676423,
+            flags=PhoaFlag.RINCHESTS,
+            vanillaItem="75 Rin",
+        ),
+        "Daea City - Ballroom piano lady quest": PhoaLocationData(
+            region="daea_city",
+            address=7676424,
+            flags=PhoaFlag.MOONSTONE,
+            vanillaItem="Moonstone",
+        ),
+        "Daea City - Tunnel White Towers entrance item": PhoaLocationData(
+            region="daea_city",
+            address=7676425,
+            rule=lambda state: logic.has_music_instrument(state)
+                               and state.has("Royal Hymn", player),
+            flags=PhoaFlag.HEARTRUBY,
+            vanillaItem="Heart Ruby",
+        ),
+        "Daea Region - Cave chest": PhoaLocationData(
+            region="daea_region",
+            address=7676426,
+            rule=lambda state: logic.has_light_source(state)
+                               and logic.has_explosives(state)
+                               and (state.has("Life Saver", player)
+                                    or state.has("Rocket Boots", player)),
+            flags=PhoaFlag.RINCHESTS,
+            vanillaItem="40 Rin",
+        ),
+        "Daea Region - Cave ledge item": PhoaLocationData(
+            region="daea_region",
+            address=7676427,
+            rule=lambda state: state.has("Rocket Boots", player)
+                               or (logic.has_light_source(state)
+                                   and logic.has_explosives(state)
+                                   and state.has("Life Saver", player)
+                                   and logic.has_sonic_spear(state)),
+            flags=PhoaFlag.ENERGYGEM,
+            vanillaItem="Energy Gem",
+        ),
+        "Daea Region - Perro Hide and Seek": PhoaLocationData(
+            region="daea_region",
+            address=7676428,
+            flags=PhoaFlag.PERRO,
+            vanillaItem="Perro",
+        ),
+        "Daea Region - Cupid's Fountain Ouroboros shrine": PhoaLocationData(
+            region="daea_region",
+            address=7676429,
+            rule=lambda state: logic.has_music_instrument(state)
+                               and state.has("Song of Ouroboros", player)
+                               and logic.has_bombs(state)
+                               and logic.has_crossbow(state),
+            flags=PhoaFlag.OUROBOROS,
+            vanillaItem="Ouroboros Scroll",
+        ),
+        "Daea Region - GEO house reward": PhoaLocationData(
+            region="daea_region",
+            address=7676430,
+            flags=PhoaFlag.GEOCHALLENGE,
+            rule=lambda state: logic.has_music_instrument(state)
+                               and state.has("GEO Song", player),
+            vanillaItem="GEO Ticket",
+        ),
+        "Daea Region - GEO house Mr. planto's reward": PhoaLocationData(
+            region="daea_region",
+            address=7676431,
+            flags=PhoaFlag.PLANTO,
+            vanillaItem="20 Rin",
+        ),
+        "Lake Laboratory - Fran freedom quest": PhoaLocationData(
+            region="lake_laboratory",
+            address=7676432,
+            rule=lambda state: logic.can_do_fran_quest_chain(state, 0),
+            flags=PhoaFlag.SIDEQUEST,
+            vanillaItem="Tailoring Voucher",
+        ),
+        "Lake Laboratory - Fran 1st moonstone batch": PhoaLocationData(
+            region="lake_laboratory",
+            address=7676433,
+            rule=lambda state: logic.can_do_fran_quest_chain(state, 1),
+            flags=PhoaFlag.MOONSTONESHOP | PhoaFlag.HEARTRUBY,
+            vanillaItem="Heart Ruby",
+        ),
+        "Lake Laboratory - Fran 2nd moonstone batch": PhoaLocationData(
+            region="lake_laboratory",
+            address=7676434,
+            rule=lambda state: logic.can_do_fran_quest_chain(state, 2),
+            flags=PhoaFlag.MOONSTONESHOP,
+            vanillaItem="Tailoring Voucher",
+        ),
+        "Lake Laboratory - Fran 3rd moonstone batch": PhoaLocationData(
+            region="lake_laboratory",
+            address=7676435,
+            rule=lambda state: logic.can_do_fran_quest_chain(state, 3),
+            flags=PhoaFlag.MOONSTONESHOP | PhoaFlag.ENERGYGEM,
+            vanillaItem="Energy Gem",
+        ),
+        "Lake Laboratory - Fran 4th moonstone batch": PhoaLocationData(
+            region="lake_laboratory",
+            address=7676436,
+            rule=lambda state: logic.can_do_fran_quest_chain(state, 4),
+            flags=PhoaFlag.MOONSTONESHOP,
+            vanillaItem="Moon Crystal",
+        ),
+        "Lake Laboratory - Fran 5th moonstone batch": PhoaLocationData(
+            region="lake_laboratory",
+            address=7676437,
+            rule=lambda state: logic.can_do_fran_quest_chain(state, 5),
+            flags=PhoaFlag.MOONSTONESHOP | PhoaFlag.HEARTRUBY,
+            vanillaItem="Heart Ruby",
+        ),
+        "Lake Laboratory - Lan gift after 1st moonstone batch": PhoaLocationData(
+            region="lake_laboratory",
+            address=7676438,
+            rule=lambda state: logic.can_do_fran_quest_chain(state, 1),
+            flags=PhoaFlag.MOONSTONESHOP | PhoaFlag.NPCGIFTS,
+            vanillaItem="Saffron Milk",
+        ),
+        "Lake Laboratory - Van gift after 2nd moonstone batch": PhoaLocationData(
+            region="lake_laboratory",
+            address=7676439,
+            rule=lambda state: logic.can_do_fran_quest_chain(state, 2),
+            flags=PhoaFlag.MOONSTONESHOP | PhoaFlag.NPCGIFTS,
+            vanillaItem="Grape Cake",
+        ),
+        "Lake Laboratory - Van gift after 3rd moonstone batch": PhoaLocationData(
+            region="lake_laboratory",
+            address=7676440,
+            rule=lambda state: logic.can_do_fran_quest_chain(state, 3),
+            flags=PhoaFlag.MOONSTONESHOP | PhoaFlag.NPCGIFTS,
+            vanillaItem="Cooked Drake Tail",
+        ),
+        "Lake Laboratory - Lan gift after 4th moonstone batch": PhoaLocationData(
+            region="lake_laboratory",
+            address=7676441,
+            rule=lambda state: logic.can_do_fran_quest_chain(state, 4),
+            flags=PhoaFlag.MOONSTONESHOP | PhoaFlag.NPCGIFTS,
+            vanillaItem="Spicy Noodles",
+        ),
+        "GEO Base - Learn GEO Song": PhoaLocationData(
+            region="daea_region",
+            address=7676442,
+            rule=lambda state: logic.has_music_instrument(state),
+            flags=PhoaFlag.SIDEQUEST,
+            vanillaItem="GEO Song",
+        ),
+        "GEO Base - Prize counter item 1": PhoaLocationData(
+            region="daea_region",
+            address=7676443,
+            rule=lambda state: logic.has_music_instrument(state)
+                               or state.has("GEO Ticket", player, 10),
+            flags=PhoaFlag.GEOSHOP,
+            vanillaItem="Golden Egg",
+        ),
+        "GEO Base - Prize counter item 2": PhoaLocationData(
+            region="daea_region",
+            address=7676444,
+            rule=lambda state: logic.has_music_instrument(state)
+                               or state.has("GEO Ticket", player, 10),
+            flags=PhoaFlag.GEOSHOP | PhoaFlag.HEARTRUBY,
+            vanillaItem="Heart Ruby",
+        ),
+        "GEO Base - Prize counter item 3": PhoaLocationData(
+            region="daea_region",
+            address=7676445,
+            rule=lambda state: logic.has_music_instrument(state)
+                               or state.has("GEO Ticket", player, 10),
+            flags=PhoaFlag.GEOSHOP | PhoaFlag.ENERGYGEM,
+            vanillaItem="Energy Gem",
+        ),
+        "GEO Base - Prize counter item 4": PhoaLocationData(
+            region="daea_region",
+            address=7676446,
+            rule=lambda state: logic.has_music_instrument(state)
+                               or state.has("GEO Ticket", player, 10),
+            flags=PhoaFlag.GEOSHOP,
+            vanillaItem="GEO Jacket",
+        ),
+        "GEO Base - Georgia quest 1": PhoaLocationData(
+            region="daea_region",
+            address=7676447,
+            rule=lambda state: state.has("Antique Pin", player),
+            flags=PhoaFlag.SIDEQUEST,
+            vanillaItem="Lucky Earrings",
+        ),
+        "GEO Base - Georgia quest 2": PhoaLocationData(
+            region="daea_region",
+            address=7676448,
+            rule=lambda state: state.has("Antique Pin", player, 2),
+            flags=PhoaFlag.SIDEQUEST | PhoaFlag.HEARTRUBY,
+            vanillaItem="Heart Ruby",
+        ),
+        "GEO Base - Attic crate": PhoaLocationData(
+            region="daea_region",
+            address=7676449,
+            rule=lambda state: logic.can_deal_damage(state),
+            flags=PhoaFlag.BREAKABLE,
+            vanillaItem="Honey Drop",
+        ),
+        "GEO Base - GEO reward": PhoaLocationData(
+            region="daea_region",
+            address=7676450,
+            rule=lambda state: logic.has_music_instrument(state)
+                               and state.has("GEO Song", player)
+                               and (logic.has_slingshot(state)
+                                    or (logic.has_sonic_spear(state)
+                                        and (logic.has_bombs(state)
+                                             or logic.has_crossbow(state)))),
+            flags=PhoaFlag.GEOCHALLENGE,
+            vanillaItem="GEO Ticket",
+        ),
+        "GEO Base - Pond fish": PhoaLocationData(
+            region="daea_region",
+            address=7676451,
+            rule=lambda state: logic.has_fishing_rod(state),
+            flags=PhoaFlag.MOONSTONE | PhoaFlag.FISHINGSPOT,
+            vanillaItem="Moonstone",
+        ),
+        "Thomas's Lab - Reception bribe": PhoaLocationData(
+            region="daea_region",
+            address=7676452,
+            flags=PhoaFlag.NPCGIFTS,
+            vanillaItem="50 Rin",
+        ),
+        "Thomas's Lab - Vending machine": PhoaLocationData(
+            region="daea_region",
+            address=7676453,
+            flags=PhoaFlag.SHOPSANITY,
+            vanillaItem="Calory Slush",
+        ),
+        "Thomas's Lab - Binary room": PhoaLocationData(
+            region="daea_region",
+            address=7676454,
+            rule=lambda state: logic.has_music_instrument(state),
+            flags=PhoaFlag.ENERGYGEM,
+            vanillaItem="Energy Gem",
+        ),
+        "Thomas's Lab - Room 1-1": PhoaLocationData(
+            region="daea_region",
+            address=7676455,
+            rule=lambda state: logic.can_hit_switch_from_a_distance(state),
+            flags=PhoaFlag.DUNGEONITEM,
+            vanillaItem="Blue Golem Medallion",
+        ),
+        "Thomas's Lab - Room 1-2": PhoaLocationData(
+            region="daea_region",
+            address=7676456,
+            flags=PhoaFlag.DUNGEONITEM,
+            vanillaItem="Blue Golem Medallion",
+        ),
+        "Thomas's Lab - Room 1-3": PhoaLocationData(
+            region="daea_region",
+            address=7676457,
+            rule=lambda state: logic.can_hit_switch_from_a_distance(state),
+            flags=PhoaFlag.DUNGEONITEM,
+            vanillaItem="Blue Golem Medallion",
+        ),
+        "Thomas's Lab - Room 1-4": PhoaLocationData(
+            region="daea_region",
+            address=7676458,
+            rule=lambda state: logic.can_reasonably_kill_flying_enemies(state),
+            flags=PhoaFlag.DUNGEONITEM,
+            vanillaItem="Blue Golem Medallion",
+        ),
+        "Thomas's Lab - Room 2-1": PhoaLocationData(
+            region="thomas_lab_2",
+            address=7676459,
+            flags=PhoaFlag.DUNGEONITEM,
+            vanillaItem="Red Golem Medallion",
+        ),
+        "Thomas's Lab - Room 2-2": PhoaLocationData(
+            region="thomas_lab_2",
+            address=7676460,
+            flags=PhoaFlag.DUNGEONITEM,
+            vanillaItem="Red Golem Medallion",
+        ),
+        "Thomas's Lab - Room 2-3": PhoaLocationData(
+            region="thomas_lab_2",
+            address=7676461,
+            flags=PhoaFlag.DUNGEONITEM,
+            vanillaItem="Red Golem Medallion",
+        ),
+        "Thomas's Lab - Room 2-4": PhoaLocationData(
+            region="thomas_lab_2",
+            address=7676462,
+            rule=lambda state: logic.can_reasonably_kill_flying_enemies(state),
+            flags=PhoaFlag.DUNGEONITEM,
+            vanillaItem="Red Golem Medallion",
+        ),
+        "Thomas's Lab - Punching bag minigame": PhoaLocationData(
+            region="thomas_lab_3",
+            address=7676463,
+            rule=lambda state: logic.has_bat(state),
+            flags=PhoaFlag.MINIGAMES | PhoaFlag.HEARTRUBY,
+            vanillaItem="Heart Ruby",
+        ),
+        "Thomas's Lab - Diary room crate": PhoaLocationData(
+            region="thomas_lab_3",
+            address=7676464,
+            flags=PhoaFlag.BREAKABLE,
+            vanillaItem="Pumpkin Muffin",
+        ),
+        "Thomas's Lab - Crate behind wrecker room": PhoaLocationData(
+            region="thomas_lab_3",
+            address=7676465,
+            rule=lambda state: state.has("Defeat Wrecker boss", player),
+            flags=PhoaFlag.BREAKABLE,
+            vanillaItem="Calory Slush",
+        ),
+        "Thomas's Lab - Reception blue medallion quest": PhoaLocationData(
+            region="daea_region",
+            address=7676466,
+            rule=lambda state: state.has("Defeat Wrecker boss", player)
+                               and logic.has_golem_medallions(state, 4, "Blue"),
+            flags=PhoaFlag.MOONSTONE,
+            vanillaItem="Moonstone",
+        ),
+        "Thomas's Lab - Reception red medallion quest": PhoaLocationData(
+            region="daea_region",
+            address=7676467,
+            rule=lambda state: state.has("Defeat Wrecker boss", player)
+                               and logic.has_golem_medallions(state, 4, "Red"),
+            flags=PhoaFlag.MOONSTONE,
+            vanillaItem="Moonstone",
+        ),
+        "Thomas's Lab - Wrecker room Floret quest": PhoaLocationData(
+            region="thomas_lab_3",
+            address=7676468,
+            rule=lambda state: state.has("Defeat Wrecker boss", player)
+                               and (state.can_reach_region("atai_region", player)
+                                    or state.can_reach_region("daea_city", player)),
+            flags=PhoaFlag.HEARTRUBY,
+            vanillaItem="Heart Ruby",
+        ),
+        "Antique Shop - Deliver Lunar Drake": PhoaLocationData(
+            region="daea_region",
+            address=7676469,
+            rule=lambda state: state.has("Lunar Drake", player),
+            flags=PhoaFlag.LUNARARTIFACTQUEST,
+            vanillaItem="40 Rin",
+        ),
+        "Antique Shop - Deliver Lunar Compass": PhoaLocationData(
+            region="daea_region",
+            address=7676470,
+            rule=lambda state: state.has("Lunar Compass", player),
+            flags=PhoaFlag.LUNARARTIFACTQUEST,
+            vanillaItem="40 Rin",
+        ),
+        "Antique Shop - Deliver Lunar Comb": PhoaLocationData(
+            region="daea_region",
+            address=7676471,
+            rule=lambda state: state.has("Lunar Comb", player),
+            flags=PhoaFlag.LUNARARTIFACTQUEST,
+            vanillaItem="40 Rin",
+        ),
+        "Antique Shop - Deliver Lunar Watch": PhoaLocationData(
+            region="daea_region",
+            address=7676472,
+            rule=lambda state: state.has("Lunar Watch", player),
+            flags=PhoaFlag.LUNARARTIFACTQUEST,
+            vanillaItem="40 Rin",
+        ),
+        "Antique Shop - Deliver Lunar Goblet": PhoaLocationData(
+            region="daea_region",
+            address=7676473,
+            rule=lambda state: state.has("Lunar Goblet", player),
+            flags=PhoaFlag.LUNARARTIFACTQUEST,
+            vanillaItem="40 Rin",
+        ),
+        "Antique Shop - Deliver Lunar Frog": PhoaLocationData(
+            region="daea_region",
+            address=7676474,
+            rule=lambda state: state.has("Lunar Frog", player),
+            flags=PhoaFlag.LUNARARTIFACTQUEST,
+            vanillaItem="40 Rin",
+        ),
+        "Antique Shop - Deliver Lunar Vase": PhoaLocationData(
+            region="daea_region",
+            address=7676475,
+            rule=lambda state: state.has("Lunar Vase", player),
+            flags=PhoaFlag.LUNARARTIFACTQUEST,
+            vanillaItem="40 Rin",
+        ),
+        "Antique Shop - Deliver Lunar Trident": PhoaLocationData(
+            region="daea_region",
+            address=7676476,
+            rule=lambda state: state.has("Lunar Trident", player),
+            flags=PhoaFlag.LUNARARTIFACTQUEST,
+            vanillaItem="40 Rin",
+        ),
+        "Antique Shop - Deliver Lunar Crown": PhoaLocationData(
+            region="daea_region",
+            address=7676477,
+            rule=lambda state: state.has("Lunar Crown", player),
+            flags=PhoaFlag.LUNARARTIFACTQUEST,
+            vanillaItem="40 Rin",
+        ),
+        "Antique Shop - Deliver Lunar Medal": PhoaLocationData(
+            region="daea_region",
+            address=7676478,
+            rule=lambda state: state.has("Lunar Medal", player),
+            flags=PhoaFlag.LUNARARTIFACTQUEST,
+            vanillaItem="40 Rin",
+        ),
+        "Antique Shop - Deliver Lunar Key": PhoaLocationData(
+            region="daea_region",
+            address=7676479,
+            rule=lambda state: state.has("Lunar Key", player),
+            flags=PhoaFlag.LUNARARTIFACTQUEST,
+            vanillaItem="40 Rin",
+        ),
+        "Antique Shop - Deliver Lunar Egg": PhoaLocationData(
+            region="daea_region",
+            address=7676480,
+            rule=lambda state: state.has("Lunar Egg", player),
+            flags=PhoaFlag.LUNARARTIFACTQUEST,
+            vanillaItem="40 Rin",
+        ),
+        "Antique Shop - Deliver Lunar Artifact 4 bonus": PhoaLocationData(
+            region="daea_region",
+            address=7676481,
+            rule=lambda state: logic.has_lunar_artifacts(4, state),
+            flags=PhoaFlag.LUNARARTIFACTQUEST | PhoaFlag.ENERGYGEM,
+            vanillaItem="Energy Gem",
+        ),
+        "Antique Shop - Deliver Lunar Artifact 8 bonus": PhoaLocationData(
+            region="daea_region",
+            address=7676482,
+            rule=lambda state: logic.has_lunar_artifacts(8, state),
+            flags=PhoaFlag.LUNARARTIFACTQUEST,
+            vanillaItem="Antique Cast Iron",
+        ),
+        "Antique Shop - Deliver Lunar Artifact 12 bonus": PhoaLocationData(
+            region="daea_region",
+            address=7676483,
+            rule=lambda state: logic.has_lunar_artifacts(12, state),
+            flags=PhoaFlag.LUNARARTIFACTQUEST | PhoaFlag.HEARTRUBY,
+            vanillaItem="Heart Ruby",
+        ),
+        "Antique Shop - Basement mouse": PhoaLocationData(
+            region="daea_region",
+            address=7676484,
+            rule=lambda state: logic.can_reasonably_kill_mice(state),
+            flags=PhoaFlag.SMALLANIMALS,
+            vanillaItem="Mystery Meat",
+        ),
+        "Antique Shop - Basement puzzle": PhoaLocationData(
+            region="daea_region",
+            address=7676485,
+            rule=lambda state: logic.has_crossbow(state),
+            flags=PhoaFlag.HEARTRUBY,
+            vanillaItem="Heart Ruby",
+        ),
+        "First Wall - Bottom right guard room crate": PhoaLocationData(
+            region="daea_region",
+            address=7676486,
+            rule=lambda state: logic.can_reasonably_kill_enemies(state, exclude_rocket_boots=True),
+            flags=PhoaFlag.MOONSTONE,
+            vanillaItem="Moonstone",
+        ),
+        "First Wall - Turret item": PhoaLocationData(  # TODO: also first wall needs to be opened
+            region="daea_region",
+            address=7676487,
+            rule=lambda state: logic.has_sonic_spear(state)
+                               and state.has("Rocket Boots", player),
+            flags=PhoaFlag.ENERGYGEM,
+            vanillaItem="Energy Gem",
+        ),
+        "First Wall - Cafeteria crate": PhoaLocationData(
+            region="daea_region",
+            address=7676488,
+            rule=lambda state: logic.can_reasonably_kill_enemies(state, exclude_rocket_boots=True),
+            flags=PhoaFlag.BREAKABLE,
+            vanillaItem="Cheese",
+        ),
+        "First Wall - Storage crate": PhoaLocationData(
+            region="daea_region",
+            address=7676489,
+            flags=PhoaFlag.BREAKABLE,
+            vanillaItem="Raw Meat",
+        ),
+        "First Wall - Cafeteria waiter quest": PhoaLocationData(
+            region="daea_region",
+            address=7676490,
+            rule=lambda state: state.can_reach_region("panselo_region", player)  # Doki Herb
+                               and state.can_reach_region("ouroboros_hideout(storage_back)", player),  # Stink Root
+            flags=PhoaFlag.HEARTRUBY,
+            vanillaItem="Heart Ruby",
+        ),
+        "First Wall - Mother/daughter quest": PhoaLocationData(
+            region="daea_region",
+            address=7676491,
+            flags=PhoaFlag.MOONSTONE,
+            vanillaItem="Moonstone",
+        ),
         "Daea tunnel - Mouse in top left tunnel": PhoaLocationData(
             region="daea_tunnel_top_left",
-            address=7676458,
+            address=7676492,
             rule=lambda state: logic.can_reasonably_kill_mice(state),
             flags=PhoaFlag.SMALLANIMALS,
             vanillaItem="Mystery Meat",
         ),
         "Daea tunnel - Chest guarded by Slargummies": PhoaLocationData(
             region="daea_tunnel_top_left",
-            address=7676459,
+            address=7676493,
             rule=lambda state: logic.can_reasonably_kill_enemies(state, exclude_slingshot=True),
             flags=PhoaFlag.RINCHESTS,
             vanillaItem="30 Rin",
         ),
         "Daea tunnel - Mouse in middle room": PhoaLocationData(
             region="daea_tunnel_middle_and_bottom_right",
-            address=7676460,
+            address=7676494,
             rule=lambda state: logic.can_reasonably_kill_mice(state),
             flags=PhoaFlag.SMALLANIMALS,
             vanillaItem="Mystery Meat",
         ),
         "Daea tunnel - Item hidden in crate at bottom of middle room": PhoaLocationData(
             region="daea_tunnel_middle_and_bottom_right",
-            address=7676461,
+            address=7676495,
             flags=PhoaFlag.MOONSTONE,
             vanillaItem="Moonstone",
         ),
         "Daea tunnel - Mouse in bottom left tunnel": PhoaLocationData(
             region="daea_tunnel_bottom_left",
-            address=7676462,
+            address=7676496,
+            rule=lambda state: logic.can_reasonably_kill_mice(state),
             flags=PhoaFlag.SMALLANIMALS,
             vanillaItem="Mystery Meat",
         ),
         "Daea tunnel - Mouse at the end of bottom left tunnel": PhoaLocationData(
             region="daea_tunnel_bottom_left",
-            address=7676463,
+            address=7676497,
             rule=lambda state: (state.has("Rocket Boots", player) or state.has("Life Saver", player)) and
                                (logic.has_sonic_spear(state)
                                 or logic.has_crossbow(state)
@@ -1916,14 +3214,14 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
         ),
         "Daea tunnel - Item at the end of bottom left tunnel": PhoaLocationData(
             region="daea_tunnel_bottom_left",
-            address=7676464,
+            address=7676498,
             rule=lambda state: state.has("Rocket Boots", player) or state.has("Life Saver", player),
             flags=PhoaFlag.HEARTRUBY,
             vanillaItem="Heart Ruby",
         ),
         "Daea tunnel - Defeat the glowing Slargummy": PhoaLocationData(
             region="daea_tunnel_top_right",
-            address=7676465,
+            address=7676499,
             rule=lambda state: logic.has_light_source(state)
                                and logic.can_reasonably_kill_enemies(state),
             flags=PhoaFlag.MOONSTONE,
@@ -1931,130 +3229,131 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
         ),
         "Daea tunnel - Choose the right statue": PhoaLocationData(
             region="daea_tunnel_top_right",
-            address=7676466,
+            address=7676500,
             flags=PhoaFlag.MOONSTONE,
             vanillaItem="Moonstone",
         ),
         "Castle Dungeon - Box high up in boiler room": PhoaLocationData(
             region="castle_dungeon",
-            address=7676467,
+            address=7676501,
             rule=lambda state: logic.can_use_whirlwind(state)
                                or logic.has_bombs(state)
-                               or logic.has_crossbow(state)
                                or logic.has_sonic_spear(state)
-                               or state.has_any({"Kobold Blaster", "Rocket Boots"}, player),
+                               or state.has("Kobold Blaster", player)
+                               or (state.has("Rocket Boots", player) and 
+                                   logic.can_deal_damage(state, exclude_rocket_boots=True, exclude_lamp=True)),
             flags=PhoaFlag.MOONSTONE,
             vanillaItem="Moonstone",
         ),
         "Castle Dungeon - Food crate in weapons room": PhoaLocationData(
             region="castle_dungeon",
-            address=7676468,
+            address=7676502,
             flags=PhoaFlag.BREAKABLE,
             vanillaItem="Cheese",
         ),
         "Castle Dungeon - Gift 1 from guard controlling C terminal": PhoaLocationData(
             region="castle_dungeon(post_control_room_fight)",
-            address=7676469,
+            address=7676503,
             flags=PhoaFlag.DUNGEONITEM,
             vanillaItem="Keycard C",
         ),
         "Castle Dungeon - Gift 2 from guard controlling C terminal": PhoaLocationData(
             region="castle_dungeon(post_control_room_fight)",
-            address=7676470,
+            address=7676504,
             flags=PhoaFlag.DUNGEONITEM | PhoaFlag.EXTRATERMINAL,
             vanillaItem="Keycard C",
         ),
         "Castle Dungeon - Gift 3 from guard controlling C terminal": PhoaLocationData(
             region="castle_dungeon(post_control_room_fight)",
-            address=7676471,
+            address=7676505,
             flags=PhoaFlag.DUNGEONITEM | PhoaFlag.EXTRATERMINAL,
             vanillaItem="Keycard C",
         ),
         "Castle Dungeon - Gift 4 from guard controlling C terminal": PhoaLocationData(
             region="castle_dungeon(post_control_room_fight)",
-            address=7676472,
+            address=7676506,
             flags=PhoaFlag.DUNGEONITEM | PhoaFlag.EXTRATERMINAL,
             vanillaItem="Keycard C",
         ),
         "Castle Dungeon - Gift 5 from guard controlling C terminal": PhoaLocationData(
             region="castle_dungeon(post_control_room_fight)",
-            address=7676473,
+            address=7676507,
             flags=PhoaFlag.DUNGEONITEM | PhoaFlag.EXTRATERMINAL,
             vanillaItem="Keycard C",
         ),
         "Castle Dungeon - Gift 1 from guard controlling B terminal": PhoaLocationData(
             region="castle_dungeon(post_control_room_fight)",
-            address=7676474,
+            address=7676508,
             rule=lambda state: state.has("Freed terminal B guard", player),
             flags=PhoaFlag.DUNGEONITEM,
             vanillaItem="Keycard B",
         ),
         "Castle Dungeon - Gift 2 from guard controlling B terminal": PhoaLocationData(
             region="castle_dungeon(post_control_room_fight)",
-            address=7676475,
+            address=7676509,
             rule=lambda state: state.has("Freed terminal B guard", player),
             flags=PhoaFlag.DUNGEONITEM | PhoaFlag.EXTRATERMINAL,
             vanillaItem="Keycard B",
         ),
         "Castle Dungeon - Gift 3 from guard controlling B terminal": PhoaLocationData(
             region="castle_dungeon(post_control_room_fight)",
-            address=7676476,
+            address=7676510,
             rule=lambda state: state.has("Freed terminal B guard", player),
             flags=PhoaFlag.DUNGEONITEM | PhoaFlag.EXTRATERMINAL,
             vanillaItem="Keycard B",
         ),
         "Castle Dungeon - Gift 4 from guard controlling B terminal": PhoaLocationData(
             region="castle_dungeon(post_control_room_fight)",
-            address=7676477,
+            address=7676511,
             rule=lambda state: state.has("Freed terminal B guard", player),
             flags=PhoaFlag.DUNGEONITEM | PhoaFlag.EXTRATERMINAL,
             vanillaItem="Keycard B",
         ),
         "Castle Dungeon - Gift 5 from guard controlling B terminal": PhoaLocationData(
             region="castle_dungeon(post_control_room_fight)",
-            address=7676478,
+            address=7676512,
             rule=lambda state: state.has("Freed terminal B guard", player),
             flags=PhoaFlag.DUNGEONITEM | PhoaFlag.EXTRATERMINAL,
             vanillaItem="Keycard B",
         ),
         "Castle Dungeon - Gift 1 from guard controlling A terminal": PhoaLocationData(
             region="castle_dungeon(post_control_room_fight)",
-            address=7676479,
+            address=7676513,
             rule=lambda state: state.has("Freed terminal A guard", player),
             flags=PhoaFlag.DUNGEONITEM,
             vanillaItem="Keycard A",
         ),
         "Castle Dungeon - Gift 2 from guard controlling A terminal": PhoaLocationData(
             region="castle_dungeon(post_control_room_fight)",
-            address=7676480,
+            address=7676514,
             rule=lambda state: state.has("Freed terminal A guard", player),
             flags=PhoaFlag.DUNGEONITEM | PhoaFlag.EXTRATERMINAL,
             vanillaItem="Keycard A",
         ),
         "Castle Dungeon - Gift 3 from guard controlling A terminal": PhoaLocationData(
             region="castle_dungeon(post_control_room_fight)",
-            address=7676481,
+            address=7676515,
             rule=lambda state: state.has("Freed terminal A guard", player),
             flags=PhoaFlag.DUNGEONITEM | PhoaFlag.EXTRATERMINAL,
             vanillaItem="Keycard A",
         ),
         "Castle Dungeon - Gift 4 from guard controlling A terminal": PhoaLocationData(
             region="castle_dungeon(post_control_room_fight)",
-            address=7676482,
+            address=7676516,
             rule=lambda state: state.has("Freed terminal A guard", player),
             flags=PhoaFlag.DUNGEONITEM | PhoaFlag.EXTRATERMINAL,
             vanillaItem="Keycard A",
         ),
         "Castle Dungeon - Gift 5 from guard controlling A terminal": PhoaLocationData(
             region="castle_dungeon(post_control_room_fight)",
-            address=7676483,
+            address=7676517,
             rule=lambda state: state.has("Freed terminal A guard", player),
             flags=PhoaFlag.DUNGEONITEM | PhoaFlag.EXTRATERMINAL,
             vanillaItem="Keycard A",
         ),
         "Castle Dungeon - Control room chest locked behind songstone 1": PhoaLocationData(
             region="castle_dungeon(post_control_room_fight)",
-            address=7676484,
+            address=7676518,
             rule=lambda state: logic.can_hit_switch_from_a_distance(state)
                                and logic.has_music_instrument(state),
             flags=PhoaFlag.RINCHESTS,
@@ -2062,7 +3361,7 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
         ),
         "Castle Dungeon - Control room chest locked behind songstone 2": PhoaLocationData(
             region="castle_dungeon(post_control_room_fight)",
-            address=7676485,
+            address=7676519,
             rule=lambda state: logic.can_hit_switch_from_a_distance(state)
                                and logic.has_music_instrument(state),
             flags=PhoaFlag.MOONSTONE,
@@ -2070,7 +3369,7 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
         ),
         "Castle Dungeon - Control room chest locked behind songstone 3": PhoaLocationData(
             region="castle_dungeon(post_control_room_fight)",
-            address=7676486,
+            address=7676520,
             rule=lambda state: logic.can_hit_switch_from_a_distance(state)
                                and logic.has_music_instrument(state),
             flags=PhoaFlag.RINCHESTS,
@@ -2078,93 +3377,95 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
         ),
         "Castle Dungeon - C Hall - Food crate at top left balcony": PhoaLocationData(
             region="castle_dungeon(c_hall)",
-            address=7676487,
+            address=7676521,
             flags=PhoaFlag.BREAKABLE,
             vanillaItem="Cosette Cannoli",
         ),
         "Castle Dungeon - C Hall - Chest in middle locked door": PhoaLocationData(
             region="castle_dungeon(c_hall)",
-            address=7676488,
-            rule=lambda state: logic.has_keycards("C", 2, state)
+            address=7676522,
+            rule=lambda state: logic.has_keycards(state, 2, "C")
                                or logic.has_sonic_spear(state),
             flags=PhoaFlag.RINCHESTS,
             vanillaItem="25 Rin",
         ),
         "Castle Dungeon - C Hall - Food crate in 1-2 cell": PhoaLocationData(
             region="castle_dungeon(c_jail_cell)",
-            address=7676489,
+            address=7676523,
             flags=PhoaFlag.BREAKABLE,
             vanillaItem="Pooki Jerky",
         ),
         "Castle Dungeon - B Hall - Box near cannon on balcony": PhoaLocationData(
             region="castle_dungeon(b_hall)",
-            address=7676490,
-            rule=lambda state: logic.has_keycards("B", 1, state),
+            address=7676524,
+            rule=lambda state: logic.has_keycards(state, 1, "B"),
             flags=PhoaFlag.BREAKABLE,
             vanillaItem="Perro Egg",
         ),
         "Castle Dungeon - B Hall - Climb up with sonic spear near jail entrance": PhoaLocationData(
             region="castle_dungeon(b_hall)",
-            address=7676491,
-            rule=lambda state: logic.has_keycards("B", 2, state)
+            address=7676525,
+            rule=lambda state: logic.has_keycards(state, 2, "B")
                                and logic.has_sonic_spear(state),
             flags=PhoaFlag.MOONSTONE,
             vanillaItem="Moonstone",
         ),
         "Castle Dungeon - B Hall - Food crate in 2-2 cell": PhoaLocationData(
             region="castle_dungeon(b_jail_cell)",
-            address=7676492,
+            address=7676526,
             flags=PhoaFlag.BREAKABLE,
             vanillaItem="Honey Brew",
         ),
         "Castle Dungeon - B Hall - Item locked behind boarded up jail cell": PhoaLocationData(
             region="castle_dungeon(b_jail_cell)",
-            address=7676493,
+            address=7676527,
             rule=lambda state: logic.has_explosives(state),
             flags=PhoaFlag.ENERGYGEM,
             vanillaItem="Energy Gem",
         ),
         "Castle Dungeon - A Hall - Free the prisoners": PhoaLocationData(
             region="castle_dungeon(a_hall_arena)",
-            address=7676494,
+            address=7676528,
             rule=lambda state: logic.can_reasonably_defeat_medium_encounters(state),
             flags=PhoaFlag.MAINQUEST,
             vanillaItem="Sonic Spear",
         ),
         "Daea Castle - Food box 1": PhoaLocationData(
             region="white_towers(entrance)",
-            address=7676495,
+            address=7676529,
+            rule=lambda state: logic.can_break_big_object_with_tools(state),
             flags=PhoaFlag.BREAKABLE,
             vanillaItem="Raw Meat",
         ),
         "Daea Castle - Food box 2": PhoaLocationData(
             region="white_towers(entrance)",
-            address=7676496,
+            address=7676530,
             flags=PhoaFlag.BREAKABLE,
             vanillaItem="Raw Bird",
         ),
         "Daea Castle - Lizard at the back of the castle": PhoaLocationData(
             region="daea_region",
-            address=7676497,
+            address=7676531,
+            rule=lambda state: logic.can_reasonably_kill_enemies(state),
             flags=PhoaFlag.SMALLANIMALS,
             vanillaItem="Mystery Meat",
         ),
         "White Towers - Castle base - Gift from guard near stairs": PhoaLocationData(
             region="white_towers(entrance)",
-            address=7676498,
+            address=7676532,
             flags=PhoaFlag.NPCGIFTS,
             vanillaItem="Deli Sandwich",
         ),
         "White Towers - Castle base - Puzzle room at balcony on the right": PhoaLocationData(
             region="white_towers(puzzle_room)",
-            address=7676499,
+            address=7676533,
             rule=lambda state: logic.has_sonic_spear(state),
             flags=PhoaFlag.HEARTRUBY,
             vanillaItem="Heart Ruby",
         ),
         "White Towers - First floor - Small pot on top of fountain": PhoaLocationData(
             region="white_towers(main)",
-            address=7676500,
+            address=7676534,
             rule=lambda state: logic.can_hit_switch_from_a_distance(state)
                                or state.has("Rocket Boots", player),
             flags=PhoaFlag.MOONSTONE,
@@ -2172,52 +3473,52 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
         ),
         "White Towers - First floor - Food crate left on the edge": PhoaLocationData(
             region="white_towers(main)",
-            address=7676501,
+            address=7676535,
             flags=PhoaFlag.BREAKABLE,
             vanillaItem="House Soup",
         ),
         "White Towers - Second floor - Second big pot on balcony in first room": PhoaLocationData(
             region="white_towers(main)",
-            address=7676502,
+            address=7676536,
             rule=lambda state: logic.can_break_big_object_with_tools(state),
             flags=PhoaFlag.RINCONTAINERS,
             vanillaItem="5 Rin",
         ),
         "White Towers - Second floor - Item on chandelier behind curtain": PhoaLocationData(
             region="white_towers(main)",
-            address=7676503,
+            address=7676537,
             rule=lambda state: logic.can_hit_switch_from_a_distance(state, exclude_bombs=True),
             flags=PhoaFlag.MOONSTONE,
             vanillaItem="Moonstone",
         ),
         "White Towers - Second floor - Chest on right side edge": PhoaLocationData(
             region="white_towers(main)",
-            address=7676504,
+            address=7676538,
             flags=PhoaFlag.RINCHESTS,
             vanillaItem="30 Rin",
         ),
         "White Towers - Second floor - Item locked behind slope and gates": PhoaLocationData(
             region="white_towers(main)",
-            address=7676505,
+            address=7676539,
             flags=PhoaFlag.ENERGYGEM,
             vanillaItem="Energy Gem",
         ),
         "White Towers - Second floor - Small pot on upper floor next to slope": PhoaLocationData(
             region="white_towers(main)",
-            address=7676506,
+            address=7676540,
             flags=PhoaFlag.BREAKABLE,
             vanillaItem="Fish Skewer",
         ),
         "White Towers - Third floor - Item locked behind timed gate": PhoaLocationData(
             region="white_towers(main)",
-            address=7676507,
+            address=7676541,
             rule=lambda state: logic.has_sonic_spear(state),
-            flags=PhoaFlag.BREAKABLE,
-            vanillaItem="Fish Skewer",
+            flags=PhoaFlag.HEARTRUBY,
+            vanillaItem="Heart Ruby",
         ),
-        "White Towers - Third floor - Knock down the item through the tight space": PhoaLocationData(
+        "White Towers - Third floor - Item in tight space": PhoaLocationData(
             region="white_towers(main)",
-            address=7676508,
+            address=7676542,
             rule=lambda state: logic.can_hit_switch_from_a_distance(state, exclude_slingshot=True, exclude_bombs=True)
                                or state.has("Rocket Boots", player),
             flags=PhoaFlag.MOONSTONE,
@@ -2225,43 +3526,44 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
         ),
         "White Towers - Third floor - Chest behind red gate": PhoaLocationData(
             region="white_towers(main)",
-            address=7676509,
+            address=7676543,
             rule=lambda state: state.can_reach_region("white_towers(upper)", player),
             flags=PhoaFlag.RINCHESTS,
             vanillaItem="40 Rin",
         ),
         "White Towers - Fourth floor - Big pot on left balcony": PhoaLocationData(
             region="white_towers(main)",
-            address=7676510,
+            address=7676544,
             rule=lambda state: logic.has_sonic_spear(state),
             flags=PhoaFlag.RINCONTAINERS,
             vanillaItem="25 Rin",
         ),
         "White Towers - Fourth floor - Defeat the kobold inside the watchtower on the right": PhoaLocationData(
             region="white_towers(upper)",
-            address=7676511,
+            address=7676545,
             rule=lambda state: logic.has_bombs(state),
             flags=PhoaFlag.MOONSTONE,
             vanillaItem="Moonstone",
         ),
         "White Towers - Boss floor - Food crate 1": PhoaLocationData(
             region="white_towers(katash)",
-            address=7676512,
+            address=7676546,
             flags=PhoaFlag.BREAKABLE,
             vanillaItem="Berry Fruit",
         ),
         "White Towers - Boss floor - Food crate 2": PhoaLocationData(
             region="white_towers(katash)",
-            address=7676513,
+            address=7676547,
             flags=PhoaFlag.BREAKABLE,
             vanillaItem="Lune Fruit",
         ),
         "White Towers - Boss floor - Food crate 3": PhoaLocationData(
             region="white_towers(katash)",
-            address=7676514,
+            address=7676548,
             flags=PhoaFlag.BREAKABLE,
             vanillaItem="Prickle Fruit",
         ),
+        # FIXME: post-birdy reference: zeke & birdy sidequest ; safe in atai mayor room
         # Events
         "Anuri Temple - Side entrance gate opened": PhoaLocationData(
             region="anuri_temple(main)",
@@ -2276,6 +3578,11 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
             region="ouroboros_hideout(great_drake_arena)",
             address=None,
             rule=lambda state: logic.can_defeat_great_drake(state),
+        ),
+        "Defeat Wrecker boss": PhoaLocationData(
+            region="daea_region",
+            address=None,
+            rule=lambda state: logic.can_defeat_wrecker(state),
         ),
         "Daea tunnel gate opened": PhoaLocationData(
             region="daea_tunnel_bottom_left",
@@ -2292,8 +3599,7 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
         "Defeat Katash": PhoaLocationData(
             region="white_towers(katash)",
             address=None,
-            # TODO: This is a bare minimum and needs to be reconsidered
-            rule=lambda state: logic.has_sonic_spear(state),
+            rule=lambda state: logic.can_defeat_katash(state),
         ),
     }
 
@@ -2322,9 +3628,13 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
         (options.enable_minigames <= 0, PhoaFlag.MINIGAMES),
         (options.enable_trap_chests <= 0, PhoaFlag.TRAPCHEST),
         (options.enable_ouroboros_shrines <= 0, PhoaFlag.OUROBOROS),
+        (options.enable_ouroboros_scroll_rewards <= 0, PhoaFlag.ATRI),
         (options.enable_perros <= 0, PhoaFlag.PERRO),
         (options.enable_ancient_vault <= 0, PhoaFlag.VAULT),
         (options.bundle_keycards == 2, PhoaFlag.EXTRATERMINAL),
+        (options.enable_moonstone_shops <= 0, PhoaFlag.MOONSTONESHOP),
+        (options.enable_geo_shop <= 0, PhoaFlag.GEOSHOP),
+        (options.enable_lunar_artifact_quest <= 0, PhoaFlag.LUNARARTIFACTQUEST),
     ]
 
     enabled_flags = PhoaFlag.DEFAULT

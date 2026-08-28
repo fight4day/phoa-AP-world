@@ -121,6 +121,29 @@ class EnableOuroborosShrines(Toggle):
     display_name = "Include Ouroboros shrines"
 
 
+class EnableOuroborosScrollRewards(Toggle):
+    """Includes rewards from Atri for retrieving Ouroboros Scrolls"""
+    display_name = "Include Ouroboros Scroll rewards"
+
+
+class EnableLunarArtifactQuest(Toggle):
+    """Includes Astrid's rewards for finding Lunar artifacts"""
+    display_name = "Include Lunar Artifact rewards"
+
+
+class EnableGEOShop(Toggle):
+    """Includes the rewards from handing in GEO tickets at the GEO base"""
+    display_name = "Include GEO shop"
+
+
+class EnableMoonstoneShops(Toggle):
+    """
+    Includes the rewards from Fran's quest chain and Thomas' shop
+    Note that this makes ALL moonstones progression items. Enabling these rewards requires you to add enough locations
+    """
+    display_name = "Include Moonstone shops"
+
+
 # Dungeon item shuffle
 
 class DungeonItemShuffle(Choice):
@@ -153,13 +176,22 @@ class OuroGuardKeyShuffle(DungeonItemShuffle):
     default = 1
 
 
+class GolemMedallionShuffle(DungeonItemShuffle):
+    """Determines where Blue and Red Golem Medallions can be placed.
+    - **Vanilla**: Places Golem Medallions at their vanilla location
+    - **Own Dungeon**: Places Golem Medallions shuffled within their dungeon
+    - **Anywhere**: Golem Medallions can be found across the multiworld"""
+    display_name = "Golem Medallion shuffle"
+    default = 1
+
+
 class KeycardShuffle(DungeonItemShuffle):
     """Determines where Keycards can be placed.
     - **Vanilla**: Keeps Keycards at the corresponding guards
     - **Own Dungeon**: Places Keycards shuffled within their dungeon
     - **Anywhere**: Keycards can be found across the multiworld"""
-    display_name = "Ouro Guard Key shuffle"
-    default = 1
+    display_name = "Keycard shuffle"
+    default = 0
 
 
 # Quality of life settings
@@ -167,6 +199,12 @@ class KeycardShuffle(DungeonItemShuffle):
 class StartWithWoodenBat(DefaultOnToggle):
     """Start out with wooden bat"""
     display_name = "Start with wooden bat"
+
+
+class BundleMoonstones(Toggle):
+    """Bundles Moonstones in bundles of 10 greatly decreasing the amount of progression items.
+    Recommended when location count is low"""
+    display_name = "Bundle Moonstones"
 
 
 class BundleAnuriPearlstones(Toggle):
@@ -179,11 +217,16 @@ class BundleOuroGuardKeys(Toggle):
     display_name = "Bundle Ouro Guard Keys"
 
 
+class BundleGolemMedallions(Toggle):
+    """Bundles Blue and Red Golem Medallion into a single medallion"""
+    display_name = "Bundle Golem Medallions"
+
+
 class BundleKeycards(Choice):
     """Bundles each type of Keycard into a single Master Keycard.
     - Yes: Bundles keycards, but keeps the 4 remaining gifts of the terminal guards as locations
     - Yes plus locations: Removes the 4 remaining gifts of the terminal guards as locations"""
-    display_name = "Bundle Ouro Guard Keys"
+    display_name = "Bundle Keycards Keys"
     option_no = 0
     option_yes = 1
     option_yes_plus_locations = 2
@@ -192,6 +235,25 @@ class BundleKeycards(Choice):
 class OpenPanseloGates(Toggle):
     """Opens the Panselo gates by default. The gates require a weapon to be opened. Enabling this setting will increase the amount of starting locations"""
     display_name = "Open Panselo gates"
+
+
+class FranwayUnlockMode(Choice):
+    """
+    How the Franway teleporters are unlocked
+    disabled - Keeps teleporters disabled at all times excluding them from logic. Backtracking can still be done by savewarping
+    vanilla* - unlocks them by following Fran's questline. If this is chosen and Moonstone shops are disabled, Franways are considered out of logic
+    automatic* - Unlocks teleporters automatically after acquiring 10-20-30 moonstones.
+    items - adds an unlock item for each teleporter to the item pool.
+    unlocked - starts with all Franways unlocked.
+    *Makes ALL moonstones progression items. Enabling these rewards requires you to add enough locations
+    """
+    display_name = "Franway unlock mode"
+    option_disabled = 0
+    option_vanilla = 1
+    option_automatic = 2
+    option_items = 3
+    option_unlocked = 4
+    default = 2
 
 
 class UpgradableBats(Toggle):
@@ -237,18 +299,26 @@ class PhoaOptions(PerGameCommonOptions):
     enable_trap_chests: EnableTrapChests
     enable_geo_challenge_rewards: EnableGEOChallengeRewards
     enable_ouroboros_shrines: EnableOuroborosShrines
+    enable_ouroboros_scroll_rewards: EnableOuroborosScrollRewards
+    enable_lunar_artifact_quest: EnableLunarArtifactQuest
+    enable_geo_shop: EnableGEOShop
+    enable_moonstone_shops: EnableMoonstoneShops
     anuri_pearlstone_shuffle: AnuriPearlstoneShuffle
     ouro_guard_key_shuffle: OuroGuardKeyShuffle
+    golem_medallion_shuffle: GolemMedallionShuffle
     keycard_shuffle: KeycardShuffle
     start_with_wooden_bat: StartWithWoodenBat
+    bundle_moonstones: BundleMoonstones
     bundle_anuri_pearlstones: BundleAnuriPearlstones
     bundle_ouro_guard_keys: BundleOuroGuardKeys
+    bundle_golem_medallions: BundleGolemMedallions
     bundle_keycards: BundleKeycards
     upgradable_bats: UpgradableBats
     upgradable_tools: UpgradableTools
     upgradable_spear: UpgradableSpear
     upgradable_prelude: UpgradablePrelude
     open_panselo_gates: OpenPanseloGates
+    franway_unlock_mode: FranwayUnlockMode
     keep_excluded_status_upgrades_in_item_pool: KeepExcludedStatusUpgradesInItemPool
     death_link: DeathLink
 
@@ -275,18 +345,26 @@ class PhoaOptions(PerGameCommonOptions):
             "enable_trap_chests",
             "enable_geo_challenge_rewards",
             "enable_ouroboros_shrines",
+            "enable_ouroboros_scroll_rewards",
+            "enable_lunar_artifact_quest",
+            "enable_geo_shop",
+            "enable_moonstone_shops",
             "anuri_pearlstone_shuffle",
             "ouro_guard_key_shuffle",
+            "golem_medallion_shuffle",
             "keycard_shuffle",
             "start_with_wooden_bat",
+            "bundle_moonstones",
             "bundle_anuri_pearlstones",
             "bundle_ouro_guard_keys",
+            "bundle_golem_medallions",
             "bundle_keycards",
             "upgradable_bats",
             "upgradable_tools",
             "upgradable_spear",
             "upgradable_prelude",
             "open_panselo_gates",
+            "franway_unlock_mode",
             "keep_excluded_status_upgrades_in_item_pool",
             "death_link",
         )
@@ -311,12 +389,16 @@ phoa_option_groups: list[OptionGroup] = [
             EnableMinigames,
             EnablePerros,
             EnableMisc,
+            EnableGEOShop,
             EnableShopSanity,
             EnableSmallAnimalDrops,
             EnableRinLocations,
             EnableTrapChests,
             EnableGEOChallengeRewards,
             EnableOuroborosShrines,
+            EnableOuroborosScrollRewards,
+            EnableLunarArtifactQuest,
+            EnableMoonstoneShops,
         ],
     ),
     OptionGroup(
@@ -325,6 +407,7 @@ phoa_option_groups: list[OptionGroup] = [
             AnuriPearlstoneShuffle,
             OuroGuardKeyShuffle,
             KeycardShuffle,
+            GolemMedallionShuffle,
         ],
     ),
     OptionGroup(
@@ -332,10 +415,13 @@ phoa_option_groups: list[OptionGroup] = [
         [
             KeepExcludedStatusUpgradesInItemPool,
             StartWithWoodenBat,
+            BundleMoonstones,
             BundleAnuriPearlstones,
             BundleOuroGuardKeys,
+            BundleGolemMedallions,
             BundleKeycards,
             OpenPanseloGates,
+            FranwayUnlockMode,
             UpgradableBats,
             UpgradableTools,
             UpgradableSpear,
