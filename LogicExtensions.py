@@ -79,18 +79,18 @@ class PhoaLogic:
 
     def has_lunar_artifacts(self, amount: int, state: CollectionState) -> bool:
         return state.has_from_list([
-            "Lunar Frog",
-            "Lunar Vase",
             "Lunar Drake",
             "Lunar Compass",
-            "Lunar Trident",
-            "Lunar Crown",
             "Lunar Comb",
             "Lunar Watch",
             "Lunar Goblet",
+            "Lunar Frog",
+            "Lunar Vase",
+            "Lunar Trident",
+            "Lunar Crown",
             "Lunar Medal",
-            "Lunar Egg",
             "Lunar Key",
+            "Lunar Egg",
         ], self.player, amount)
 
     def can_use_spear_bomb(self, state: CollectionState) -> bool:
@@ -196,13 +196,20 @@ class PhoaLogic:
                 and state.has("Energy Gem", self.player, 8))
 
     def can_defeat_great_drake(self, state: CollectionState) -> bool:
-        # TODO: This is a bare minimum and needs to be reconsidered
-        return ((self.has_bombs(state) and self.has_bat(state))
-                or state.has("Kobold Blaster", self.player))
+        return (state.has("Heart Ruby", self.player, 2)
+                and (
+                 (self.has_bombs(state) and self.has_bat(state))
+                 or state.has("Kobold Blaster", self.player)
+                ))
 
     def can_defeat_wrecker(self, state: CollectionState) -> bool:
-        # TODO: This is a bare minimum and needs to be reconsidered
-        return self.has_bat(state)
+        return (state.has("Heart Ruby", self.player, 5)
+                and self.has_bat(state))
+
+    def can_defeat_katash(self, state: CollectionState) -> bool:
+        return (state.has("Heart Ruby", self.player, 8)
+                and self.has_sonic_spear(state)
+                and (self.has_crossbow(state) or self.has_slingshot(state)))
 
     def can_do_fran_quest_chain(self, state: CollectionState, quest_number: int) -> bool:
         # TODO: adjust moonstone cost for Thomas shop later
