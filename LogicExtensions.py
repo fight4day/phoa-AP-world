@@ -79,18 +79,18 @@ class PhoaLogic:
 
     def has_lunar_artifacts(self, amount: int, state: CollectionState) -> bool:
         return state.has_from_list([
-            "Lunar Frog",
-            "Lunar Vase",
             "Lunar Drake",
             "Lunar Compass",
-            "Lunar Trident",
-            "Lunar Crown",
             "Lunar Comb",
             "Lunar Watch",
             "Lunar Goblet",
+            "Lunar Frog",
+            "Lunar Vase",
+            "Lunar Trident",
+            "Lunar Crown",
             "Lunar Medal",
-            "Lunar Egg",
             "Lunar Key",
+            "Lunar Egg",
         ], self.player, amount)
 
     def can_use_spear_bomb(self, state: CollectionState) -> bool:
