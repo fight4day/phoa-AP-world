@@ -1270,13 +1270,13 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
             flags=PhoaFlag.SMALLANIMALS,
             vanillaItem="Mystery Meat",
         ),
-        "Atai Town - Gift 1 from Mikail after helping the mayor": PhoaLocationData(
+        "Atai Town - Gift 1 from Mikhail after helping the mayor": PhoaLocationData(
             region="atai_town",
             address=7676558,
             flags=PhoaFlag.SIDEQUEST,
             vanillaItem="150 Rin",
         ),
-        "Atai Town - Gift 2 from Mikail after helping the mayor": PhoaLocationData(
+        "Atai Town - Gift 2 from Mikhail after helping the mayor": PhoaLocationData(
             region="atai_town",
             address=7676559,
             flags=PhoaFlag.SIDEQUEST | PhoaFlag.HEARTRUBY,
