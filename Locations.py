@@ -3563,7 +3563,6 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
             flags=PhoaFlag.BREAKABLE,
             vanillaItem="Prickle Fruit",
         ),
-        # FIXME: post-birdy reference: zeke & birdy sidequest ; safe in atai mayor room
         # Events
         "Anuri Temple - Side entrance gate opened": PhoaLocationData(
             region="anuri_temple(main)",
