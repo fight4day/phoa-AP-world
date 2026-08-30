@@ -2094,7 +2094,7 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
             flags=PhoaFlag.FREESTANDING,
             vanillaItem="Moon Kelp",
         ),
-        "Moonlight Ravine - Wilds room 3 pot": PhoaLocationData(
+        "Moonlight Ravine - Wilds room 3 tree pot": PhoaLocationData(
             region="moonlight_ravine(wilds)",
             address=7676350,
             rule=lambda state: logic.has_sonic_spear(state)
