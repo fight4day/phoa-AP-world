@@ -1273,12 +1273,14 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
         "Atai Town - Gift 1 from Mikhail after helping the mayor": PhoaLocationData(
             region="atai_town",
             address=7676558,
+            rule=lambda state: state.has("Stack of Letters", player),
             flags=PhoaFlag.SIDEQUEST,
             vanillaItem="150 Rin",
         ),
         "Atai Town - Gift 2 from Mikhail after helping the mayor": PhoaLocationData(
             region="atai_town",
             address=7676559,
+            rule=lambda state: state.has("Stack of Letters", player),
             flags=PhoaFlag.SIDEQUEST | PhoaFlag.HEARTRUBY,
             vanillaItem="Heart Ruby",
         ),
