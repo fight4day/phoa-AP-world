@@ -31,8 +31,8 @@ class DungeonItemSettingGroup(NamedTuple):
 # @formatter:off
 item_table: dict[str, PhoaItemData] = {
     "Heart Ruby":                       PhoaItemData(3,     33, IC.progression),
-    "Energy Gem":                       PhoaItemData(4,     20, IC.useful),
-    "Moonstone":                        PhoaItemData(5,     66, IC.filler),
+    "Energy Gem":                       PhoaItemData(4,     21, IC.useful),
+    "Moonstone":                        PhoaItemData(5,     65, IC.filler),
     "Wooden Bat":                       PhoaItemData(6,     1,  IC.progression),
     "Composite Bat":                    PhoaItemData(7,     1,  IC.useful),
     "Steel Bat":                        PhoaItemData(8,     1,  IC.useful),

@@ -2589,8 +2589,8 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
             region="daea_city",
             address=7676410,
             rule=lambda state: logic.can_clear_atai_expert_gallery(state),
-            flags=PhoaFlag.MINIGAMES | PhoaFlag.MOONSTONE,
-            vanillaItem="Moonstone",
+            flags=PhoaFlag.MINIGAMES | PhoaFlag.ENERGYGEM,
+            vanillaItem="Energy Gem",
         ),
         "Daea City - Guard tower balcony crate": PhoaLocationData(
             region="daea_city",
