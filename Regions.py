@@ -37,7 +37,7 @@ def get_exit_data(player: int, options: PhoaOptions) -> list[PhoaExit]:
             name="rutea's_lab_gate",
             region="panselo_village",
             connection="panselo_village_rutea's_lab",
-            rule=lambda state: logic.can_hit_switch_from_a_distance(state),
+            rule=lambda state: logic.can_hit_switch_from_a_distance(state) or logic.can_use_whirlwind(state),
         ),
         # panselo_region
         PhoaExit(

@@ -1737,7 +1737,8 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
         "Forlorn Ruins - Ceiling switch room pot": PhoaLocationData(
             region="forlorn_ruins(east)",
             address=7676294,
-            rule=lambda state: logic.can_hit_switch_from_a_distance(state),
+            rule=lambda state: logic.can_hit_switch_from_a_distance(state)
+                               or logic.can_use_whirlwind(state),
             flags=PhoaFlag.BREAKABLE,
             vanillaItem="Canned Beans",
         ),
@@ -1907,14 +1908,18 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
         "Ouroboros Hideout - Drake hatchery pot 2": PhoaLocationData(
             region="ouroboros_hideout(infant_drake_arena)",
             address=7676321,
-            rule=lambda state: logic.has_slingshot(state) or logic.has_crossbow(state),
+            rule=lambda state: logic.has_slingshot(state)
+                               or logic.has_crossbow(state)
+                               or logic.can_use_whirlwind(state),
             flags=PhoaFlag.LUNARARTIFACT,
             vanillaItem="Lunar Drake",
         ),
         "Ouroboros Hideout - Drake hatchery chest": PhoaLocationData(
             region="ouroboros_hideout(infant_drake_arena)",
             address=7676322,
-            rule=lambda state: logic.has_slingshot(state) or logic.has_crossbow(state),
+            rule=lambda state: logic.has_slingshot(state)
+                               or logic.has_crossbow(state)
+                               or logic.can_use_whirlwind(state),
             flags=PhoaFlag.RINCHESTS,
             vanillaItem="35 Rin",
         ),
@@ -3356,7 +3361,8 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
         "Castle Dungeon - Control room chest locked behind songstone 1": PhoaLocationData(
             region="castle_dungeon(post_control_room_fight)",
             address=7676518,
-            rule=lambda state: logic.can_hit_switch_from_a_distance(state)
+            rule=lambda state: (logic.can_hit_switch_from_a_distance(state)
+                                or logic.can_use_whirlwind(state))
                                and logic.has_music_instrument(state),
             flags=PhoaFlag.RINCHESTS,
             vanillaItem="35 Rin",
@@ -3364,7 +3370,8 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
         "Castle Dungeon - Control room chest locked behind songstone 2": PhoaLocationData(
             region="castle_dungeon(post_control_room_fight)",
             address=7676519,
-            rule=lambda state: logic.can_hit_switch_from_a_distance(state)
+            rule=lambda state: (logic.can_hit_switch_from_a_distance(state)
+                                or logic.can_use_whirlwind(state))
                                and logic.has_music_instrument(state),
             flags=PhoaFlag.MOONSTONE,
             vanillaItem="Moonstone",
@@ -3372,7 +3379,8 @@ def get_location_data(player: Optional[int], options: Optional[PhoaOptions]) -> 
         "Castle Dungeon - Control room chest locked behind songstone 3": PhoaLocationData(
             region="castle_dungeon(post_control_room_fight)",
             address=7676520,
-            rule=lambda state: logic.can_hit_switch_from_a_distance(state)
+            rule=lambda state: (logic.can_hit_switch_from_a_distance(state)
+                                or logic.can_use_whirlwind(state))
                                and logic.has_music_instrument(state),
             flags=PhoaFlag.RINCHESTS,
             vanillaItem="35 Rin",
